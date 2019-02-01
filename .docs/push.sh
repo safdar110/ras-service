@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 export SERVICE_NAME=raservice
-./mvnw package
+#./mvnw package
+./mvnw -DskipTests package
 docker login -u gitlab-ci-token -p zVTStG4zXy8fseKHzD8c registry.gitlab.com
 git add .
 git commit -m "updated via script"
