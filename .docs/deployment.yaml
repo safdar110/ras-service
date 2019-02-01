@@ -1,0 +1,53 @@
+apiVersion: apps/v1beta1
+kind: Deployment
+metadata:
+  namespace: nslocal
+  name: raservice
+  labels:
+    app: raservice
+spec:
+  template:
+    metadata:
+      labels:
+        app: raservice
+        tier: web
+    spec:
+      imagePullSecrets:
+      - name: gitlab-auth
+      containers:
+      - name: raservice
+        image: registry.gitlab.com/resourceallocationsystem/raservice:@KVERSION
+        ports:
+        - containerPort: 8080
+        env:
+          - name: POSTGRES_USER
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: postgres_user
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              configMapKeyRef:
+                name: postgres-config
+                key: postgres_password
+          - name: POSTGRES_HOST
+            valueFrom:
+              configMapKeyRef:
+                name: hostname-config
+                key: postgres_host
+---
+apiVersion: v1
+kind: Service
+metadata:
+  namespace: nslocal
+  name: raservice
+  labels:
+    app: raservice
+spec:
+  type: NodePort
+  selector:
+    app: raservice
+    tier: web
+  ports:
+  - port: 8080
+    targetPort: 8080
