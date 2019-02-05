@@ -5,7 +5,7 @@ export SERVICE_NAME=raservice
 eval $(minikube docker-env)
 
 #./mvnw package
-#./mvnw -DskipTests package
+./mvnw -DskipTests package
 git add .
 git commit -m "updated via script"
 git push origin master
