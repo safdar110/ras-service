@@ -9,14 +9,20 @@ import org.springframework.web.bind.annotation.RestController;
  * Created by khawar on 1/30/19.
  */
 @RestController
-@RequestMapping("/api/ras/v1/test")
+@RequestMapping("/base")
 public class BaseController {
     @Value("${app.title}")
    private String appName;
 
-    @GetMapping("hello")
-    public String hello() {
+    @GetMapping("/")
+    public String index() {
         String msg = "Welcome To " + appName;
+        return msg;
+    }
+
+    @GetMapping("/hello")
+    public String hello() {
+        String msg = "Hello To " + appName;
         return msg;
     }
 
