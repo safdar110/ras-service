@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: postgres-config
+  namespace: nslocal
+data:
+  postgres_user: appiskeydbuser
+  postgres_password: appiskeyDbpassword
+  postgres_host_url: postgres.nslocal
+  postgres_ddl_auto: update
