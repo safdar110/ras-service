@@ -6,5 +6,5 @@ metadata:
 data:
   postgres_user: appiskeydbuser
   postgres_password: appiskeyDbpassword
-  postgres_host_url: postgres.nslocal
+  postgres_host_url: 10.100.208.173
   postgres_ddl_auto: update
