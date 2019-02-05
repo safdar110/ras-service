@@ -8,4 +8,5 @@ import com.appiskey.raservice.model.Client;
 public interface ClientService {
 
     public Iterable<Client> getAllClients();
+    public Client createClient(Client client);
 }

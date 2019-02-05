@@ -18,4 +18,10 @@ public class ClientServiceImpl implements ClientService{
     public Iterable<Client> getAllClients() {
         return clientRepository.findAll();
     }
+
+    @Override
+    public Client createClient(Client client) {
+        return clientRepository.save(client);
+
+    }
 }

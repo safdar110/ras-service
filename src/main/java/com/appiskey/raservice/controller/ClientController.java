@@ -5,10 +5,9 @@ import com.appiskey.raservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 /**
  * Created by khawar on 2/5/19.
@@ -26,5 +25,10 @@ public class ClientController extends BaseController {
         return clientService.getAllClients();
     }
 
+
+    @PostMapping("/create")
+    public Client create(@Valid @RequestBody Client client) {
+        return clientService.createClient(client);
+    }
 
 }
