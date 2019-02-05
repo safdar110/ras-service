@@ -15,7 +15,7 @@ docker build -t $SERVICE_NAME:$VERSION .
 
 #cat .docs/configmap.yaml | kubectl apply -f-
 
-kubectl apply -f .docs/configmap.yaml
+#kubectl apply -f .docs/configmap.yaml
 
 cat .docs/deployment.yaml | sed -e "s/@KVERSION/$VERSION/g" -e "s/@KSERVICE/$SERVICE_NAME/g" | kubectl apply -f-
 
