@@ -17,11 +17,28 @@ import java.util.List;
 @Table
 public class Resource extends BaseModel{
     private String resourceName;
+    private String resourceCNIC;
+    private String resourceDOB;
     private String resourceEmail;
+    private String resourceAddress;
     private String resourcePhone;
-    private int resourceExperience;
+    private String resourceReligion;
+    private String resourceBloodGroup;
+    private String resourceNationality;
+    private String resourceEmergencyContactNo;
+    private String resourceMaritalStatus;
+    private String resourceDesignation;
+    private String resourceReportingTo;
+    private String resourceResume;
+    private String resourceDateOfJoining;
+    private String resourceWorkingDays;
+    private float resourceExperience;
     private BigDecimal resourceSalaryPerMonth;
     private BigDecimal resourcePerHourRate;
+    private String resourceShift;
+    private BigDecimal resourceBenefits;
+    private int resourceContractType;     //isIntern, isPartTime , isFullTime
+
 
     @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(name = "resource_skill",
@@ -30,7 +47,7 @@ public class Resource extends BaseModel{
                     referencedColumnName = "id"))
     private List<Skill> resourceSkills;
 
-    private String resourceResume;
+
     private boolean resourcePartTime;
 
     @ManyToOne

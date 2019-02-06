@@ -19,17 +19,22 @@ public class Milestone extends BaseModel {
 
     private String milestoneName;
     private LocalDateTime milestoneStartDate;
-    private LocalDateTime milestoneEndDate;
+    private LocalDateTime milestoneDelieveryDate;
+    private LocalDateTime milestoneDevelopmentDate;
     private BigDecimal milestoneExpectedPayment;
+    private BigDecimal milestonePaymentAmount;
+    private BigDecimal milestoneCost;
+    private String milestonePaymentMethod;
 
 
-//    private Client client;
+    @ManyToOne
+    private Client client;
 
-    @OneToOne
-    @JoinColumn(name = "project_type_id", referencedColumnName = "id")
-    private ProjectType projectType;
 
-//    @OneToMany(cascade = CascadeType.ALL)
-//    @JoinColumn(name = "pid", referencedColumnName = "id")
-//    private Project project;
-}
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "project_id", referencedColumnName = "id")
+    private Project project;
+
+
+ }

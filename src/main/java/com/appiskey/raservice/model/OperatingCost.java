@@ -5,18 +5,18 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
 import javax.persistence.Table;
+import java.math.BigDecimal;
 
 /**
- * Created by appiskey on 2/4/19.
+ * Created by suraksha-pnc on 2/6/19.
  */
 
 @EqualsAndHashCode(callSuper = true)
 @Data
 @Entity
 @Table
-public class ProjectType extends BaseModel {
+public class OperatingCost extends BaseModel{
 
-    private String typeName;
-
+    private BigDecimal monthlyCost;
 
 }
