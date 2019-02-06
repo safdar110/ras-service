@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import java.util.List;
 
 /**
  * Created by khawar on 1/30/19.
@@ -16,7 +18,9 @@ import javax.persistence.Table;
 @Table
 public class Department extends BaseModel{
     private String departmentName;
+    private String departmentBench;
 
-//    @OneToMany(mappedBy = "library")
-//    private List<Resource> departmentResources;
+    @OneToMany
+    private List<Resource> departmentResources;
+
 }

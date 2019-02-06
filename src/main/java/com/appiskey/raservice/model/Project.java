@@ -4,6 +4,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -37,8 +38,11 @@ public class Project extends BaseModel{
             inverseJoinColumns = @JoinColumn(name = "project_id",
                     referencedColumnName = "id"))
     private List<Resource> projectResources;
-
-
     private LocalDateTime projectStartDate;
-    private LocalDateTime projectEndDate;
+    private LocalDateTime projectDevelopmentDate;
+    private BigDecimal projectCost;
+    private String projectTimeline;
+    private String projectPaymentMethod;
+
+
 }
