@@ -3,8 +3,8 @@ package com.appiskey.raservice.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 /**
  * Created by khawar on 1/30/19.
@@ -15,7 +15,7 @@ import javax.persistence.Table;
 @Entity
 @Table
 public class Client extends BaseModel{
-    private String clientName;
-    private String clientEmail;
-    private String clientPhone;
+    private String companyName;
+
+
 }
