@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @Entity
 @Table
-public class FringeBenefits extends BaseModel {
+public class FringeBenefit extends BaseModel {
 
 
     private String benefitMonth;
