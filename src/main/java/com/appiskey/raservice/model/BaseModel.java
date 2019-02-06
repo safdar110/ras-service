@@ -30,10 +30,7 @@ import java.util.UUID;
         allowGetters = true)
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class BaseModel {
-    public void setId(UUID id) {
-        this.id = id;
-    }
-
+    
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "pg-uuid", strategy = "pg-uuid")
