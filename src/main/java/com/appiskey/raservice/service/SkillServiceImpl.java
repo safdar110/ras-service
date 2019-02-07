@@ -55,8 +55,9 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public List<Skill> searchSkill(String keyword){
-     return skillRepository.findBySkillNameContaining(keyword);
+    public Iterable<Skill> searchSkill(String keyword){
+        Iterable<Skill> skill = skillRepository.findByskillNameContainingIgnoreCase(keyword);
+     return skill;
     }
 
 
