@@ -56,9 +56,9 @@ public class SkillController {
         return skillService.editSkill(skill,id);
     }
 
-    @GetMapping("skill/search/{name}")
-    public List<Skill> findSkillByName(@PathVariable("name") String body){
-        return  skillService.searchSkill(body);
+    @PostMapping("/skill/search")
+    public Iterable<Skill> findSkillByName(@RequestBody Map<String, String>  body){
+        return  skillService.searchSkill(body.get("keyword"));
     }
 
 }

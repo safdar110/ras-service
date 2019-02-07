@@ -16,5 +16,5 @@ public interface SkillService {
     public Optional<Skill> retrieveSkill(UUID id);
     public String deleteSkill(UUID id);
     public ResponseEntity<Object> editSkill(Skill skill, UUID id);
-    public List<Skill> searchSkill(String keyword);
+    public Iterable<Skill> searchSkill(String keyword);
 }
