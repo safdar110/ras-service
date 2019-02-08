@@ -18,20 +18,15 @@ import java.util.List;
 @Table
 public class FringeBenefit extends BaseModel {
 
-
     private String benefitMonth;
     private String expenseName;
     private BigDecimal expenseAmount;
     private Boolean isOneTime;
 
-
-    @ManyToMany
-    private List<Department> benefitDepartment;
-
-    @ManyToMany
-    private List<Resource> benefitResource;
-
-
-
+//    @ManyToMany
+//    private List<Department> benefitDepartment;
+//
+//    @ManyToMany
+//    private List<Resource> benefitResource;
 
 }
