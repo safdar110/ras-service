@@ -44,13 +44,19 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public ResponseEntity<Object> editDepartment(@RequestBody Department department, UUID id) {
-        Optional<Department> OD = departmentRepository.findById(id);
-        if (!OD.isPresent())
+    public ResponseEntity<Department> editDepartment(@RequestBody Department department, UUID id) {
+        Optional<Department> mDepartment = departmentRepository.findById(id);
+        if (!mDepartment.isPresent())
             return ResponseEntity.notFound().build();
         department.setId(id);
         departmentRepository.save(department);
         return ResponseEntity.noContent().build();
+    }
+
+    @Override
+    public Iterable<Department> searchDepartment(String keyword){
+        Iterable<Department> department = departmentRepository.findByDepartmentNameContainingIgnoreCase(keyword);
+        return department;
     }
 
 }

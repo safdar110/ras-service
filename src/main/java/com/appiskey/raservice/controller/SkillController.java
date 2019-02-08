@@ -18,45 +18,45 @@ import java.util.UUID;
  * Created by suraksha-pnc on 2/7/19.
  */
 @RestController
-@RequestMapping("/api/ras/v1")
+@RequestMapping("/api/ras/v1/skill")
 public class SkillController {
     @Autowired
     SkillService skillService;
 
-    @GetMapping("/skill/list")
+    @GetMapping("/list")
     public Iterable<Skill> getAllSkills(){
 
         return skillService.getAllSkills();
     }
 
-    @PostMapping("/skill/add")
-    public Skill add (@Valid @RequestBody Skill skill){
+    @PostMapping("/add")
+    public Skill addSkill (@Valid @RequestBody Skill skill){
         return skillService.createSkill(skill);
     }
 
-    @GetMapping("/skill/{uuid}")
+    @GetMapping("/get/{uuid}")
     @ResponseBody
     public Optional<Skill> retrieveSkill(@PathVariable("uuid") UUID id) {
         return skillService.retrieveSkill(id);
 
     }
 
-    @PostMapping("/skill/delete/{uuid}")
+    @PostMapping("/delete/{uuid}")
     @ResponseBody
-    public String deleteID(@PathVariable("uuid") UUID id)
+    public String deleteSkillByID(@PathVariable("uuid") UUID id)
     {
         skillService.deleteSkill(id);
         return"{Response : Deleted }";
     }
 
 
-    @PutMapping("/skill/update/{skillID}")
+    @PutMapping("/update/{skillID}")
     @ResponseBody
-    public ResponseEntity<Object> editSkill(@RequestBody Skill skill, @PathVariable("skillID") UUID id) {
+    public ResponseEntity<Skill> editSkill(@RequestBody Skill skill, @PathVariable("skillID") UUID id) {
         return skillService.editSkill(skill,id);
     }
 
-    @PostMapping("/skill/search")
+    @PostMapping("/search")
     public Iterable<Skill> findSkillByName(@RequestBody Map<String, String>  body){
         return  skillService.searchSkill(body.get("keyword"));
     }

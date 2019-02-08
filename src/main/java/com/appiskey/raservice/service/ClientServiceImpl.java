@@ -44,12 +44,18 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public ResponseEntity<Object> editClient(@RequestBody Client client, UUID id) {
-        Optional<Client> OD = clientRepository.findById(id);
-        if (!OD.isPresent())
+    public ResponseEntity<Client> editClient(@RequestBody Client client, UUID id) {
+        Optional<Client> mClient = clientRepository.findById(id);
+        if (!mClient.isPresent())
             return ResponseEntity.notFound().build();
         client.setId(id);
         clientRepository.save(client);
         return ResponseEntity.noContent().build();
     }
+    @Override
+    public Iterable<Client> searchClient(String keyword){
+        Iterable<Client> client = clientRepository.findByClientNameContainingIgnoreCase(keyword);
+        return client;
+    }
+
 }

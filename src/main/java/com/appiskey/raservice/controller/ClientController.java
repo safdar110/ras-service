@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -18,43 +19,47 @@ import java.util.UUID;
  */
 
 @RestController
-@RequestMapping("/api/ras/v1")
+@RequestMapping("/api/ras/v1/client")
 public class ClientController extends BaseController {
 
     @Autowired
     ClientService clientService;
 
-    @GetMapping("/client/list")
-    public Iterable<Client> list() {
+    @GetMapping("/list")
+    public Iterable<Client> getAllClients() {
         return clientService.getAllClients();
     }
 
 
-    @PostMapping("/client/create")
-    public Client create(@Valid @RequestBody Client client) {
+    @PostMapping("/create")
+    public Client createClient(@Valid @RequestBody Client client) {
         return clientService.createClient(client);
     }
 
-    @GetMapping("/client/list/{uuid}")
+    @GetMapping("/get/{uuid}")
     @ResponseBody
     public Optional<Client> retrieveClient(@PathVariable("uuid") UUID id) {
         return clientService.retrieveClient(id);
 
     }
 
-    @PostMapping("/client/delete/{uuid}")
+    @PostMapping("/delete/{uuid}")
     @ResponseBody
-    public String deleteID(@PathVariable("uuid") UUID id)
+    public String deleteClientByID(@PathVariable("uuid") UUID id)
     {
        clientService.deleteClient(id);
         return"{Response : Deleted }";
     }
 
 
-    @PutMapping("/client/update/{clientID}")
+    @PutMapping("/update/{clientID}")
     @ResponseBody
-    public ResponseEntity<Object> editClient(@RequestBody Client client, @PathVariable("clientID") UUID id) {
+    public ResponseEntity<Client> editClient(@RequestBody Client client, @PathVariable("clientID") UUID id) {
         return clientService.editClient(client,id);
+    }
+    @PostMapping("/search")
+    public Iterable<Client> findClientByName(@RequestBody Map<String, String>  body){
+        return  clientService.searchClient(body.get("keyword"));
     }
 
 
