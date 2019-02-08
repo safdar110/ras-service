@@ -15,11 +15,7 @@ import java.util.UUID;
 
 public interface SkillRepository extends PagingAndSortingRepository<Skill, UUID> {
 
-//    String query = "SELECT t.skill_name FROM skill t WHERE t.skill_name LIKE CONCAT('%',:keyword,'%')";
-
    Iterable<Skill> findByskillNameContainingIgnoreCase(String keyword);
-   //List<Skill> findAll();
+   Iterable<Skill> findAll();
 
-//    @Query(query)
-//   List<Skill> findByskillName(@Param("keyword") String keyword);
 }

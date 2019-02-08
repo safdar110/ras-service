@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Map;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -14,45 +15,49 @@ import java.util.UUID;
  * Created by appiskey on 2/4/19.
  */
 @RestController
-@RequestMapping("/api/ras/v1")
+@RequestMapping(value = "${app.url}" + "/department")
 public class DepartmentController {
 
     @Autowired
      DepartmentService departmentService;
 
-    @GetMapping("/department/list")
-    public Iterable<Department> getAll(){
+    @GetMapping
+    public Iterable<Department> getAllDepartments(){
 
         return departmentService.getAllDepartments();
     }
 
-    @PostMapping("/department/add")
-    public Department add (@Valid @RequestBody Department department){
+    @PostMapping
+    public Department addDepartment(@Valid @RequestBody Department department){
         return departmentService.createDepartment(department);
     }
 
-    @GetMapping("/department/{uuid}")
+    @GetMapping("/{uuid}")
     @ResponseBody
-    public Optional<Department> retrieveDepartment(@PathVariable("uuid") UUID id) {
-        return departmentService.retrieveDepartment(id);
+    public Optional<Department> getDepartmentByID(@PathVariable("uuid") UUID id) {
+        return departmentService.getDepartmentByID(id);
 
     }
 
-    @PostMapping("/department/delete/{uuid}")
+    @DeleteMapping
     @ResponseBody
-    public String deleteID(@PathVariable("uuid") UUID id)
+    public String deleteDepartmentID(@RequestBody Map<String, UUID> body)
     {
-        departmentService.deleteDepartment(id);
+        departmentService.deleteDepartment(body.get("id"));
         return"{Response : Deleted }";
     }
 
 
-    @PutMapping("/department/update/{departmentID}")
+    @PutMapping
     @ResponseBody
-    public ResponseEntity<Object> edit(@RequestBody Department department, @PathVariable("departmentID") UUID id) {
-   return departmentService.editDepartment(department,id);
+    public ResponseEntity<Department> editDepartment(@RequestBody Department department) {
+   return departmentService.editDepartment(department);
     }
 
+    @PostMapping("/search")
+    public Iterable<Department> findDepartmentByName(@RequestBody Map<String, String> body){
+        return  departmentService.searchDepartment(body.get("keyword"));
+    }
 
 
 }

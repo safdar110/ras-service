@@ -45,11 +45,11 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public ResponseEntity<Object> editSkill(@RequestBody Skill skill, UUID id) {
-        Optional<Skill> OS = skillRepository.findById(id);
-        if (!OS.isPresent())
+    public ResponseEntity<Skill> editSkill(@RequestBody Skill skill) {
+        Optional<Skill> mSkill = skillRepository.findById(skill.getId());
+        if (!mSkill.isPresent())
             return ResponseEntity.notFound().build();
-        skill.setId(id);
+        //skill.setId();
         skillRepository.save(skill);
         return ResponseEntity.noContent().build();
     }
