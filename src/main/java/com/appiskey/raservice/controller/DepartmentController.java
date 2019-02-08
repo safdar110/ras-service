@@ -15,43 +15,43 @@ import java.util.UUID;
  * Created by appiskey on 2/4/19.
  */
 @RestController
-@RequestMapping("/api/ras/v1/department")
+@RequestMapping(value = "${app.url}" + "/department")
 public class DepartmentController {
 
     @Autowired
      DepartmentService departmentService;
 
-    @GetMapping("/list")
+    @GetMapping
     public Iterable<Department> getAllDepartments(){
 
         return departmentService.getAllDepartments();
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Department addDepartment(@Valid @RequestBody Department department){
         return departmentService.createDepartment(department);
     }
 
-    @GetMapping("/get/{uuid}")
+    @GetMapping("/{uuid}")
     @ResponseBody
-    public Optional<Department> retrieveDepartment(@PathVariable("uuid") UUID id) {
-        return departmentService.retrieveDepartment(id);
+    public Optional<Department> getDepartmentByID(@PathVariable("uuid") UUID id) {
+        return departmentService.getDepartmentByID(id);
 
     }
 
-    @PostMapping("/delete/{uuid}")
+    @DeleteMapping
     @ResponseBody
-    public String deleteDepartmentyID(@PathVariable("uuid") UUID id)
+    public String deleteDepartmentID(@RequestBody Map<String, UUID> body)
     {
-        departmentService.deleteDepartment(id);
+        departmentService.deleteDepartment(body.get("id"));
         return"{Response : Deleted }";
     }
 
 
-    @PutMapping("/update/{departmentID}")
+    @PutMapping
     @ResponseBody
-    public ResponseEntity<Department> editDepartment(@RequestBody Department department, @PathVariable("departmentID") UUID id) {
-   return departmentService.editDepartment(department,id);
+    public ResponseEntity<Department> editDepartment(@RequestBody Department department) {
+   return departmentService.editDepartment(department);
     }
 
     @PostMapping("/search")

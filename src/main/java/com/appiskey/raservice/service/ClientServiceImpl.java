@@ -31,7 +31,7 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public Optional<Client> retrieveClient(UUID id){
+    public Optional<Client> getClientByID(UUID id){
 
         return clientRepository.findById(id);
 
@@ -44,11 +44,11 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public ResponseEntity<Client> editClient(@RequestBody Client client, UUID id) {
-        Optional<Client> mClient = clientRepository.findById(id);
+    public ResponseEntity<Client> editClient(@RequestBody Client client) {
+        Optional<Client> mClient = clientRepository.findById(client.getId());
         if (!mClient.isPresent())
             return ResponseEntity.notFound().build();
-        client.setId(id);
+      //  client.setId(id);
         clientRepository.save(client);
         return ResponseEntity.noContent().build();
     }

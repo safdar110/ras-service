@@ -16,5 +16,6 @@ import java.util.UUID;
 public interface SkillRepository extends PagingAndSortingRepository<Skill, UUID> {
 
    Iterable<Skill> findByskillNameContainingIgnoreCase(String keyword);
+   Iterable<Skill> findAll();
 
 }
