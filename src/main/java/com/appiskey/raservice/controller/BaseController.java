@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/base")
 public class BaseController {
     @Value("${app.title}")
-   private String appName;
+    private String appName;
 
     @GetMapping("/")
     public String index() {

@@ -41,23 +41,37 @@ public class SkillControllerTest {
     SkillService skillService;
 
     @Before
-    public void setup() throws Exception{
+    public void setup() throws Exception {
         mockMvc = MockMvcBuilders.standaloneSetup(skillController).build();
     }
 
-     @Test
-    public void testSkillAdd() throws Exception{
-         File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
-         String content = new String(Files.readAllBytes(file.toPath()));
+    @Test
+    public void testSkillAdd() throws Exception {
+        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
+        String content = new String(Files.readAllBytes(file.toPath()));
 
-         HttpEntity<Object> skill = getHttpEntity(content);
-         ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill/add", skill, Skill.class);
-         Assert.assertEquals("Test Skill", response.getBody().getSkillName());
-         Assert.assertEquals(200,response.getStatusCode().value());
+        HttpEntity<Object> skill = getHttpEntity(content);
+        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill/add", skill, Skill.class);
+        Assert.assertEquals("Test Skill", response.getBody().getSkillName());
+        Assert.assertEquals(200, response.getStatusCode().value());
 
-         //cleanup db record
-         skillService.deleteSkill(response.getBody().getId());
-     }
+        //cleanup db record
+//        skillService.deleteSkill(response.getBody().getId());
+    }
+
+    @Test
+    public void testSkillUpdate() throws Exception {
+        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
+        String content = new String(Files.readAllBytes(file.toPath()));
+
+        HttpEntity<Object> skill = getHttpEntity(content);
+        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill/update", skill, Skill.class);
+        Assert.assertEquals("Test Skill", response.getBody().getSkillName());
+        Assert.assertEquals(200, response.getStatusCode().value());
+
+        //cleanup db record
+        skillService.deleteSkill(response.getBody().getId());
+    }
 
     private HttpEntity<Object> getHttpEntity(Object body) {
         HttpHeaders headers = new HttpHeaders();
