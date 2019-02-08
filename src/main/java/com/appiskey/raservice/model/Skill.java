@@ -20,6 +20,6 @@ import java.util.List;
 public class Skill extends BaseModel {
     private String skillName;
 
-    @ManyToMany(mappedBy = "resourceSkills", cascade = CascadeType.PERSIST)
-    private List<Resource> skillResources;
+//    @ManyToMany(mappedBy = "resourceSkills", cascade = CascadeType.PERSIST)
+//    private List<Resource> skillResources;
 }

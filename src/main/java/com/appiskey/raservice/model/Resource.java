@@ -47,8 +47,8 @@ public class Resource extends BaseModel{
                     referencedColumnName = "id"))
     private List<Skill> resourceSkills;
 
-    @ManyToMany(mappedBy = "projectResources", cascade = CascadeType.PERSIST)
-    private List<Project> resourceProjects;
+//    @ManyToMany(mappedBy = "projectResources", cascade = CascadeType.PERSIST)
+//    private List<Project> resourceProjects;
 
 
     private boolean resourcePartTime;

@@ -19,8 +19,8 @@ public class Feature extends BaseModel {
     private String featureName;
     private Duration featureEstimateDuration;
 
-    @ManyToMany(mappedBy = "projectFeatures", cascade = CascadeType.PERSIST)
-    private List<Project> featureProjects;
+//    @ManyToMany(mappedBy = "projectFeatures", cascade = CascadeType.PERSIST)
+//    private List<Project> featureProjects;
 
 
 //    @ManyToMany(cascade = CascadeType.ALL)
