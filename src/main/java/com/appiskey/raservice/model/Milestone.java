@@ -27,9 +27,8 @@ public class Milestone extends BaseModel {
     private String milestonePaymentMethod;
 
 
-    @ManyToOne
-    private Client client;
-
+//    @ManyToOne
+//    private Client client;
 
 
     @ManyToOne(cascade = CascadeType.ALL)

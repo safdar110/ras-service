@@ -24,7 +24,7 @@ public class Project extends BaseModel{
     @JoinColumn(name="client_id")
     private Client projectClient;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "project_feature",
             joinColumns = @JoinColumn(name = "feature_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project_id",
@@ -32,12 +32,13 @@ public class Project extends BaseModel{
     private List<Feature> projectFeatures;
 
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "project_resource",
             joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project_id",
                     referencedColumnName = "id"))
     private List<Resource> projectResources;
+
     private LocalDateTime projectStartDate;
     private LocalDateTime projectDevelopmentDate;
     private BigDecimal projectCost;

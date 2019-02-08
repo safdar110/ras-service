@@ -14,7 +14,7 @@ import java.util.UUID;
  * Created by suraksha-pnc on 2/7/19.
  */
 @RestController
-@RequestMapping(value = "${app.url}" + "/skill")
+@RequestMapping("/skill")
 public class SkillController {
     @Autowired
     SkillService skillService;

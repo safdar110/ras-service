@@ -26,6 +26,14 @@ import java.nio.file.Files;
  * Created by khawar on 2/7/19.
  */
 
+//Add
+//getAll
+//getById
+//Update
+//Delete
+
+
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SkillControllerTest {
@@ -51,7 +59,7 @@ public class SkillControllerTest {
         String content = new String(Files.readAllBytes(file.toPath()));
 
         HttpEntity<Object> skill = getHttpEntity(content);
-        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill/add", skill, Skill.class);
+        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill", skill, Skill.class);
         Assert.assertEquals("Test Skill", response.getBody().getSkillName());
         Assert.assertEquals(200, response.getStatusCode().value());
 
@@ -60,18 +68,63 @@ public class SkillControllerTest {
     }
 
     @Test
-    public void testSkillUpdate() throws Exception {
-        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
-        String content = new String(Files.readAllBytes(file.toPath()));
-
-        HttpEntity<Object> skill = getHttpEntity(content);
-        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill/update", skill, Skill.class);
+    public void testSkillGetAll() throws Exception {
+//        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
+//        String content = new String(Files.readAllBytes(file.toPath()));
+//        HttpEntity<Object> skill = getHttpEntity(content);
+        ResponseEntity<Skill> response = template.getForEntity("/api/ras/v1/skill", Skill.class);
         Assert.assertEquals("Test Skill", response.getBody().getSkillName());
         Assert.assertEquals(200, response.getStatusCode().value());
 
         //cleanup db record
         skillService.deleteSkill(response.getBody().getId());
     }
+
+
+    @Test
+    public void testSkillGetById() throws Exception {
+        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
+        String content = new String(Files.readAllBytes(file.toPath()));
+
+        HttpEntity<Object> skill = getHttpEntity(content);
+        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill", skill, Skill.class);
+        Assert.assertEquals("Test Skill", response.getBody().getSkillName());
+        Assert.assertEquals(200, response.getStatusCode().value());
+
+        //cleanup db record
+        skillService.deleteSkill(response.getBody().getId());
+    }
+
+
+    @Test
+    public void testSkillUpdate() throws Exception {
+        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
+        String content = new String(Files.readAllBytes(file.toPath()));
+
+        HttpEntity<Object> skill = getHttpEntity(content);
+        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill", skill, Skill.class);
+        Assert.assertEquals("Test Skill", response.getBody().getSkillName());
+        Assert.assertEquals(200, response.getStatusCode().value());
+
+        //cleanup db record
+        skillService.deleteSkill(response.getBody().getId());
+    }
+
+    @Test
+    public void testSkillDelete() throws Exception {
+        File file = ResourceUtils.getFile("classpath:jsonfortest/skill.json");
+        String content = new String(Files.readAllBytes(file.toPath()));
+
+        HttpEntity<Object> skill = getHttpEntity(content);
+        ResponseEntity<Skill> response = template.postForEntity("/api/ras/v1/skill", skill, Skill.class);
+        Assert.assertEquals("Test Skill", response.getBody().getSkillName());
+        Assert.assertEquals(200, response.getStatusCode().value());
+
+        //cleanup db record
+        skillService.deleteSkill(response.getBody().getId());
+    }
+
+
 
     private HttpEntity<Object> getHttpEntity(Object body) {
         HttpHeaders headers = new HttpHeaders();

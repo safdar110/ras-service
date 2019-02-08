@@ -20,7 +20,7 @@ public class Department extends BaseModel{
     private String departmentName;
     private String departmentBench;
 
-    @OneToMany
-    private List<Resource> departmentResources;
+//    @OneToMany
+//    private List<Resource> departmentResources;
 
 }
