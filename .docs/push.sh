@@ -8,9 +8,9 @@ eval $(minikube docker-env)
 ./mvnw -DskipTests package
 git add .
 git commit -m "updated via script"
-git push origin master
+git checkout -b feature/from-script
+git push origin feature/from-script
 export VERSION=$(git rev-parse --short HEAD)
-
 docker build -t $SERVICE_NAME:$VERSION .
 
 #cat .docs/configmap.yaml | kubectl apply -f-
