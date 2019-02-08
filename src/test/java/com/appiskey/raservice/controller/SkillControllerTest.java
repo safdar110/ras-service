@@ -26,6 +26,14 @@ import java.nio.file.Files;
  * Created by khawar on 2/7/19.
  */
 
+//Add
+//getAll
+//getById
+//Update
+//Delete
+
+
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class SkillControllerTest {

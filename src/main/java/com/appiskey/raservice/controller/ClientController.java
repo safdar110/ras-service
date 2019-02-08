@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 
 @RestController
-@RequestMapping(value = "${app.url}" + "/client")
+@RequestMapping("/client")
 public class ClientController extends BaseController {
 
     @Autowired
