@@ -19,43 +19,43 @@ import java.util.UUID;
  */
 
 @RestController
-@RequestMapping("/api/ras/v1/client")
+@RequestMapping(value = "${app.url}" + "/client")
 public class ClientController extends BaseController {
 
     @Autowired
     ClientService clientService;
 
-    @GetMapping("/list")
+    @GetMapping
     public Iterable<Client> getAllClients() {
         return clientService.getAllClients();
     }
 
 
-    @PostMapping("/create")
+    @PostMapping
     public Client createClient(@Valid @RequestBody Client client) {
         return clientService.createClient(client);
     }
 
-    @GetMapping("/get/{uuid}")
+    @GetMapping("/{uuid}")
     @ResponseBody
     public Optional<Client> retrieveClient(@PathVariable("uuid") UUID id) {
-        return clientService.retrieveClient(id);
+        return clientService.getClientByID(id);
 
     }
 
-    @PostMapping("/delete/{uuid}")
+    @DeleteMapping
     @ResponseBody
-    public String deleteClientByID(@PathVariable("uuid") UUID id)
+    public String deleteClientByID(@RequestBody Map<String, UUID> body)
     {
-       clientService.deleteClient(id);
+       clientService.deleteClient(body.get("id"));
         return"{Response : Deleted }";
     }
 
 
-    @PutMapping("/update/{clientID}")
+    @PutMapping
     @ResponseBody
-    public ResponseEntity<Client> editClient(@RequestBody Client client, @PathVariable("clientID") UUID id) {
-        return clientService.editClient(client,id);
+    public ResponseEntity<Client> editClient(@RequestBody Client client) {
+        return clientService.editClient(client);
     }
     @PostMapping("/search")
     public Iterable<Client> findClientByName(@RequestBody Map<String, String>  body){
