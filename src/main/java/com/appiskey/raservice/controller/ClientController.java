@@ -19,7 +19,8 @@ import java.util.UUID;
  */
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping(value = "${app.url}" + "/client")
+@CrossOrigin(origins = {"http://localhost:4200", "http://someserver:8080"})
 public class ClientController extends BaseController {
 
     @Autowired

@@ -15,7 +15,8 @@ import java.util.UUID;
  * Created by appiskey on 2/4/19.
  */
 @RestController
-@RequestMapping("/department")
+@RequestMapping(value = "${app.url}" + "/department")
+@CrossOrigin(origins = {"http://localhost:4200", "http://someserver:8080"})
 public class DepartmentController {
 
     @Autowired

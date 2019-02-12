@@ -14,7 +14,8 @@ import java.util.UUID;
  * Created by suraksha-pnc on 2/7/19.
  */
 @RestController
-@RequestMapping("/skill")
+@RequestMapping(value = "${app.url}" + "/skill")
+@CrossOrigin(origins = {"http://localhost:4200", "http://someserver:8080"})
 public class SkillController {
     @Autowired
     SkillService skillService;
