@@ -77,7 +77,7 @@ public class SkillControllerTest {
         Assert.assertEquals(200, response.getStatusCode().value());
 
         //cleanup db record
-        skillService.deleteSkill(response.getBody().getId());
+//        skillService.deleteSkill(response.getBody().getId());
     }
 
 
@@ -92,7 +92,7 @@ public class SkillControllerTest {
         Assert.assertEquals(200, response.getStatusCode().value());
 
         //cleanup db record
-        skillService.deleteSkill(response.getBody().getId());
+   //     skillService.deleteSkill(response.getBody().getId());
     }
 
 
@@ -107,7 +107,7 @@ public class SkillControllerTest {
         Assert.assertEquals(200, response.getStatusCode().value());
 
         //cleanup db record
-        skillService.deleteSkill(response.getBody().getId());
+     //   skillService.deleteSkill(response.getBody().getId());
     }
 
     @Test
@@ -121,7 +121,7 @@ public class SkillControllerTest {
         Assert.assertEquals(200, response.getStatusCode().value());
 
         //cleanup db record
-        skillService.deleteSkill(response.getBody().getId());
+       // skillService.deleteSkill(response.getBody().getId());
     }
 
 

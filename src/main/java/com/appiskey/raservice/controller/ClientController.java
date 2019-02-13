@@ -20,7 +20,6 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "${app.url}" + "/client")
-@CrossOrigin(origins = {"http://localhost:4200", "http://someserver:8080"})
 public class ClientController extends BaseController {
 
     @Autowired
@@ -46,10 +45,10 @@ public class ClientController extends BaseController {
 
     @DeleteMapping
     @ResponseBody
-    public String deleteClientByID(@RequestBody Map<String, UUID> body)
+    public ResponseEntity<Client> deleteClientByID(@RequestBody Client client)
     {
-       clientService.deleteClient(body.get("id"));
-        return"{Response : Deleted }";
+     return  clientService.deleteClient(client);
+
     }
 
 

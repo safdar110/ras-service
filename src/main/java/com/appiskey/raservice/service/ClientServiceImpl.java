@@ -3,6 +3,7 @@ package com.appiskey.raservice.service;
 import com.appiskey.raservice.model.Client;
 import com.appiskey.raservice.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -38,9 +39,13 @@ public class ClientServiceImpl implements ClientService{
     }
 
     @Override
-    public String deleteClient(UUID id){
-        clientRepository.deleteById(id);
-        return "Deleted Succesfully!";
+    public ResponseEntity<Client> deleteClient(Client client){
+        Optional<Client> mClient = clientRepository.findById(client.getId());
+        if (!mClient.isPresent())
+            return ResponseEntity.notFound().build();
+        //skill.setId();
+        clientRepository.delete(client);
+        return new ResponseEntity<>(client, HttpStatus.OK);
     }
 
     @Override
@@ -48,9 +53,9 @@ public class ClientServiceImpl implements ClientService{
         Optional<Client> mClient = clientRepository.findById(client.getId());
         if (!mClient.isPresent())
             return ResponseEntity.notFound().build();
-      //  client.setId(id);
-        clientRepository.save(client);
-        return ResponseEntity.noContent().build();
+        client.setCreatedAt(mClient.get().getCreatedAt());
+
+        return new ResponseEntity<>(clientRepository.save(client),HttpStatus.OK);
     }
     @Override
     public Iterable<Client> searchClient(String keyword){

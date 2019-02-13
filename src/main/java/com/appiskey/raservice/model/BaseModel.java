@@ -37,7 +37,8 @@ public class BaseModel {
     @Type(type="pg-uuid")
     protected UUID id;
 
-    @CreationTimestamp
+
+   @CreationTimestamp
     protected Date createdAt;
 
     @UpdateTimestamp
@@ -46,4 +47,14 @@ public class BaseModel {
     @Column(nullable = false)
     @JsonIgnore
     protected boolean deleted;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 }

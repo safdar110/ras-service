@@ -3,6 +3,7 @@ package com.appiskey.raservice.service;
 import com.appiskey.raservice.model.Skill;
 import com.appiskey.raservice.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -39,9 +40,15 @@ public class SkillServiceImpl implements SkillService{
     }
 
     @Override
-    public String deleteSkill(UUID id){
-        skillRepository.deleteById(id);
-        return "Deleted Succesfully!";
+    public ResponseEntity<Skill> deleteSkill(Skill skill){
+        Optional<Skill> mSkill = skillRepository.findById(skill.getId());
+        if (!mSkill.isPresent())
+            return ResponseEntity.notFound().build();
+        //skill.setId();
+        skillRepository.delete(skill);
+        return new ResponseEntity<>(skill, HttpStatus.OK);
+//        return skill;
+//        return ResponseEntity.noContent().build();
     }
 
     @Override
@@ -50,8 +57,9 @@ public class SkillServiceImpl implements SkillService{
         if (!mSkill.isPresent())
             return ResponseEntity.notFound().build();
         //skill.setId();
-        skillRepository.save(skill);
-        return ResponseEntity.noContent().build();
+        skill.setCreatedAt(mSkill.get().getCreatedAt());
+
+        return new ResponseEntity<>(skillRepository.save(skill),HttpStatus.OK);
     }
 
     @Override
