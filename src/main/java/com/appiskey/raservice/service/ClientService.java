@@ -15,7 +15,7 @@ public interface ClientService {
     public Client createClient(Client client);
     public Iterable<Client> getAllClients();
     public Optional<Client> getClientByID(UUID id);
-    public String deleteClient(UUID id);
+    public ResponseEntity<Client> deleteClient(Client client);
     public ResponseEntity<Client> editClient(Client client);
     public Iterable<Client> searchClient(String keyword);
 

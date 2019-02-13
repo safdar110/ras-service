@@ -15,7 +15,6 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/skill")
-@CrossOrigin(origins = {"http://localhost:4200", "http://someserver:8080"})
 public class SkillController {
     @Autowired
     SkillService skillService;
@@ -40,10 +39,10 @@ public class SkillController {
 
     @DeleteMapping
     @ResponseBody
-    public String deleteSkillByID(@RequestBody Map<String , UUID> body)
+    public ResponseEntity<Skill> deleteSkillByID(@RequestBody Skill skill)
     {
-        skillService.deleteSkill(body.get("id"));
-        return"{Response : Deleted }";
+        return skillService.deleteSkill(skill);
+//        return"{Response : Deleted }";
     }
 
 
