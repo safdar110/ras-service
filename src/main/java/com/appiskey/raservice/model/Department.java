@@ -18,6 +18,7 @@ import java.util.List;
 @Table
 public class Department extends BaseModel{
     private String departmentName;
+    private String departmentHod;
     private String departmentBench;
 
 //    @OneToMany

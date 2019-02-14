@@ -3,6 +3,7 @@ package com.appiskey.raservice.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
@@ -22,11 +23,11 @@ public class FringeBenefit extends BaseModel {
     private String expenseName;
     private BigDecimal expenseAmount;
     private Boolean isOneTime;
-
-//    @ManyToMany
-//    private List<Department> benefitDepartment;
 //
-//    @ManyToMany
-//    private List<Resource> benefitResource;
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    private Iterable<Department> benefitDepartment;
+//
+//    @ManyToMany(cascade = CascadeType.PERSIST)
+//    private Iterable<Resource> benefitResource;
 
 }

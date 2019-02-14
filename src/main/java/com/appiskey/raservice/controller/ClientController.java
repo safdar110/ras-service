@@ -47,7 +47,8 @@ public class ClientController extends BaseController {
     @ResponseBody
     public ResponseEntity<Client> deleteClientByID(@RequestBody Client client)
     {
-     return  clientService.deleteClient(client);
+        ResponseEntity<Client> dl = clientService.deleteClient(client);
+     return  dl;
 
     }
 
