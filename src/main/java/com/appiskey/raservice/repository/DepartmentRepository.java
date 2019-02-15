@@ -13,6 +13,8 @@ import java.util.UUID;
 @Repository
 public interface DepartmentRepository extends PagingAndSortingRepository<Department, UUID> {
     Iterable<Department> findByDepartmentNameContainingIgnoreCase(String keyword);
+    Iterable<Department> findAllByDeleted(Boolean deleted);
+    Iterable<Department> findAll();
 
 }
 

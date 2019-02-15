@@ -5,6 +5,7 @@ import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,8 +31,8 @@ public class Resource extends BaseModel{
     private String resourceDesignation;
     private String resourceReportingTo;
     private String resourceResume;
-    private String resourceDateOfJoining;
-    private String resourceWorkingDays;
+    private Date resourceDateOfJoining;
+    private int resourceWorkingDays;
     private float resourceExperience;
     private BigDecimal resourceSalaryPerMonth;
     private BigDecimal resourcePerHourRate;

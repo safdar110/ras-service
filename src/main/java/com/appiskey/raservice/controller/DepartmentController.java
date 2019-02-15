@@ -16,6 +16,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/department")
+@CrossOrigin(origins = "http://localhost:4200/")
 public class DepartmentController {
 
     @Autowired
@@ -39,12 +40,10 @@ public class DepartmentController {
 
     }
 
-    @DeleteMapping
-    @ResponseBody
-    public String deleteDepartmentID(@RequestBody Map<String, UUID> body)
-    {
-        departmentService.deleteDepartment(body.get("id"));
-        return"{Response : Deleted }";
+
+    @DeleteMapping("{id}")
+    public Boolean delete(@PathVariable UUID id) {
+        return departmentService.deleteDepartment(id);
     }
 
 

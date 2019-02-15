@@ -4,6 +4,7 @@ import com.appiskey.raservice.model.Client;
 import com.appiskey.raservice.model.Department;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -13,4 +14,5 @@ public interface ClientRepository extends PagingAndSortingRepository<Client, UUI
     Iterable<Client> findByClientNameContainingIgnoreCase(String keyword);
     Iterable<Client> findAllByDeleted(Boolean deleted);
     Iterable<Client> findAll();
+
 }
