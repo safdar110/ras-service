@@ -22,7 +22,7 @@ public class ClientServiceImpl implements ClientService{
 
     @Override
     public Iterable<Client> getAllClients() {
-        return clientRepository.findAll();
+        return clientRepository.findAllByDeleted(false);
     }
 
     @Override
@@ -38,16 +38,35 @@ public class ClientServiceImpl implements ClientService{
 
     }
 
-    @Override
-    public ResponseEntity<Client> deleteClient(Client client){
-        Optional<Client> mClient = clientRepository.findById(client.getId());
-        if (!mClient.isPresent())
-            return ResponseEntity.notFound().build();
-        //skill.setId();
-        clientRepository.delete(client);
-        return new ResponseEntity<>(client, HttpStatus.OK);
-    }
+//    @Override
+//    public ResponseEntity<Client> deleteClient(Client client){
+//        Optional<Client> mClient = clientRepository.findById(client.getId());
+//        if (!mClient.isPresent())
+//            return ResponseEntity.notFound().build();
+//        //skill.setId();
+//        clientRepository.delete(client);
+//        return new ResponseEntity<>(client, HttpStatus.OK);
+//    }
 
+    @Override
+    public Boolean deleteClient(UUID id) {
+        Client client;
+        Optional<Client> clientOptional = clientRepository.findById(id);//  findOne(id);
+        if (clientOptional.isPresent()) {
+            client = clientOptional.get();
+            client.setDeleted(true);
+            clientRepository.save(client);
+            return true;
+        } else {
+
+            return false;
+        }
+
+
+
+
+
+    }
     @Override
     public ResponseEntity<Client> editClient(@RequestBody Client client) {
         Optional<Client> mClient = clientRepository.findById(client.getId());

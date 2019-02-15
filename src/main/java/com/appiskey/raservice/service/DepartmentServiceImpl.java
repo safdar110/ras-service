@@ -37,11 +37,27 @@ public class DepartmentServiceImpl implements DepartmentService{
         return departmentRepository.findById(id);
 
     }
+//
+//    @Override
+//    public String deleteDepartment(UUID id){
+//        departmentRepository.deleteById(id);
+//        return "Deleted Succesfully!";
+//    }
 
     @Override
-    public String deleteDepartment(UUID id){
-        departmentRepository.deleteById(id);
-        return "Deleted Succesfully!";
+    public Boolean deleteDepartment(UUID id) {
+        Department department;
+        Optional<Department> departmentOptional = departmentRepository.findById(id);//  findOne(id);
+        if (departmentOptional.isPresent()) {
+            department = departmentOptional.get();
+            department.setDeleted(true);
+            departmentRepository.save(department);
+            // processing with foo ...
+            return true;
+        } else {
+            // alternative processing....
+            return false;
+        }
     }
 
     @Override

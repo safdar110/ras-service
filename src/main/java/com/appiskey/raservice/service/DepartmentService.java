@@ -17,7 +17,7 @@ public interface DepartmentService {
 
     public Optional<Department> getDepartmentByID(UUID id);
 
-    public String deleteDepartment(UUID id);
+    public Boolean deleteDepartment(UUID id);
     public ResponseEntity<Department> editDepartment(Department department);
     public Iterable<Department> searchDepartment(String keyword);
 }

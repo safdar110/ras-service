@@ -43,13 +43,9 @@ public class ClientController extends BaseController {
 
     }
 
-    @DeleteMapping
-    @ResponseBody
-    public ResponseEntity<Client> deleteClientByID(@RequestBody Client client)
-    {
-        ResponseEntity<Client> dl = clientService.deleteClient(client);
-     return  dl;
-
+    @DeleteMapping("{id}")
+    public Boolean delete(@PathVariable UUID id) {
+        return clientService.deleteClient(id);
     }
 
 
