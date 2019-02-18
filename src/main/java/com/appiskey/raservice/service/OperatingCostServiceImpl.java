@@ -22,7 +22,7 @@ public class OperatingCostServiceImpl implements OperatingCostService {
 
     @Override
     public Iterable<OperatingCost> getAllOperatingCosts() {
-        return operatingCostRepository.findAll();
+        return operatingCostRepository.findAllByDeleted(false);
     }
 
     @Override
@@ -37,15 +37,24 @@ public class OperatingCostServiceImpl implements OperatingCostService {
         return operatingCostRepository.findById(id);
 
     }
-
     @Override
-    public ResponseEntity<OperatingCost> deleteOperatingCost(OperatingCost operatingCost){
-        Optional<OperatingCost> mOperatingCost = operatingCostRepository.findById(operatingCost.getId());
-        if (!mOperatingCost.isPresent())
-            return ResponseEntity.notFound().build();
-        //skill.setId();
-        operatingCostRepository.delete(operatingCost);
-        return new ResponseEntity<>(operatingCost, HttpStatus.OK);
+    public Boolean deleteOperatingCost(UUID id) {
+        OperatingCost operatingCost;
+        Optional<OperatingCost> operatingCostOptional = operatingCostRepository.findById(id);//  findOne(id);
+        if (operatingCostOptional.isPresent()) {
+            operatingCost = operatingCostOptional.get();
+            operatingCost.setDeleted(true);
+            operatingCostRepository.save(operatingCost);
+            return true;
+        } else {
+
+            return false;
+        }
+
+
+
+
+
     }
 
     @Override

@@ -9,4 +9,5 @@ import java.util.UUID;
  * Created by suraksha-app on 2/14/19.
  */
 public interface ResourceRepository extends PagingAndSortingRepository<Resource, UUID> {
+    Iterable<Resource> findAllByDeleted(Boolean deleted);
 }

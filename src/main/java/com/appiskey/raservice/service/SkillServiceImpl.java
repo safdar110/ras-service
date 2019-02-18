@@ -28,7 +28,7 @@ public class SkillServiceImpl implements SkillService{
 
     @Override
     public Iterable<Skill> getAllSkills(){
-        return skillRepository.findAll();
+        return skillRepository.findAllByDeleted(false);
 
     }
 
@@ -38,17 +38,20 @@ public class SkillServiceImpl implements SkillService{
         return skillRepository.findById(id);
 
     }
-
     @Override
-    public ResponseEntity<Skill> deleteSkill(Skill skill){
-        Optional<Skill> mSkill = skillRepository.findById(skill.getId());
-        if (!mSkill.isPresent())
-            return ResponseEntity.notFound().build();
-        //skill.setId();
-        skillRepository.delete(skill);
-        return new ResponseEntity<>(skill, HttpStatus.OK);
-//        return skill;
-//        return ResponseEntity.noContent().build();
+    public Boolean deleteSkill(UUID id) {
+        Skill skill;
+        Optional<Skill> skillOptional = skillRepository.findById(id);//  findOne(id);
+        if (skillOptional.isPresent()) {
+            skill = skillOptional.get();
+            skill.setDeleted(true);
+            skillRepository.save(skill);
+            // processing with foo ...
+            return true;
+        } else {
+            // alternative processing....
+            return false;
+        }
     }
 
     @Override

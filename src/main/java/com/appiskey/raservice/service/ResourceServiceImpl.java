@@ -22,7 +22,7 @@ public class ResourceServiceImpl implements ResourceService {
 
     @Override
     public Iterable<Resource> getAllResources() {
-        return resourceRepository.findAll();
+        return resourceRepository.findAllByDeleted(false);
     }
 
     @Override
@@ -39,16 +39,21 @@ public class ResourceServiceImpl implements ResourceService {
     }
 
     @Override
-    public ResponseEntity<Resource> deleteResource(Resource resource){
-        Optional<Resource> mResource = resourceRepository.findById(resource.getId());
-        if (!mResource.isPresent())
-            return ResponseEntity.notFound().build();
-        //skill.setId();
-        resourceRepository.delete(resource);
-        return new ResponseEntity<>(resource, HttpStatus.OK);
-    }
+    public Boolean deleteResource(UUID id) {
+        Resource resource;
+        Optional<Resource> resourceOptional = resourceRepository.findById(id);//  findOne(id);
+        if (resourceOptional.isPresent()) {
+            resource = resourceOptional.get();
+            resource.setDeleted(true);
+            resourceRepository.save(resource);
+            return true;
+        } else {
 
-    @Override
+            return false;
+        }
+
+    }
+        @Override
     public ResponseEntity<Resource> editResource(@RequestBody Resource resource) {
         Optional<Resource> mResource = resourceRepository.findById(resource.getId());
         if (!mResource.isPresent())

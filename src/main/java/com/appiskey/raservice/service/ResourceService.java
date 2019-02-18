@@ -13,7 +13,7 @@ public interface ResourceService {
     public Resource createResource(Resource resource);
     public Iterable<Resource> getAllResources();
     public Optional<Resource> getResourceByID(UUID id);
-    public ResponseEntity<Resource> deleteResource(Resource resource);
+    public Boolean deleteResource(UUID id);
     public ResponseEntity<Resource> editResource(Resource resource);
 
 }

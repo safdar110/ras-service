@@ -16,7 +16,8 @@ public interface FringeBenefitService {
 
     public Optional<FringeBenefit> getFringeBenefitByID(UUID id);
 
-    public ResponseEntity<FringeBenefit> deleteFringeBenefit(FringeBenefit fringeBenefit);
+    public Boolean deleteFringeBenefit(UUID id);
+
     public ResponseEntity<FringeBenefit> editFringeBenefit(FringeBenefit fringeBenefit);
 //    public Iterable<FringeBenefit> searchFringeBenefit(String keyword);
 }

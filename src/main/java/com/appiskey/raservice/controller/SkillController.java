@@ -37,12 +37,10 @@ public class SkillController {
 
     }
 
-    @DeleteMapping
-    @ResponseBody
-    public ResponseEntity<Skill> deleteSkillByID(@RequestBody Skill skill)
-    {
-        return skillService.deleteSkill(skill);
-//        return"{Response : Deleted }";
+
+    @DeleteMapping("{id}")
+    public Boolean deleteSkill(@PathVariable UUID id) {
+        return skillService.deleteSkill(id);
     }
 
 

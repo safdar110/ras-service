@@ -41,14 +41,10 @@ public class OperatingCostController {
 
     }
 
-    @DeleteMapping
-    @ResponseBody
-    public ResponseEntity<OperatingCost> deleteOperatingCost(@RequestBody OperatingCost operatingCost)
-    {
-
-        return operatingCostService.deleteOperatingCost(operatingCost);
+    @DeleteMapping("{id}")
+    public Boolean deleteOperatingCost(@PathVariable UUID id) {
+        return operatingCostService.deleteOperatingCost(id);
     }
-
 
     @PutMapping
     @ResponseBody
