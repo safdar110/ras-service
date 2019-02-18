@@ -16,7 +16,7 @@ public interface OperatingCostService {
 
     public Optional<OperatingCost> getOperatingCostByID(UUID id);
 
-    public ResponseEntity<OperatingCost> deleteOperatingCost(OperatingCost operatingCost);
+    public Boolean deleteOperatingCost(UUID id);
     public ResponseEntity<OperatingCost> editOperatingCost(OperatingCost operatingCost);
     public Iterable<OperatingCost> searchOperatingCost(String keyword);
 }

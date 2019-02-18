@@ -27,7 +27,7 @@ public class DepartmentServiceImpl implements DepartmentService{
 
     @Override
     public Iterable<Department> getAllDepartments(){
-        return departmentRepository.findAll();
+        return departmentRepository.findAllByDeleted(false);
 
     }
 

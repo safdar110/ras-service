@@ -14,7 +14,7 @@ public interface SkillService {
     public Skill createSkill(Skill skill);
     public Iterable<Skill> getAllSkills();
     public Optional<Skill> retrieveSkill(UUID id);
-    public ResponseEntity<Skill> deleteSkill(Skill skill);
+    public Boolean deleteSkill(UUID id);
     public ResponseEntity<Skill> editSkill(Skill skill);
     public Iterable<Skill> searchSkill(String keyword);
 

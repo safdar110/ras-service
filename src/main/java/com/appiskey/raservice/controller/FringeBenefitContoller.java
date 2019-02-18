@@ -39,14 +39,10 @@ public class FringeBenefitContoller {
 
     }
 
-    @DeleteMapping
-    @ResponseBody
-    public ResponseEntity<FringeBenefit> deleteFringeBenefit(@RequestBody FringeBenefit fringeBenefit)
-    {
-
-        return fringeBenefitService.deleteFringeBenefit(fringeBenefit);
+    @DeleteMapping("{id}")
+    public Boolean deleteOperatingCost(@PathVariable UUID id) {
+        return fringeBenefitService.deleteFringeBenefit(id);
     }
-
 
     @PutMapping
     @ResponseBody

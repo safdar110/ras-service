@@ -38,14 +38,10 @@ public class ResourceController {
 
     }
 
-    @DeleteMapping
-    @ResponseBody
-    public ResponseEntity<Resource> deleteResource(@RequestBody Resource resource)
-    {
-
-        return resourceService.deleteResource(resource);
+    @DeleteMapping("{id}")
+    public Boolean deleteResource(@PathVariable UUID id) {
+        return resourceService.deleteResource(id);
     }
-
 
     @PutMapping
     @ResponseBody

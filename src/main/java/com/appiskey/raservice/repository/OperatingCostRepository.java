@@ -10,5 +10,6 @@ import java.util.UUID;
  */
 public interface OperatingCostRepository extends PagingAndSortingRepository<OperatingCost, UUID> {
     Iterable<OperatingCost> findByMonthlyCostContaining(String keyword);
+    Iterable<OperatingCost> findAllByDeleted(Boolean deleted);
 
 }

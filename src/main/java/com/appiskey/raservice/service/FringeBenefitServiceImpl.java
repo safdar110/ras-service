@@ -24,7 +24,7 @@ public class FringeBenefitServiceImpl implements FringeBenefitService{
 
     @Override
     public Iterable<FringeBenefit> getAllFringeBenefits() {
-        return fringeBenefitRepository.findAll();
+        return fringeBenefitRepository.findAllByDeleted(false);
     }
 
     @Override
@@ -41,12 +41,23 @@ public class FringeBenefitServiceImpl implements FringeBenefitService{
     }
 
     @Override
-    public ResponseEntity<FringeBenefit> deleteFringeBenefit(FringeBenefit fringeBenefit){
-        Optional<FringeBenefit> mOperatingCost = fringeBenefitRepository.findById(fringeBenefit.getId());
-        if (!mOperatingCost.isPresent())
-            return ResponseEntity.notFound().build();
-        fringeBenefitRepository.delete(fringeBenefit);
-        return new ResponseEntity<>(fringeBenefit, HttpStatus.OK);
+    public Boolean deleteFringeBenefit(UUID id) {
+        FringeBenefit fringeBenefit;
+        Optional<FringeBenefit> fringeBenefitOptional = fringeBenefitRepository.findById(id);//  findOne(id);
+        if (fringeBenefitOptional.isPresent()) {
+            fringeBenefit = fringeBenefitOptional.get();
+            fringeBenefit.setDeleted(true);
+            fringeBenefitRepository.save(fringeBenefit);
+            return true;
+        } else {
+
+            return false;
+        }
+
+
+
+
+
     }
 
     @Override
