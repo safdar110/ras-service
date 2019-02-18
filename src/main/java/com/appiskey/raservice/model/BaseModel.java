@@ -30,14 +30,20 @@ import java.util.UUID;
         allowGetters = true)
 @Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
 public class BaseModel {
-    
+    //for postgres
+//    @Id
+//    @GeneratedValue(generator = "uuid")
+//    @GenericGenerator(name = "pg-uuid", strategy = "pg-uuid")
+//    @Type(type="pg-uuid")
+
     @Id
-    @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name = "pg-uuid", strategy = "pg-uuid")
-    @Type(type="pg-uuid")
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column(name = "id", columnDefinition = "BINARY(16)")
     protected UUID id;
 
-    @CreationTimestamp
+
+   @CreationTimestamp
     protected Date createdAt;
 
     @UpdateTimestamp
@@ -46,4 +52,14 @@ public class BaseModel {
     @Column(nullable = false)
     @JsonIgnore
     protected boolean deleted;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = new Date();
+    }
+
+    @PreUpdate
+    protected void onUpdate() {
+        updatedAt = new Date();
+    }
 }

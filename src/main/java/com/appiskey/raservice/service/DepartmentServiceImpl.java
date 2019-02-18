@@ -3,6 +3,7 @@ package com.appiskey.raservice.service;
 import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -49,8 +50,9 @@ public class DepartmentServiceImpl implements DepartmentService{
         if (!mDepartment.isPresent())
             return ResponseEntity.notFound().build();
       //  department.setId(id);
-        departmentRepository.save(department);
-        return ResponseEntity.noContent().build();
+        department.setCreatedAt(mDepartment.get().getCreatedAt());
+
+        return new ResponseEntity<>(departmentRepository.save(department), HttpStatus.OK);
     }
 
     @Override

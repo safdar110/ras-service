@@ -15,7 +15,7 @@ import java.util.UUID;
  * Created by appiskey on 2/4/19.
  */
 @RestController
-@RequestMapping("/department")
+@RequestMapping(value = "${app.url}" + "/department")
 public class DepartmentController {
 
     @Autowired

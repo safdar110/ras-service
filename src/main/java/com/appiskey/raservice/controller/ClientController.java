@@ -19,7 +19,7 @@ import java.util.UUID;
  */
 
 @RestController
-@RequestMapping("/client")
+@RequestMapping(value = "${app.url}" + "/client")
 public class ClientController extends BaseController {
 
     @Autowired
@@ -45,10 +45,11 @@ public class ClientController extends BaseController {
 
     @DeleteMapping
     @ResponseBody
-    public String deleteClientByID(@RequestBody Map<String, UUID> body)
+    public ResponseEntity<Client> deleteClientByID(@RequestBody Client client)
     {
-       clientService.deleteClient(body.get("id"));
-        return"{Response : Deleted }";
+        ResponseEntity<Client> dl = clientService.deleteClient(client);
+     return  dl;
+
     }
 
 

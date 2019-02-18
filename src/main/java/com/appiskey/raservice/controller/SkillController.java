@@ -14,7 +14,7 @@ import java.util.UUID;
  * Created by suraksha-pnc on 2/7/19.
  */
 @RestController
-@RequestMapping("/skill")
+@RequestMapping(value = "${app.url}" + "/skill")
 public class SkillController {
     @Autowired
     SkillService skillService;
@@ -37,10 +37,10 @@ public class SkillController {
 
     @DeleteMapping
     @ResponseBody
-    public String deleteSkillByID(@RequestBody Map<String , UUID> body)
+    public ResponseEntity<Skill> deleteSkillByID(@RequestBody Skill skill)
     {
-        skillService.deleteSkill(body.get("id"));
-        return"{Response : Deleted }";
+        return skillService.deleteSkill(skill);
+//        return"{Response : Deleted }";
     }
 
 

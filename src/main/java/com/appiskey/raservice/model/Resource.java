@@ -40,7 +40,7 @@ public class Resource extends BaseModel{
     private int resourceContractType;     //isIntern, isPartTime , isFullTime
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "resource_skill",
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "resource_id",
