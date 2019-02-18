@@ -17,4 +17,6 @@ public interface SkillService {
     public ResponseEntity<Skill> deleteSkill(Skill skill);
     public ResponseEntity<Skill> editSkill(Skill skill);
     public Iterable<Skill> searchSkill(String keyword);
+
+    Skill findByskillName(String name);
 }

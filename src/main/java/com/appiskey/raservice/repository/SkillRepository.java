@@ -7,6 +7,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -17,5 +18,7 @@ public interface SkillRepository extends PagingAndSortingRepository<Skill, UUID>
 
    Iterable<Skill> findByskillNameContainingIgnoreCase(String keyword);
    Iterable<Skill> findAll();
+//   Optional<Skill> findByskillName(String name);
+   Skill findByskillName(String name);
 
 }

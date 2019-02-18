@@ -68,5 +68,10 @@ public class SkillServiceImpl implements SkillService{
      return skill;
     }
 
+    @Override
+    public Skill findByskillName(String name) {
+       return skillRepository.findByskillName(name);
+    }
+
 
 }
