@@ -21,7 +21,6 @@ public class SkillController {
 
     @GetMapping
     public Iterable<Skill> getAllSkills(){
-
         return skillService.getAllSkills();
     }
 
@@ -34,7 +33,6 @@ public class SkillController {
     @ResponseBody
     public Optional<Skill> retrieveSkill(@PathVariable("uuid") UUID id) {
         return skillService.retrieveSkill(id);
-
     }
 
     @DeleteMapping
