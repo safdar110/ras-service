@@ -18,5 +18,5 @@ public interface SkillService {
     public ResponseEntity<Skill> editSkill(Skill skill);
     public Iterable<Skill> searchSkill(String keyword);
 
-    Skill findByskillName(String name);
+//    Skill findByskillName(String name);
 }

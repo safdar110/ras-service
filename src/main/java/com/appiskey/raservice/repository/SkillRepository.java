@@ -20,6 +20,6 @@ public interface SkillRepository extends PagingAndSortingRepository<Skill, UUID>
    Iterable<Skill> findAllByDeleted(Boolean deleted);
    Iterable<Skill> findAll();
 //   Optional<Skill> findByskillName(String name);
-   Skill findByskillName(String name);
+//   Skill findByskillName(String name);
 
 }

@@ -1,6 +1,7 @@
 package com.appiskey.raservice.repository;
 
 import com.appiskey.raservice.model.Skill;
+import org.assertj.core.util.Lists;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,8 +34,8 @@ public class SkillRepositoryIntegrationTest {
 
 
         // when
-        Skill found = skillRepository.findByskillName("devops");
-
+        Iterable<Skill>  foundList = skillRepository.findByskillNameContainingIgnoreCase("op");
+        Skill found  = Lists.newArrayList(foundList).get(0);
         // then
         assertThat(found.getSkillName()).isEqualTo(devops.getSkillName());
 

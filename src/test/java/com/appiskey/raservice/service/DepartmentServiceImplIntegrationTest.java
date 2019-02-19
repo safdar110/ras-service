@@ -1,6 +1,8 @@
 package com.appiskey.raservice.service;
 
+import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.model.Skill;
+import com.appiskey.raservice.repository.DepartmentRepository;
 import com.appiskey.raservice.repository.SkillRepository;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
@@ -18,43 +20,43 @@ import java.util.ArrayList;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(SpringRunner.class)
-public class SkillServiceImplIntegrationTest {
+public class DepartmentServiceImplIntegrationTest {
 
 
     @TestConfiguration
-    static class SkillServiceImplTestContextConfiguration {
+    static class DepartmentServiceImplTestContextConfiguration {
         @Bean
-        public SkillService skillService() {
-            return new SkillServiceImpl();
+        public DepartmentService serviceImpl() {
+            return new DepartmentServiceImpl();
         }
     }
 
     @Autowired
-    private SkillService skillService;
+    private DepartmentService service;
 
     @MockBean
-    private SkillRepository skillRepository;
+    private DepartmentRepository repository;
 
     // write test cases here
 
     @Before
     public void setup(){
-        Skill python = new Skill();
-        python.setSkillName("python");
-        ArrayList<Skill> newList = new ArrayList<>();
-        newList.add(python);
+        Department sales = new Department();
+        sales.setDepartmentName("sales");
+        ArrayList<Department> newList = new ArrayList<>();
+        newList.add(sales);
 
-        Iterable<Skill>  foundList = skillRepository.findByskillNameContainingIgnoreCase("python");
+        Iterable<Department>  foundList = repository.findByDepartmentNameContainingIgnoreCase("sales");
         Mockito.when(foundList)
                 .thenReturn(newList);
     }
 
     @Test
     public void whenValidName_thenSkillShouldBefound(){
-        String name = "python";
-        Iterable<Skill>  foundList  = skillService.searchSkill(name);
-        Skill found  = Lists.newArrayList(foundList).get(0);
-        assertThat(found.getSkillName())
+        String name = "sales";
+        Iterable<Department>  foundList  = service.searchDepartment(name);
+        Department found  = Lists.newArrayList(foundList).get(0);
+        assertThat(found.getDepartmentName())
                 .isEqualTo(name);
     }
 
