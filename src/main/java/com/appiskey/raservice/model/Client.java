@@ -34,8 +34,8 @@ public class Client extends BaseModel{
     @ManyToOne
     @JoinColumn(name = "parent_id")
     protected Client parent;
-
-    @OneToMany(mappedBy = "parent")
-    protected Set<Client> children;
+//
+//    @OneToMany(mappedBy = "parent")
+//    protected Set<Client> children;
 
 }
