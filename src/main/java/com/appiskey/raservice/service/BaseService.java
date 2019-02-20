@@ -10,8 +10,12 @@ import java.util.UUID;
 /**
  * Created by suraksha-pnc on 2/7/19.
  */
-public interface SkillService extends  BaseService<Skill> {
-
-    public Iterable<Skill> searchBySkillName(String keyword);
+public abstract interface BaseService<T> {
+    public T insert(T item);
+    public Iterable<T> findAll();
+    public T findById(UUID id);
+    public void delete(T item);
+    public T update(T item);
+//    public Iterable<T> search(String keyword);
 
 }

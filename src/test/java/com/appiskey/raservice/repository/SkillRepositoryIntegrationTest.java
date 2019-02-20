@@ -70,7 +70,5 @@ public class SkillRepositoryIntegrationTest {
                 .hasSize(3)
                 .contains(css)
                 .doesNotContainNull();
-
     }
-
 }
