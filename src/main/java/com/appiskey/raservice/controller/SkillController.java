@@ -15,43 +15,10 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/skill")
-public class SkillController {
-
-    @Autowired
-    SkillService service;
-
-    @GetMapping
-    public Iterable<Skill> findAll() {
-        return service.findAll();
-    }
-
-    @PostMapping
-    public Skill insert(@Valid @RequestBody Skill skill) {
-        return service.insert(skill);
-    }
-
-    @GetMapping("/{uuid}")
-    @ResponseBody
-    public Skill findById(@PathVariable("uuid") UUID id) {
-        return service.findById(id);
-    }
-
-
-    @DeleteMapping("{id}")
-    public void delete(@PathVariable UUID id) {
-        service.delete(service.findById(id));
-    }
-
-
-    @PutMapping
-    @ResponseBody
-    public Skill update(@RequestBody Skill skill) {
-        return service.update(skill);
-    }
+public class SkillController extends BaseController<SkillService, Skill> {
 
     @PostMapping("/search")
-    public Iterable<Skill> findSkillByName(@RequestBody Map<String, String> body) {
+    public Iterable<Skill> searchByName(@RequestBody Map<String, String> body) {
         return service.searchBySkillName(body.get("keyword"));
     }
-
 }

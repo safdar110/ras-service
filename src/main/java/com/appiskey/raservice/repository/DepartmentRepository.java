@@ -11,9 +11,8 @@ import java.util.UUID;
 /**
  * Created by appiskey on 2/4/19.
  */
-@Qualifier("departmentService")
-public interface DepartmentRepository extends PagingAndSortingRepository<Department, UUID> {
+
+public interface DepartmentRepository extends BaseRepository<Department> {
     Iterable<Department> findByDepartmentNameContainingIgnoreCase(String keyword);
-    Iterable<Department> findAllByDeleted(Boolean deleted);
 }
 

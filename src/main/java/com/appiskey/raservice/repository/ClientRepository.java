@@ -11,10 +11,7 @@ import java.util.UUID;
 /**
  * Created by khawar on 1/31/19.
  */
-//@Qualifier("clientService")
-public interface ClientRepository extends PagingAndSortingRepository<Client, UUID> {
-    Iterable<Client> findByClientNameContainingIgnoreCase(String keyword);
-    Iterable<Client> findAllByDeleted(Boolean deleted);
-//    Iterable<Client> findAll();
 
+public interface ClientRepository extends BaseRepository<Client> {
+    Iterable<Client> findByClientNameContainingIgnoreCase(String keyword);
 }

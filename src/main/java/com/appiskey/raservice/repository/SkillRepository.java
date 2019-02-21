@@ -14,7 +14,6 @@ import java.util.UUID;
 /**
  * Created by suraksha-pnc on 2/7/19.
  */
-public interface SkillRepository extends PagingAndSortingRepository<Skill, UUID> {
+public interface SkillRepository extends BaseRepository<Skill> {
     Iterable<Skill> findByskillNameContainingIgnoreCase(String keyword);
-    Iterable<Skill> findAllByDeleted(Boolean deleted);
 }
