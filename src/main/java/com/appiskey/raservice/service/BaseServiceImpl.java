@@ -7,6 +7,7 @@ import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -21,11 +22,11 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public T insert(T item) {
-        return repository.save(item);
+        return repository.saveAndFlush(item);
     }
 
     @Override
-    public Iterable<T> findAll() {
+    public List<T> findAll() {
         return repository.findAllByDeleted(false);
     }
 
@@ -43,6 +44,6 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public T update(T item) {
-        return repository.save(item);
+        return repository.saveAndFlush(item);
     }
 }

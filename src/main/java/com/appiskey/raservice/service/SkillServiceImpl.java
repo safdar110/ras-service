@@ -5,6 +5,8 @@ import com.appiskey.raservice.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by suraksha-pnc on 2/7/19.
  */
@@ -14,7 +16,7 @@ public class SkillServiceImpl extends BaseServiceImpl<Skill> implements SkillSer
     @Autowired
     SkillRepository skillRepository;
     @Override
-    public Iterable<Skill> searchBySkillName(String keyword) {
+    public List<Skill> searchBySkillName(String keyword) {
         return skillRepository.findByskillNameContainingIgnoreCase(keyword);
     }
 }

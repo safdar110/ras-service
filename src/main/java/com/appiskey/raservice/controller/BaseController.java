@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -21,8 +22,7 @@ public class BaseController<S extends BaseService<T>, T> {
     S service;
 
     @GetMapping
-    public Iterable<T> getAll() {
-
+    public List<T> getAll() {
         return service.findAll();
     }
 

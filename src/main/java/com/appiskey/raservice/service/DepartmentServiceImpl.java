@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -23,7 +24,7 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Department> implement
     DepartmentRepository departmentRepository;
 
     @Override
-    public Iterable<Department> searchByDepartmentName(String keyword) {
+    public List<Department> searchByDepartmentName(String keyword) {
         return departmentRepository.findByDepartmentNameContainingIgnoreCase(keyword);
     }
 }
