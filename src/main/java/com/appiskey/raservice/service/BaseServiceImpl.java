@@ -1,10 +1,8 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.exception.ResourceNotFoundException;
-import com.appiskey.raservice.model.Skill;
-import com.appiskey.raservice.repository.BaseRepository;
-import com.appiskey.raservice.repository.SkillRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,11 +11,10 @@ import java.util.UUID;
 /**
  * Created by suraksha-pnc on 2/7/19.
  */
-//@Service("baseService")
-public class BaselServiceImpl<T> implements BaseService<T>{
+public class BaseServiceImpl<R extends PagingAndSortingRepository<T, UUID>, T> implements BaseService<T> {
 
     @Autowired
-    BaseRepository<T> repository;
+    R repository;
 
     @Override
     public T insert(T item) {
@@ -26,7 +23,7 @@ public class BaselServiceImpl<T> implements BaseService<T>{
 
     @Override
     public Iterable<T> findAll() {
-        return repository.findAllByDeleted(false);
+        return repository.findAll();
     }
 
     @Override

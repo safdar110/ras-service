@@ -10,14 +10,14 @@ import java.util.UUID;
 /**
  * Created by khawar on 1/31/19.
  */
-public interface ClientService {
+public interface ClientService extends BaseService<Client>{
 
-    public Client createClient(Client client);
-    public Iterable<Client> getAllClients();
-    public Optional<Client> getClientByID(UUID id);
-//    public ResponseEntity<Client>  deleteClientByID(UUID id);
-    public Boolean deleteClient(UUID id);
-    public ResponseEntity<Client> editClient(Client client);
-    public Iterable<Client> searchClient(String keyword);
+//    public Client createClient(Client client);
+//    public Iterable<Client> getAllClients();
+//    public Optional<Client> getClientByID(UUID id);
+////    public ResponseEntity<Client>  deleteClientByID(UUID id);
+//    public Boolean deleteClient(UUID id);
+//    public ResponseEntity<Client> editClient(Client client);
+//    public Iterable<Client> searchClient(String keyword);
 
 }

@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -16,47 +15,45 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/department")
-@CrossOrigin(origins = "http://localhost:4200/")
-public class DepartmentController {
+public class DepartmentController extends BaseController<DepartmentService, Department> {
 
-    @Autowired
-     DepartmentService departmentService;
+//    @Autowired
+//    DepartmentService service;
+//
+//    @GetMapping
+//    public Iterable<Department> getAllDepartments() {
+//
+//        return service.findAll();
+//    }
+//
+//    @PostMapping
+//    public Department addDepartment(@Valid @RequestBody Department department) {
+//        return service.insert(department);
+//    }
+//
+//    @GetMapping("/{uuid}")
+//    @ResponseBody
+//    public Department getDepartmentByID(@PathVariable("uuid") UUID id) {
+//        return service.findById(id);
+//    }
+//
+//
+//    @DeleteMapping("{id}")
+//    public void delete(@PathVariable UUID id) {
+//        service.delete(service.findById(id));
+//    }
+//
+//
+//    @PutMapping
+//    @ResponseBody
+//    public Department update(@RequestBody Department department) {
+//        return service.update(department);
+//    }
 
-    @GetMapping
-    public Iterable<Department> getAllDepartments(){
-
-        return departmentService.getAllDepartments();
-    }
-
-    @PostMapping
-    public Department addDepartment(@Valid @RequestBody Department department){
-        return departmentService.createDepartment(department);
-    }
-
-    @GetMapping("/{uuid}")
-    @ResponseBody
-    public Optional<Department> getDepartmentByID(@PathVariable("uuid") UUID id) {
-        return departmentService.getDepartmentByID(id);
-
-    }
-
-
-    @DeleteMapping("{id}")
-    public Boolean delete(@PathVariable UUID id) {
-        return departmentService.deleteDepartment(id);
-    }
-
-
-    @PutMapping
-    @ResponseBody
-    public ResponseEntity<Department> editDepartment(@RequestBody Department department) {
-   return departmentService.editDepartment(department);
-    }
-
-    @PostMapping("/search")
-    public Iterable<Department> findDepartmentByName(@RequestBody Map<String, String> body){
-        return  departmentService.searchDepartment(body.get("keyword"));
-    }
+//    @PostMapping("/search")
+//    public Iterable<Department> findDepartmentByName(@RequestBody Map<String, String> body) {
+//        return service.searchDepartment(body.get("keyword"));
+//    }
 
 
 }
