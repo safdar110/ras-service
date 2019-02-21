@@ -15,6 +15,7 @@ import java.util.UUID;
 public interface BaseService<T> {
     public T insert(T item);
     public List<T> findAll();
+    public List<T> findAllByDeleted();
     public T findById(UUID id);
     public void delete(T item);
     public T update(T item);

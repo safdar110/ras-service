@@ -27,15 +27,33 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Override
     public List<T> findAll() {
+        return repository.findAll();
+    }
+
+    @Override
+    public List<T> findAllByDeleted() {
         return repository.findAllByDeleted(false);
     }
 
     @Override
     public T findById(UUID id) {
-        Optional<T> itemOpt = Optional.ofNullable(repository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Object", "id", id)));
-        return itemOpt.get();
+        Optional<T> itemOpt = repository.findById(id);
+//                .orElseThrow(() -> new ResourceNotFoundException("Object", "id", id)));
+        if (itemOpt.isPresent()) {
+            return itemOpt.get();
+        } else {
+            return null;
+        }
+
     }
+
+//    @Override
+//    public Optional<T> findById(UUID id) {
+//        return repository.findById(id);
+////        Optional<T> itemOpt = Optional.ofNullable(repository.findById(id)
+////                .orElseThrow(() -> new ResourceNotFoundException("Object", "id", id)));
+////        return itemOpt;
+//    }
 
     @Override
     public void delete(T item) {

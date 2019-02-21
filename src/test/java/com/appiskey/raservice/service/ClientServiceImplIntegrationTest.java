@@ -55,7 +55,7 @@ public class ClientServiceImplIntegrationTest {
     public void whenFindAll_thenListShouldBefound() {
         Client tom = new Client();
         tom.setClientName("tom");
-        Iterable<Client> foundList = service.findAll();
+        Iterable<Client> foundList = service.findAllByDeleted();
         assertThat(foundList)
                 .isNotEmpty()
                 .containsOnly(tom)
