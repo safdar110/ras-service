@@ -3,6 +3,7 @@ package com.appiskey.raservice.service;
 import com.appiskey.raservice.exception.ResourceNotFoundException;
 import com.appiskey.raservice.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.NoRepositoryBean;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +13,11 @@ import java.util.UUID;
 /**
  * Created by suraksha-pnc on 2/7/19.
  */
-public class BaseServiceImpl<R extends BaseRepository<T>, T> implements BaseService<T> {
+//@NoRepositoryBean
+public class BaseServiceImpl<T> implements BaseService<T> {
 
     @Autowired
-    R repository;
+    BaseRepository<T> repository;
 
     @Override
     public T insert(T item) {

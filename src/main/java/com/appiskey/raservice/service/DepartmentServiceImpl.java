@@ -17,10 +17,13 @@ import java.util.UUID;
  * Created by appiskey on 2/4/19.
  */
 @Service("departmentService")
-public class DepartmentServiceImpl extends BaseServiceImpl<DepartmentRepository, Department> implements DepartmentService{
+public class DepartmentServiceImpl extends BaseServiceImpl<Department> implements DepartmentService{
+
+    @Autowired
+    DepartmentRepository departmentRepository;
 
     @Override
     public Iterable<Department> searchByDepartmentName(String keyword) {
-        return repository.findByDepartmentNameContainingIgnoreCase(keyword);
+        return departmentRepository.findByDepartmentNameContainingIgnoreCase(keyword);
     }
 }

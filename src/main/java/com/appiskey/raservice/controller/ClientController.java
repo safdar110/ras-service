@@ -20,44 +20,4 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "${app.url}" + "/client")
-public class ClientController extends BaseController<ClientService, Client> {
-
-    @Autowired
-    ClientService clientService;
-//
-//    @GetMapping
-//    public Iterable<Client> getAllClients() {
-//        return clientService.getAllClients();
-//    }
-//
-//
-//    @PostMapping
-//    public Client createClient(@Valid @RequestBody Client client) {
-//        return clientService.createClient(client);
-//    }
-//
-//    @GetMapping("/{uuid}")
-//    @ResponseBody
-//    public Optional<Client> retrieveClient(@PathVariable("uuid") UUID id) {
-//        return clientService.getClientByID(id);
-//
-//    }
-//
-//    @DeleteMapping("{id}")
-//    public Boolean delete(@PathVariable UUID id) {
-//        return clientService.deleteClient(id);
-//    }
-//
-//
-//    @PutMapping
-//    @ResponseBody
-//    public ResponseEntity<Client> editClient(@RequestBody Client client) {
-//        return clientService.editClient(client);
-//    }
-//    @PostMapping("/search")
-//    public Iterable<Client> findClientByName(@RequestBody Map<String, String>  body){
-//        return  clientService.searchClient(body.get("keyword"));
-//    }
-
-
-}
+public class ClientController extends BaseController<ClientService, Client> {}

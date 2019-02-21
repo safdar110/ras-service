@@ -12,5 +12,5 @@ import java.util.UUID;
  * Created by khawar on 1/31/19.
  */
 public interface ClientService extends BaseService<Client>{
-    public Iterable<Client> searchByName(String keyword);
+//    public Iterable<Client> searchByName(String keyword);
 }
