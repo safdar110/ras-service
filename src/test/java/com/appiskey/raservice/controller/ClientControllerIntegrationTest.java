@@ -1,6 +1,8 @@
 package com.appiskey.raservice.controller;
 
+import com.appiskey.raservice.model.Client;
 import com.appiskey.raservice.model.Department;
+import com.appiskey.raservice.service.ClientService;
 import com.appiskey.raservice.service.DepartmentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -23,8 +25,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(DepartmentController.class)
-public class DepartmentControllerIntegrationTest {
+@WebMvcTest(ClientController.class)
+public class ClientControllerIntegrationTest {
 
     @Value("${app.url}")
     private String appUrl;
@@ -33,18 +35,18 @@ public class DepartmentControllerIntegrationTest {
     MockMvc mockMvc;
 
     @MockBean
-    private DepartmentService service;
+    private ClientService service;
 
     @Test
-    public void givenDepartments_whenGetDepartments_thenReturnJsonArray() throws Exception{
-        Department python = new Department();
-        python.setDepartmentName("python");
-        List<Department> allDepartments = Arrays.asList(python);
-        given(service.findAll()).willReturn(allDepartments);
-        mockMvc.perform(get(appUrl + "/department")
+    public void givenItems_whenGetItems_thenReturnJsonArray() throws Exception{
+        Client item1 = new Client();
+        item1.setClientName("item1");
+        List<Client> allItems = Arrays.asList(item1);
+        given(service.findAll()).willReturn(allItems);
+        mockMvc.perform(get(appUrl + "/client")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].departmentName", is(python.getDepartmentName())));
+                .andExpect(jsonPath("$[0].clientName", is(item1.getClientName())));
     }
 }

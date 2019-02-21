@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.test.context.junit4.SpringRunner;
-
 import static org.assertj.core.api.Assertions.*;
 
 
@@ -21,7 +20,6 @@ public class SkillRepositoryIntegrationTest {
 
     @Autowired
     private SkillRepository skillRepository;
-
 
     @Test
     public void whenFindByName_thenReturnSkill() {
@@ -70,7 +68,5 @@ public class SkillRepositoryIntegrationTest {
                 .hasSize(3)
                 .contains(css)
                 .doesNotContainNull();
-
     }
-
 }

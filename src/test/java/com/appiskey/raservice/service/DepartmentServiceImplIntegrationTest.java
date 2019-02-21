@@ -3,7 +3,6 @@ package com.appiskey.raservice.service;
 import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.model.Skill;
 import com.appiskey.raservice.repository.DepartmentRepository;
-import com.appiskey.raservice.repository.SkillRepository;
 import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
@@ -41,20 +40,20 @@ public class DepartmentServiceImplIntegrationTest {
 
     @Before
     public void setup(){
-        Department sales = new Department();
-        sales.setDepartmentName("sales");
+        Department python = new Department();
+        python.setDepartmentName("python");
         ArrayList<Department> newList = new ArrayList<>();
-        newList.add(sales);
+        newList.add(python);
 
-        Iterable<Department>  foundList = repository.findByDepartmentNameContainingIgnoreCase("sales");
+        Iterable<Department>  foundList = repository.findByDepartmentNameContainingIgnoreCase("python");
         Mockito.when(foundList)
                 .thenReturn(newList);
     }
 
     @Test
-    public void whenValidName_thenSkillShouldBefound(){
-        String name = "sales";
-        Iterable<Department>  foundList  = service.searchDepartment(name);
+    public void whenValidName_thenDepartmentShouldBefound(){
+        String name = "python";
+        Iterable<Department>  foundList  = service.searchByDepartmentName(name);
         Department found  = Lists.newArrayList(foundList).get(0);
         assertThat(found.getDepartmentName())
                 .isEqualTo(name);

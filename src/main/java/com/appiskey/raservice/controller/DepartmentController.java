@@ -1,6 +1,7 @@
 package com.appiskey.raservice.controller;
 
 import com.appiskey.raservice.model.Department;
+import com.appiskey.raservice.model.Skill;
 import com.appiskey.raservice.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -8,7 +9,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.Map;
-import java.util.Optional;
 import java.util.UUID;
 
 /**
@@ -16,47 +16,10 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/department")
-@CrossOrigin(origins = "http://localhost:4200/")
-public class DepartmentController {
-
-    @Autowired
-     DepartmentService departmentService;
-
-    @GetMapping
-    public Iterable<Department> getAllDepartments(){
-
-        return departmentService.getAllDepartments();
-    }
-
-    @PostMapping
-    public Department addDepartment(@Valid @RequestBody Department department){
-        return departmentService.createDepartment(department);
-    }
-
-    @GetMapping("/{uuid}")
-    @ResponseBody
-    public Optional<Department> getDepartmentByID(@PathVariable("uuid") UUID id) {
-        return departmentService.getDepartmentByID(id);
-
-    }
-
-
-    @DeleteMapping("{id}")
-    public Boolean delete(@PathVariable UUID id) {
-        return departmentService.deleteDepartment(id);
-    }
-
-
-    @PutMapping
-    @ResponseBody
-    public ResponseEntity<Department> editDepartment(@RequestBody Department department) {
-   return departmentService.editDepartment(department);
-    }
+public class DepartmentController extends BaseController<DepartmentService, Department> {
 
     @PostMapping("/search")
-    public Iterable<Department> findDepartmentByName(@RequestBody Map<String, String> body){
-        return  departmentService.searchDepartment(body.get("keyword"));
+    public Iterable<Department> searchByName(@RequestBody Map<String, String> body) {
+        return service.searchByDepartmentName(body.get("keyword"));
     }
-
-
 }

@@ -2,6 +2,7 @@ package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.Client;
 import com.appiskey.raservice.model.Department;
+import com.appiskey.raservice.model.Skill;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
@@ -10,14 +11,6 @@ import java.util.UUID;
 /**
  * Created by khawar on 1/31/19.
  */
-public interface ClientService {
-
-    public Client createClient(Client client);
-    public Iterable<Client> getAllClients();
-    public Optional<Client> getClientByID(UUID id);
-//    public ResponseEntity<Client>  deleteClientByID(UUID id);
-    public Boolean deleteClient(UUID id);
-    public ResponseEntity<Client> editClient(Client client);
-    public Iterable<Client> searchClient(String keyword);
-
+public interface ClientService extends BaseService<Client>{
+//    public Iterable<Client> searchByName(String keyword);
 }

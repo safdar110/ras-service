@@ -1,6 +1,7 @@
 package com.appiskey.raservice.controller;
 
 import com.appiskey.raservice.model.Skill;
+import com.appiskey.raservice.service.BaseService;
 import com.appiskey.raservice.service.SkillService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,14 +31,14 @@ public class SkillControllerIntegrationTest {
     MockMvc mockMvc;
 
     @MockBean
-    private SkillService skillService;
+    private SkillService service;
 
     @Test
     public void givenSkills_whenGetSkills_thenReturnJsonArray() throws Exception{
         Skill python = new Skill();
         python.setSkillName("python");
         List<Skill> allSkills = Arrays.asList(python);
-        given(skillService.getAllSkills()).willReturn(allSkills);
+        given(service.findAll()).willReturn(allSkills);
         mockMvc.perform(get(appUrl + "/skill")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

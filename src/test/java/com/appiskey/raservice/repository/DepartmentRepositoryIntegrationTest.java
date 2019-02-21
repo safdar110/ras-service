@@ -23,50 +23,52 @@ public class DepartmentRepositoryIntegrationTest {
     @Autowired
     private DepartmentRepository repository;
 
-
-//    @Test
-//    public void whenFindByName_thenReturnSkill() {
-//
-//        // given
-//        Skill devops = new Skill();
-//        devops.setSkillName("devops");
-//        entityManager.persist(devops);
-//        entityManager.flush();
-//
-//
-//        // when
-//        Iterable<Skill>  foundList = repository.findByskillNameContainingIgnoreCase("op");
-//        Skill found  = Lists.newArrayList(foundList).get(0);
-//        // then
-//        assertThat(found.getSkillName()).isEqualTo(devops.getSkillName());
-//
-//    }
-
     @Test
-    public void whenFindAll_thenReturnList() {
+    public void whenFindByName_thenReturnDepartment() {
 
         // given
-        Department sales = new Department();
-        sales.setDepartmentName("sales");
-        entityManager.persist(sales);
+        Department devops = new Department();
+        devops.setDepartmentName("devops");
+        entityManager.persist(devops);
+        entityManager.flush();
 
-        Department  accounts = new Department();
-        accounts.setDepartmentName("accounts");
-        entityManager.persist(accounts);
+
+        // when
+        Iterable<Department>  foundList = repository.findByDepartmentNameContainingIgnoreCase("op");
+        Department found  = Lists.newArrayList(foundList).get(0);
+        // then
+        assertThat(found.getDepartmentName()).isEqualTo(devops.getDepartmentName());
+
+    }
+
+    @Test
+    public void whenFindAll_thenReturnDepartmentList() {
+
+        // given
+        Department devops = new Department();
+        devops.setDepartmentName("devops");
+        entityManager.persist(devops);
+
+        Department html = new Department();
+        devops.setDepartmentName("html");
+        entityManager.persist(html);
+
+
+        Department css = new Department();
+        devops.setDepartmentName("css");
+        entityManager.persist(css);
 
         entityManager.flush();
 
 
         // when
-        Iterable<Department> foundList = repository.findAll();
+        Iterable<Department> found = repository.findAll();
 
         // then
-        assertThat(foundList)
+        assertThat(found)
                 .isNotEmpty()
-                .hasSize(2)
-                .contains(sales)
+                .hasSize(3)
+                .contains(css)
                 .doesNotContainNull();
-
     }
-
 }

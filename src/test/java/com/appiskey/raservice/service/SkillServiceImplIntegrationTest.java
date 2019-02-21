@@ -24,13 +24,13 @@ public class SkillServiceImplIntegrationTest {
     @TestConfiguration
     static class SkillServiceImplTestContextConfiguration {
         @Bean
-        public SkillService skillService() {
+        public SkillService serviceImpl() {
             return new SkillServiceImpl();
         }
     }
 
     @Autowired
-    private SkillService skillService;
+    private SkillService service;
 
     @MockBean
     private SkillRepository skillRepository;
@@ -52,7 +52,7 @@ public class SkillServiceImplIntegrationTest {
     @Test
     public void whenValidName_thenSkillShouldBefound(){
         String name = "python";
-        Iterable<Skill>  foundList  = skillService.searchSkill(name);
+        Iterable<Skill>  foundList  = service.searchBySkillName(name);
         Skill found  = Lists.newArrayList(foundList).get(0);
         assertThat(found.getSkillName())
                 .isEqualTo(name);
