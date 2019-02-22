@@ -1,5 +1,6 @@
 package com.appiskey.raservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -40,6 +41,7 @@ public class Resource extends BaseModel{
     private int resourceContractType;     //isIntern, isPartTime , isFullTime
 
 
+
     @ManyToMany
     @JoinTable(name = "resource_skill",
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
@@ -53,9 +55,11 @@ public class Resource extends BaseModel{
 
     private boolean resourcePartTime;
 
+
     @ManyToOne
     @JoinColumn(name="department_id")
     private Department resourceDepartment;
+
 
     @ManyToOne
     @JoinColumn(name = "reporting_id")
