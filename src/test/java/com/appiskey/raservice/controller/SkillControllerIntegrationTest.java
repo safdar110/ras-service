@@ -1,7 +1,6 @@
 package com.appiskey.raservice.controller;
 
 import com.appiskey.raservice.model.Skill;
-import com.appiskey.raservice.service.BaseService;
 import com.appiskey.raservice.service.SkillService;
 import com.appiskey.raservice.util.Datagen;
 import org.junit.Before;
@@ -9,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.mockito.internal.verification.VerificationModeFactory;
-import org.mockito.verification.VerificationMode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
@@ -17,11 +15,7 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
-
-import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
-
+import java.util.*;
 import static org.hamcrest.collection.IsCollectionWithSize.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.reset;
@@ -98,6 +92,29 @@ public class SkillControllerIntegrationTest {
                 .andExpect(jsonPath("$[2].skillName", is(item3.getSkillName())));
 
         verify(service, VerificationModeFactory.times(1)).findAll();
+        reset(service);
+    }
+
+    @Test
+    public void givenItems_whenSearchItems_thenReturnJsonArray() throws Exception {
+        Skill item1 = Datagen.generateSkill("item1");
+        Skill item2 = Datagen.generateSkill("item2");
+        Skill item3 = Datagen.generateSkill("item32");
+
+        Map<String, String> keywordStrings = new HashMap<>();
+        keywordStrings.put("keyword", "2");
+        List<Skill> allItems = Arrays.asList(item2, item3);
+        given(service.searchBySkillName(Mockito.anyString())).willReturn(allItems);
+
+        mockMvc.perform(post(appUrl + "/skill/search/")
+                .content(JsonUtil.asJsonString(keywordStrings))
+                .contentType(MediaType.APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$", hasSize(2)))
+                .andExpect(jsonPath("$[0].skillName", is(item2.getSkillName())))
+                .andExpect(jsonPath("$[1].skillName", is(item3.getSkillName())));
+
+        verify(service, VerificationModeFactory.times(1)).searchBySkillName(Mockito.anyString());
         reset(service);
     }
 

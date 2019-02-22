@@ -1,5 +1,6 @@
 package com.appiskey.raservice.controller;
 
+import com.appiskey.raservice.model.BaseModel;
 import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.service.BaseService;
 import com.appiskey.raservice.service.DepartmentService;
@@ -18,7 +19,7 @@ import java.util.UUID;
  */
 //@RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-public class BaseController<S extends BaseService<T>, T> {
+public class BaseController<S extends BaseService<T>, T extends BaseModel> {
 
     @Autowired
     S service;

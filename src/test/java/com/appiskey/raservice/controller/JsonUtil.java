@@ -12,6 +12,14 @@ class JsonUtil {
         return mapper.writeValueAsBytes(object);
     }
 
+    public static String asJsonString(final Object obj) {
+        try {
+            return new ObjectMapper().writeValueAsString(obj);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 //    static Object toObject(String json, Class cls) throws IOException {
 //        ObjectMapper mapper = new ObjectMapper();
 //        Object object = mapper.readValue(json, cls);
