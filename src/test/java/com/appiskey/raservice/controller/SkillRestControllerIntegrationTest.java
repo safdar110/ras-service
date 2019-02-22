@@ -75,6 +75,23 @@ public class SkillRestControllerIntegrationTest {
     }
 
     @Test
+    public void whenValidInput_thenDeleteSoftItem() throws IOException, Exception {
+        Skill itemToInsert = new Skill();
+        itemToInsert.setSkillName("foo");
+        Skill itemInserted = repository.save(itemToInsert);
+
+        Map<String, String> itemToDeleteMap = new HashMap<>();
+        itemToDeleteMap.put("id", itemInserted.getId().toString());
+//        itemToUpdateMap.put("skillName", "deleted-item-name");
+
+        mockMvc.perform(delete(appUrl + "/skill")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(JsonUtil.asJsonString(itemToDeleteMap)));
+        Iterable<Skill> found = repository.findAll();
+        assertThat(found).extracting(Skill::getSkillName).containsOnly("deleted-item-name");
+    }
+
+    @Test
     public void givenEmployees_whenGetEmployees_thenStatus200() throws Exception {
         createTestItem("foo");
         createTestItem("bar");
