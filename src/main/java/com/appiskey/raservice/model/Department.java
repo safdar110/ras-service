@@ -1,5 +1,6 @@
 package com.appiskey.raservice.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -22,6 +23,7 @@ public class Department extends BaseModel{
 //    @OneToMany
 //    @JoinColumn(name = "resource_id")
 //    private List<Resource> departmentResources;
+
 
     @ManyToOne
     @JoinColumn(name="resource_id")
