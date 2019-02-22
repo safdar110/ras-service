@@ -3,10 +3,7 @@ package com.appiskey.raservice.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -20,6 +17,7 @@ import java.util.List;
 public class Skill extends BaseModel {
     private String skillName;
 
-//    @ManyToMany(mappedBy = "resourceSkills", cascade = CascadeType.PERSIST)
-//    private List<Resource> skillResources;
+    @ManyToMany
+    @JoinColumn(name = "resource_id")
+    private List<Resource> skillResources;
 }

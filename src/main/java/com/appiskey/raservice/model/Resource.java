@@ -29,7 +29,6 @@ public class Resource extends BaseModel{
     private String resourceEmergencyContactNo;
     private String resourceMaritalStatus;
     private String resourceDesignation;
-    private String resourceReportingTo;
     private String resourceResume;
     private Date resourceDateOfJoining;
     private int resourceWorkingDays;
@@ -57,4 +56,8 @@ public class Resource extends BaseModel{
     @ManyToOne
     @JoinColumn(name="department_id")
     private Department resourceDepartment;
+
+    @ManyToOne
+    @JoinColumn(name = "reporting_id")
+    protected Resource resourceReportingTo;
 }
