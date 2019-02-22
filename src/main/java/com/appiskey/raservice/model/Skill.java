@@ -15,6 +15,7 @@ import java.util.List;
 @Entity
 @Table
 public class Skill extends BaseModel {
+
     private String skillName;
 
     @ManyToMany

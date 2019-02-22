@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Type;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
@@ -19,7 +18,7 @@ import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
-
+//@RequiredArgsConstructor
 
 @Getter
 @Setter
@@ -28,13 +27,8 @@ import java.util.UUID;
 @EntityListeners(AuditingEntityListener.class)
 @JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
         allowGetters = true)
-@Inheritance(strategy= InheritanceType.TABLE_PER_CLASS)
-public class BaseModel {
-    //for postgres
-//    @Id
-//    @GeneratedValue(generator = "uuid")
-//    @GenericGenerator(name = "pg-uuid", strategy = "pg-uuid")
-//    @Type(type="pg-uuid")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+public class BaseModel<T> {
 
     @Id
     @GeneratedValue(generator = "uuid2")
@@ -42,15 +36,14 @@ public class BaseModel {
     @Column(name = "id", columnDefinition = "BINARY(16)")
     protected UUID id;
 
-
-   @CreationTimestamp
+    @CreationTimestamp
     protected Date createdAt;
 
     @UpdateTimestamp
     protected Date updatedAt;
 
-    @Column(nullable = false)
     @JsonIgnore
+    @Column(nullable = false)
     protected boolean deleted;
 
     @PrePersist
@@ -62,4 +55,5 @@ public class BaseModel {
     protected void onUpdate() {
         updatedAt = new Date();
     }
+
 }

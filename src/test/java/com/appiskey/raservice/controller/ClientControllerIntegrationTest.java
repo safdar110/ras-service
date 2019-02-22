@@ -1,9 +1,7 @@
 package com.appiskey.raservice.controller;
 
 import com.appiskey.raservice.model.Client;
-import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.service.ClientService;
-import com.appiskey.raservice.service.DepartmentService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;

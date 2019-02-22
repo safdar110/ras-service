@@ -11,5 +11,8 @@ import java.util.UUID;
  * Created by suraksha-pnc on 2/7/19.
  */
 public interface SkillService extends  BaseService<Skill> {
-    public Iterable<Skill> searchBySkillName(String keyword);
+    List<Skill> searchBySkillName(String keyword);
+    Skill getSkillBySkillName(String name);
+    boolean exists(String name);
+//    Optional<Skill> getSkillBySkillId(UUID id);
 }
