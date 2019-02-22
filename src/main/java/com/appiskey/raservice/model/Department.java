@@ -3,9 +3,7 @@ package com.appiskey.raservice.model;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-import javax.persistence.Entity;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.util.List;
 
 /**
@@ -18,10 +16,15 @@ import java.util.List;
 @Table
 public class Department extends BaseModel{
     private String departmentName;
-    private String departmentHod;
+  //  private String departmentHod;
     private String departmentBench;
 
 //    @OneToMany
+//    @JoinColumn(name = "resource_id")
 //    private List<Resource> departmentResources;
+
+    @ManyToOne
+    @JoinColumn(name="resource_id")
+    private Resource departmentHod;
 
 }
