@@ -2,7 +2,8 @@ package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.Skill;
 import com.appiskey.raservice.repository.SkillRepository;
-import org.assertj.core.util.Lists;
+import com.appiskey.raservice.util.Datagen;
+import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -43,14 +44,14 @@ public class SkillServiceImplIntegrationTest {
 
     @Before
     public void setup() {
-        UUID wrongId = UUID.randomUUID();
+        UUID wrongId = Datagen.getUuId();
         UUID uuid = UUID.fromString("123e4567-e89b-42d3-a456-556642440000");
-        Skill item1 = generateItem("item1");
+        Skill item1 = Datagen.generateSkill("item1");
         item1.setId(uuid);
 
-        Skill item2 = generateItem("item2");
+        Skill item2 = Datagen.generateSkill("item2");
 
-        Skill item3 = generateItem("item3");
+        Skill item3 = Datagen.generateSkill("item3");
 
         List<Skill> allItems = Arrays.asList(item1, item2, item3);
 
@@ -99,37 +100,36 @@ public class SkillServiceImplIntegrationTest {
         verifyFindByIdIsCalledOnce(uuid);
     }
 
-//    @Test
-//    public void whenInValidId_thenItemShouldNotBeFound() {
-//        UUID wrongUuid = UUID.fromString("123e4567-e89b-42d3-a456-556642449911");
-//        Skill fromDb = service.findById(wrongUuid);
-//        verifyFindByIdIsCalledOnce(wrongUuid);
-//        assertThat(fromDb).isNull();
-//    }
+    @Test
+    public void whenInValidId_thenItemShouldNotBeFound() {
+        UUID wrongUuid = UUID.fromString("123e4567-e89b-42d3-a456-886642449911");
+        Skill fromDb = service.findById(wrongUuid);
+        verifyFindByIdIsCalledOnce(wrongUuid);
+        assertThat(fromDb).isNull();
+    }
 
     @Test
     public void given3Items_whengetAll_thenReturn3Records() {
-        Skill item1 = generateItem("item1");
-        Skill item2 = generateItem("item2");
-        Skill item3 = generateItem("item3");
-
-//        Employee john = new Employee("john");
-//        Employee bob = new Employee("bob");
-
+        Skill item1 = Datagen.generateSkill("item1");
+        Skill item2 = Datagen.generateSkill("item2");
+        Skill item3 = Datagen.generateSkill("item3");
         List<Skill> allItems = service.findAll();
         verifyFindAllEmployeesIsCalledOnce();
         assertThat(allItems).hasSize(3).extracting(Skill::getSkillName).contains(item1.getSkillName(), item2.getSkillName(), item3.getSkillName());
     }
-
+    @After
+    public void resetDb() {
+        repository.deleteAll();
+    }
 //    ================================================================================
 
-    private Skill generateItem(String name) {
-        Skill item = new Skill();
-        item.setSkillName(name);
-        UUID uuid = UUID.randomUUID();
-        item.setId(uuid);
-        return item;
-    }
+//    private Skill generateItem(String name) {
+//        Skill item = new Skill();
+//        item.setSkillName(name);
+//        UUID uuid = UUID.randomUUID();
+//        item.setId(uuid);
+//        return item;
+//    }
 
     private void verifyFindByNameIsCalledOnce(String name) {
         Mockito.verify(repository, VerificationModeFactory.times(1)).findBySkillName(name);

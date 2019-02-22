@@ -1,6 +1,7 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.exception.ResourceNotFoundException;
+import com.appiskey.raservice.model.Skill;
 import com.appiskey.raservice.repository.BaseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.NoRepositoryBean;
@@ -47,17 +48,14 @@ public class BaseServiceImpl<T> implements BaseService<T> {
 
     }
 
-//    @Override
-//    public Optional<T> findById(UUID id) {
-//        return repository.findById(id);
-////        Optional<T> itemOpt = Optional.ofNullable(repository.findById(id)
-////                .orElseThrow(() -> new ResourceNotFoundException("Object", "id", id)));
-////        return itemOpt;
-//    }
-
     @Override
-    public void delete(T item) {
-        repository.delete(item);
+    public T delete(UUID id) {
+        Optional<T> item = repository.findById(id);
+        if(item.isPresent()){
+            repository.delete(item.get());
+            return item.get();
+        }
+        return  null;
     }
 
     @Override

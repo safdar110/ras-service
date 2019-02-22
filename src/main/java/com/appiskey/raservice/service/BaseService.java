@@ -17,7 +17,6 @@ public interface BaseService<T> {
     public List<T> findAll();
     public List<T> findAllByDeleted();
     public T findById(UUID id);
-    public void delete(T item);
+    public T delete(UUID id);
     public T update(T item);
-
 }
