@@ -11,7 +11,7 @@ import java.util.UUID;
  * Created by khawar on 1/31/19.
  */
 @NoRepositoryBean
-@Transactional
+//@Transactional
 public interface BaseRepository<T> extends JpaRepository<T, UUID> {
     List<T> findAllByDeleted(Boolean deleted);
 }

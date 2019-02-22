@@ -1,10 +1,13 @@
 package com.appiskey.raservice.controller;
 
+import com.appiskey.raservice.model.BaseModel;
 import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.service.BaseService;
 import com.appiskey.raservice.service.DepartmentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -16,7 +19,7 @@ import java.util.UUID;
  */
 //@RestController
 @CrossOrigin(origins = "http://localhost:4200/")
-public class BaseController<S extends BaseService<T>, T> {
+public class BaseController<S extends BaseService<T>, T extends BaseModel> {
 
     @Autowired
     S service;
@@ -27,24 +30,27 @@ public class BaseController<S extends BaseService<T>, T> {
     }
 
     @PostMapping
+    @ResponseStatus(value = HttpStatus.CREATED)
     public T insert(@Valid @RequestBody T item) {
         return service.insert(item);
     }
 
     @GetMapping("/{uuid}")
     @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
     public T findById(@PathVariable("uuid") UUID id) {
         return service.findById(id);
     }
 
-
     @DeleteMapping("{id}")
-    public void delete(@PathVariable UUID id) {
-        service.delete(service.findById(id));
+    @ResponseStatus(value = HttpStatus.OK)
+    public T delete(@PathVariable UUID id) {
+        return service.delete(id);
     }
 
     @PutMapping
     @ResponseBody
+    @ResponseStatus(value = HttpStatus.OK)
     public T update(@RequestBody T item) {
         return service.update(item);
     }
