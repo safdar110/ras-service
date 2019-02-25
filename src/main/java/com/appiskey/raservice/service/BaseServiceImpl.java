@@ -51,22 +51,22 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     @Override
     public T delete(UUID id) {
         Optional<T> item = repository.findById(id);
-        if(item.isPresent()){
+        if (item.isPresent()) {
             repository.delete(item.get());
             return item.get();
         }
-        return  null;
+        return null;
     }
 
     @Override
     public T deleteSoft(UUID id) {
         Optional<T> item = repository.findById(id);
-        if(item.isPresent()){
+        if (item.isPresent() && item.get().isDeleted() == false) {
             item.get().setDeleted(true);
             repository.save(item.get());
             return item.get();
         }
-        return  null;
+        return null;
     }
 
     @Override

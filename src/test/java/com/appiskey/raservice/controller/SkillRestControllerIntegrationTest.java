@@ -62,11 +62,9 @@ public class SkillRestControllerIntegrationTest {
         Skill itemToInsert = new Skill();
         itemToInsert.setSkillName("foo");
         Skill itemInserted = repository.save(itemToInsert);
-
         Map<String, String> itemToUpdateMap = new HashMap<>();
         itemToUpdateMap.put("id", itemInserted.getId().toString());
         itemToUpdateMap.put("skillName", "updated-name");
-
         mockMvc.perform(put(appUrl + "/skill")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.asJsonString(itemToUpdateMap)));
@@ -78,17 +76,12 @@ public class SkillRestControllerIntegrationTest {
     public void whenValidInput_thenDeleteSoftItem() throws IOException, Exception {
         Skill itemToInsert = new Skill();
         itemToInsert.setSkillName("foo");
+        createTestItem("bar");
         Skill itemInserted = repository.save(itemToInsert);
-
-        Map<String, String> itemToDeleteMap = new HashMap<>();
-        itemToDeleteMap.put("id", itemInserted.getId().toString());
-//        itemToUpdateMap.put("skillName", "deleted-item-name");
-
-        mockMvc.perform(delete(appUrl + "/skill")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(JsonUtil.asJsonString(itemToDeleteMap)));
-        Iterable<Skill> found = repository.findAll();
-        assertThat(found).extracting(Skill::getSkillName).containsOnly("deleted-item-name");
+        mockMvc.perform(delete(appUrl + "/skill/" + itemInserted.getId())
+                .contentType(MediaType.APPLICATION_JSON));
+        Iterable<Skill> found = repository.findAllByDeleted(false);
+        assertThat(found).extracting(Skill::getSkillName).containsOnly("bar");
     }
 
     @Test
