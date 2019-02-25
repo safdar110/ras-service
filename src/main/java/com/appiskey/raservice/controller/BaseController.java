@@ -26,7 +26,7 @@ public class BaseController<S extends BaseService<T>, T extends BaseModel> {
 
     @GetMapping
     public List<T> getAll() {
-        return service.findAll();
+        return service.getAll();
     }
 
     @PostMapping

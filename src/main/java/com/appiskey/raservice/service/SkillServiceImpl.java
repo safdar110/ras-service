@@ -20,21 +20,21 @@ public class SkillServiceImpl extends BaseServiceImpl<Skill> implements SkillSer
 
     @Override
     public List<Skill> searchBySkillName(String keyword) {
-        return skillRepository.findByskillNameContainingIgnoreCase(keyword);
+        return skillRepository.findByNameContainingIgnoreCase(keyword);
     }
 
-    @Override
-    public Skill getSkillBySkillName(String name) {
-        return skillRepository.findBySkillName(name);
-    }
+//    @Override
+//    public Skill getSkillBySkillName(String name) {
+//        return skillRepository.findBySkillName(name);
+//    }
 
-    @Override
-    public boolean exists(String name) {
-        if (skillRepository.findBySkillName(name) != null) {
-            return true;
-        }
-        return false;
-    }
+//    @Override
+//    public boolean exists(String name) {
+//        if (skillRepository.findByName(name) != null) {
+//            return true;
+//        }
+//        return false;
+//    }
 
 //    @Override
 //    public Optional<Skill> getSkillBySkillId(UUID id) {

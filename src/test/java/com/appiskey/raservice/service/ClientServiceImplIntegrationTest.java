@@ -1,10 +1,7 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.Client;
-import com.appiskey.raservice.model.Department;
 import com.appiskey.raservice.repository.ClientRepository;
-import com.appiskey.raservice.repository.DepartmentRepository;
-import org.assertj.core.util.Lists;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -55,7 +52,7 @@ public class ClientServiceImplIntegrationTest {
     public void whenFindAll_thenListShouldBefound() {
         Client tom = new Client();
         tom.setClientName("tom");
-        Iterable<Client> foundList = service.findAllByDeleted();
+        Iterable<Client> foundList = service.getAll();
         assertThat(foundList)
                 .isNotEmpty()
                 .containsOnly(tom)

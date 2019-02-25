@@ -18,6 +18,6 @@ import java.util.UUID;
 //@Transactional
 //@Repository
 public interface SkillRepository extends BaseRepository<Skill> {
-    List<Skill> findByskillNameContainingIgnoreCase(String keyword);
-    Skill findBySkillName(String name);
+//    List<Skill> findByskillNameContainingIgnoreCase(String keyword);
+//    Skill findBySkillName(String name);
 }

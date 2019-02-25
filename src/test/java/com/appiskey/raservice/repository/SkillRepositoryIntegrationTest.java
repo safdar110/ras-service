@@ -29,13 +29,13 @@ public class SkillRepositoryIntegrationTest {
     public void whenFindByName_thenReturnItem() {
         Skill item1 = Datagen.generateSkill("item1");
         entityManager.persistAndFlush(item1);
-        Skill found = skillRepository.findBySkillName(item1.getSkillName());
-        assertThat(found.getSkillName()).isEqualTo(item1.getSkillName());
+        Skill found = skillRepository.findByName(item1.getName());
+        assertThat(found.getName()).isEqualTo(item1.getName());
     }
 
     @Test
     public void whenInvalidName_thenReturnNull() {
-        Skill fromDb = skillRepository.findBySkillName("doesNotExist");
+        Skill fromDb = skillRepository.findByName("doesNotExist");
         assertThat(fromDb).isNull();
     }
 
@@ -44,7 +44,7 @@ public class SkillRepositoryIntegrationTest {
         Skill item1 = Datagen.generateSkill("item1");
         entityManager.persistAndFlush(item1);
         Skill fromDb = skillRepository.findById(item1.getId()).orElse(null);
-        assertThat(fromDb.getSkillName()).isEqualTo(item1.getSkillName());
+        assertThat(fromDb.getName()).isEqualTo(item1.getName());
     }
 
     @Test
@@ -64,8 +64,8 @@ public class SkillRepositoryIntegrationTest {
         entityManager.persist(item2);
         entityManager.persist(item3);
         entityManager.flush();
-        List<Skill> allEmployees = skillRepository.findAll();
-        assertThat(allEmployees).hasSize(3).extracting(Skill::getSkillName).containsOnly(item1.getSkillName(), item2.getSkillName(), item3.getSkillName());
+        List<Skill> allEmployees = skillRepository.findAllByDeleted(false);
+        assertThat(allEmployees).hasSize(3).extracting(Skill::getName).containsOnly(item1.getName(), item2.getName(), item3.getName());
     }
 
     @After

@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 public interface SkillService extends  BaseService<Skill> {
     List<Skill> searchBySkillName(String keyword);
-    Skill getSkillBySkillName(String name);
-    boolean exists(String name);
+//    Skill getSkillBySkillName(String name);
+//    boolean exists(String name);
 //    Optional<Skill> getSkillBySkillId(UUID id);
 }

@@ -33,7 +33,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     }
 
     @Override
-    public List<T> findAllByDeleted() {
+    public List<T> getAll() {
         return repository.findAllByDeleted(false);
     }
 
@@ -51,26 +51,39 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     @Override
     public T delete(UUID id) {
         Optional<T> item = repository.findById(id);
-        if(item.isPresent()){
+        if (item.isPresent()) {
             repository.delete(item.get());
             return item.get();
         }
-        return  null;
+        return null;
     }
 
     @Override
     public T deleteSoft(UUID id) {
         Optional<T> item = repository.findById(id);
-        if(item.isPresent()){
+        if (item.isPresent() && item.get().isDeleted() == false) {
             item.get().setDeleted(true);
             repository.save(item.get());
             return item.get();
         }
-        return  null;
+        return null;
     }
 
     @Override
     public T update(T item) {
         return repository.saveAndFlush(item);
+    }
+
+    @Override
+    public T findByName(String name) {
+        return repository.findByName(name);
+    }
+
+    @Override
+    public boolean exists(String name) {
+        if (repository.findByName(name) != null) {
+            return true;
+        }
+        return false;
     }
 }

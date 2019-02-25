@@ -40,7 +40,7 @@ public class ClientControllerIntegrationTest {
         Client item1 = new Client();
         item1.setClientName("item1");
         List<Client> allItems = Arrays.asList(item1);
-        given(service.findAll()).willReturn(allItems);
+        given(service.getAll()).willReturn(allItems);
         mockMvc.perform(get(appUrl + "/client")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

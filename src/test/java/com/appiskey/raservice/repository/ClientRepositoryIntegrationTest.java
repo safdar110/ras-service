@@ -60,7 +60,7 @@ public class ClientRepositoryIntegrationTest {
         entityManager.flush();
 
         // when
-        Iterable<Client> found = repository.findAll();
+        Iterable<Client> found = repository.findAllByDeleted(false);
 
         // then
         assertThat(found)

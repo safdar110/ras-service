@@ -55,25 +55,25 @@ public class SkillServiceImplIntegrationTest {
 
         List<Skill> allItems = Arrays.asList(item1, item2, item3);
 
-        Mockito.when(repository.findBySkillName(item1.getSkillName())).thenReturn(item1);
-        Mockito.when(repository.findBySkillName(item2.getSkillName())).thenReturn(item2);
-        Mockito.when(repository.findBySkillName("wrong name")).thenReturn(null);
+        Mockito.when(repository.findByName(item1.getName())).thenReturn(item1);
+        Mockito.when(repository.findByName(item2.getName())).thenReturn(item2);
+        Mockito.when(repository.findByName("wrong name")).thenReturn(null);
         Mockito.when(repository.findById(uuid)).thenReturn(Optional.of(item1));
-        Mockito.when(repository.findAll()).thenReturn(allItems);
+        Mockito.when(repository.findAllByDeleted(false)).thenReturn(allItems);
         Mockito.when(repository.findById(wrongId)).thenReturn(Optional.empty());
     }
 
     @Test
     public void whenValidName_thenItemShouldBeFound() {
         String name = "item1";
-        Skill found = service.getSkillBySkillName(name);
-        assertThat(found.getSkillName()).isEqualTo(name);
+        Skill found = service.findByName(name);
+        assertThat(found.getName()).isEqualTo(name);
     }
 
 
     @Test
     public void whenInValidName_thenItemShouldNotBeFound() {
-        Skill fromDb = service.getSkillBySkillName("wrong_name");
+        Skill fromDb = service.findByName("wrong_name");
         assertThat(fromDb).isNull();
         verifyFindByNameIsCalledOnce("wrong_name");
     }
@@ -96,7 +96,7 @@ public class SkillServiceImplIntegrationTest {
     public void whenValidId_thenItemShouldBeFound() {
         UUID uuid = UUID.fromString("123e4567-e89b-42d3-a456-556642440000");
         Skill fromDb = service.findById(uuid);
-        assertThat(fromDb.getSkillName()).isEqualTo("item1");
+        assertThat(fromDb.getName()).isEqualTo("item1");
         verifyFindByIdIsCalledOnce(uuid);
     }
 
@@ -113,9 +113,9 @@ public class SkillServiceImplIntegrationTest {
         Skill item1 = Datagen.generateSkill("item1");
         Skill item2 = Datagen.generateSkill("item2");
         Skill item3 = Datagen.generateSkill("item3");
-        List<Skill> allItems = service.findAll();
+        List<Skill> allItems = service.getAll();
         verifyFindAllEmployeesIsCalledOnce();
-        assertThat(allItems).hasSize(3).extracting(Skill::getSkillName).contains(item1.getSkillName(), item2.getSkillName(), item3.getSkillName());
+        assertThat(allItems).hasSize(3).extracting(Skill::getName).contains(item1.getName(), item2.getName(), item3.getName());
     }
     @After
     public void resetDb() {
@@ -132,7 +132,7 @@ public class SkillServiceImplIntegrationTest {
 //    }
 
     private void verifyFindByNameIsCalledOnce(String name) {
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findBySkillName(name);
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findByName(name);
         Mockito.reset(repository);
     }
 
@@ -142,7 +142,7 @@ public class SkillServiceImplIntegrationTest {
     }
 
     private void verifyFindAllEmployeesIsCalledOnce() {
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findAll();
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findAllByDeleted(false);
         Mockito.reset(repository);
     }
 

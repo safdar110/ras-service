@@ -40,7 +40,7 @@ public class DepartmentControllerIntegrationTest {
         Department python = new Department();
         python.setDepartmentName("python");
         List<Department> allDepartments = Arrays.asList(python);
-        given(service.findAll()).willReturn(allDepartments);
+        given(service.getAll()).willReturn(allDepartments);
         mockMvc.perform(get(appUrl + "/department")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())

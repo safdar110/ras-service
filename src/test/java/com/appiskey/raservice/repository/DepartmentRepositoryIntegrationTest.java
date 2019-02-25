@@ -62,7 +62,7 @@ public class DepartmentRepositoryIntegrationTest {
 
 
         // when
-        Iterable<Department> found = repository.findAll();
+        Iterable<Department> found = repository.findAllByDeleted(false);
 
         // then
         assertThat(found)
