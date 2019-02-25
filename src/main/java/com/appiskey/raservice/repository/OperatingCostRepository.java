@@ -8,8 +8,5 @@ import java.util.UUID;
 /**
  * Created by suraksha-app on 2/14/19.
  */
-public interface OperatingCostRepository extends PagingAndSortingRepository<OperatingCost, UUID> {
-    Iterable<OperatingCost> findByMonthlyCostContaining(String keyword);
-    Iterable<OperatingCost> findAllByDeleted(Boolean deleted);
-
+public interface OperatingCostRepository extends BaseRepository<OperatingCost>{
 }

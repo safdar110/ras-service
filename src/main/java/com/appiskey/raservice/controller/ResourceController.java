@@ -15,38 +15,6 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/resource")
-public class ResourceController {
-
-    @Autowired
-    ResourceService resourceService;
-
-    @GetMapping
-    public Iterable<Resource> getAllResources(){
-
-        return resourceService.getAllResources();
-    }
-
-    @PostMapping
-    public Resource addResource(@Valid @RequestBody Resource resource){
-        return resourceService.createResource(resource);
-    }
-
-    @GetMapping("/{uuid}")
-    @ResponseBody
-    public Optional<Resource> getResourceByID(@PathVariable("uuid") UUID id) {
-        return resourceService.getResourceByID(id);
-
-    }
-
-    @DeleteMapping("{id}")
-    public Boolean deleteResource(@PathVariable UUID id) {
-        return resourceService.deleteResource(id);
-    }
-
-    @PutMapping
-    @ResponseBody
-    public ResponseEntity<Resource> editOperatingCost(@RequestBody Resource resource) {
-        return resourceService.editResource(resource);
-    }
+public class ResourceController extends BaseController<ResourceService, Resource> {
 
 }

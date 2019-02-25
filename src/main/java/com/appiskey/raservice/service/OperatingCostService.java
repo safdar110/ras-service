@@ -8,15 +8,6 @@ import java.util.UUID;
 /**
  * Created by suraksha-app on 2/14/19.
  */
-public interface OperatingCostService {
+public interface OperatingCostService extends BaseService<OperatingCost> {
 
-    public OperatingCost createOperatingCost(OperatingCost operatingCost);
-
-    public Iterable<OperatingCost> getAllOperatingCosts();
-
-    public Optional<OperatingCost> getOperatingCostByID(UUID id);
-
-    public Boolean deleteOperatingCost(UUID id);
-    public ResponseEntity<OperatingCost> editOperatingCost(OperatingCost operatingCost);
-    public Iterable<OperatingCost> searchOperatingCost(String keyword);
 }
