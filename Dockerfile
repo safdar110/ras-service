@@ -6,3 +6,5 @@ ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","/app.jar"]
 #./mvnw package
 #docker build -t raservice .
 #docker run --rm raservice
+
+# java -jar target/raservice-0.0.1-SNAPSHOT.jar app.jar
