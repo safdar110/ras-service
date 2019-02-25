@@ -21,4 +21,6 @@ public interface BaseService<T extends BaseModel> {
     public T delete(UUID id);
     public T deleteSoft(UUID id);
     public T update(T item);
+    public T findByName(String name);
+    boolean exists(String name);
 }

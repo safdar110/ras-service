@@ -48,40 +48,40 @@ public class SkillRestControllerIntegrationTest {
     @Test
     public void whenValidInput_thenCreateItem() throws IOException, Exception {
         Skill item1 = new Skill();
-        item1.setSkillName("foo");
+        item1.setName("foo");
 
         mockMvc.perform(post(appUrl + "/skill")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.toJson(item1)));
-        Iterable<Skill> found = repository.findAll();
-        assertThat(found).extracting(Skill::getSkillName).containsOnly("foo");
+        Iterable<Skill> found = repository.findAllByDeleted(false);
+        assertThat(found).extracting(Skill::getName).containsOnly("foo");
     }
 
     @Test
     public void whenValidInput_thenUpdateItem() throws IOException, Exception {
         Skill itemToInsert = new Skill();
-        itemToInsert.setSkillName("foo");
+        itemToInsert.setName("foo");
         Skill itemInserted = repository.save(itemToInsert);
         Map<String, String> itemToUpdateMap = new HashMap<>();
         itemToUpdateMap.put("id", itemInserted.getId().toString());
-        itemToUpdateMap.put("skillName", "updated-name");
+        itemToUpdateMap.put("name", "updated-name");
         mockMvc.perform(put(appUrl + "/skill")
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(JsonUtil.asJsonString(itemToUpdateMap)));
-        Iterable<Skill> found = repository.findAll();
-        assertThat(found).extracting(Skill::getSkillName).containsOnly("updated-name");
+        Iterable<Skill> found = repository.findAllByDeleted(false);
+        assertThat(found).extracting(Skill::getName).containsOnly("updated-name");
     }
 
     @Test
     public void whenValidInput_thenDeleteSoftItem() throws IOException, Exception {
         Skill itemToInsert = new Skill();
-        itemToInsert.setSkillName("foo");
+        itemToInsert.setName("foo");
         createTestItem("bar");
         Skill itemInserted = repository.save(itemToInsert);
         mockMvc.perform(delete(appUrl + "/skill/" + itemInserted.getId())
                 .contentType(MediaType.APPLICATION_JSON));
         Iterable<Skill> found = repository.findAllByDeleted(false);
-        assertThat(found).extracting(Skill::getSkillName).containsOnly("bar");
+        assertThat(found).extracting(Skill::getName).containsOnly("bar");
     }
 
     @Test
@@ -95,8 +95,8 @@ public class SkillRestControllerIntegrationTest {
                 .andExpect(status().isOk())
                 .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$", hasSize(greaterThanOrEqualTo(2))))
-                .andExpect(jsonPath("$[0].skillName", is("foo")))
-                .andExpect(jsonPath("$[1].skillName", is("bar")));
+                .andExpect(jsonPath("$[0].name", is("foo")))
+                .andExpect(jsonPath("$[1].name", is("bar")));
     }
 
     @After
@@ -108,7 +108,7 @@ public class SkillRestControllerIntegrationTest {
 
     private void createTestItem(String name) {
         Skill item = new Skill();
-        item.setSkillName(name);
+        item.setName(name);
         repository.saveAndFlush(item);
     }
 }

@@ -7,7 +7,7 @@ import java.util.UUID;
 public class Datagen {
     public static Skill generateSkill(String name) {
         Skill item = new Skill();
-        item.setSkillName(name);
+        item.setName(name);
         UUID uuid = UUID.randomUUID();
 //        item.setId(uuid);
         return item;

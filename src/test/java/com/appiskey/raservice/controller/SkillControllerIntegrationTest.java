@@ -87,9 +87,9 @@ public class SkillControllerIntegrationTest {
         mockMvc.perform(get(appUrl + "/skill").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(3)))
-                .andExpect(jsonPath("$[0].skillName", is(item1.getSkillName())))
-                .andExpect(jsonPath("$[1].skillName", is(item2.getSkillName())))
-                .andExpect(jsonPath("$[2].skillName", is(item3.getSkillName())));
+                .andExpect(jsonPath("$[0].name", is(item1.getName())))
+                .andExpect(jsonPath("$[1].name", is(item2.getName())))
+                .andExpect(jsonPath("$[2].name", is(item3.getName())));
 
         verify(service, VerificationModeFactory.times(1)).getAll();
         reset(service);
@@ -111,8 +111,8 @@ public class SkillControllerIntegrationTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$", hasSize(2)))
-                .andExpect(jsonPath("$[0].skillName", is(item2.getSkillName())))
-                .andExpect(jsonPath("$[1].skillName", is(item3.getSkillName())));
+                .andExpect(jsonPath("$[0].name", is(item2.getName())))
+                .andExpect(jsonPath("$[1].name", is(item3.getName())));
 
         verify(service, VerificationModeFactory.times(1)).searchBySkillName(Mockito.anyString());
         reset(service);
@@ -128,7 +128,7 @@ public class SkillControllerIntegrationTest {
         mockMvc.perform(get(appUrl + "/skill/" + uuid)
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("skillName", is(item1.getSkillName())));
+                .andExpect(jsonPath("name", is(item1.getName())));
         verify(service, VerificationModeFactory.times(1)).findById(Mockito.any());
         reset(service);
     }

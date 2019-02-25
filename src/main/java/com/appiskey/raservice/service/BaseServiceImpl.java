@@ -73,4 +73,17 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     public T update(T item) {
         return repository.saveAndFlush(item);
     }
+
+    @Override
+    public T findByName(String name) {
+        return repository.findByName(name);
+    }
+
+    @Override
+    public boolean exists(String name) {
+        if (repository.findByName(name) != null) {
+            return true;
+        }
+        return false;
+    }
 }

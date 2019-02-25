@@ -16,7 +16,7 @@ import java.util.List;
 @Table
 public class Skill extends BaseModel {
 
-    private String skillName;
+//    private String skillName;
 
     @ManyToMany
     @JoinColumn(name = "resource_id")
