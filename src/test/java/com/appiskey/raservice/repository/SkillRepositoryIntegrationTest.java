@@ -64,7 +64,7 @@ public class SkillRepositoryIntegrationTest {
         entityManager.persist(item2);
         entityManager.persist(item3);
         entityManager.flush();
-        List<Skill> allEmployees = skillRepository.findAll();
+        List<Skill> allEmployees = skillRepository.findAllByDeleted(false);
         assertThat(allEmployees).hasSize(3).extracting(Skill::getSkillName).containsOnly(item1.getSkillName(), item2.getSkillName(), item3.getSkillName());
     }
 

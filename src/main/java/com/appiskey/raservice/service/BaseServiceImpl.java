@@ -33,7 +33,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     }
 
     @Override
-    public List<T> findAllByDeleted() {
+    public List<T> getAll() {
         return repository.findAllByDeleted(false);
     }
 

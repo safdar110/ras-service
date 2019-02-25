@@ -82,7 +82,7 @@ public class SkillControllerIntegrationTest {
         Skill item3 = Datagen.generateSkill("item3");
 
         List<Skill> allItems = Arrays.asList(item1, item2, item3);
-        given(service.findAll()).willReturn(allItems);
+        given(service.getAll()).willReturn(allItems);
 
         mockMvc.perform(get(appUrl + "/skill").contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
@@ -91,7 +91,7 @@ public class SkillControllerIntegrationTest {
                 .andExpect(jsonPath("$[1].skillName", is(item2.getSkillName())))
                 .andExpect(jsonPath("$[2].skillName", is(item3.getSkillName())));
 
-        verify(service, VerificationModeFactory.times(1)).findAll();
+        verify(service, VerificationModeFactory.times(1)).getAll();
         reset(service);
     }
 

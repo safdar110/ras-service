@@ -59,7 +59,7 @@ public class SkillServiceImplIntegrationTest {
         Mockito.when(repository.findBySkillName(item2.getSkillName())).thenReturn(item2);
         Mockito.when(repository.findBySkillName("wrong name")).thenReturn(null);
         Mockito.when(repository.findById(uuid)).thenReturn(Optional.of(item1));
-        Mockito.when(repository.findAll()).thenReturn(allItems);
+        Mockito.when(repository.findAllByDeleted(false)).thenReturn(allItems);
         Mockito.when(repository.findById(wrongId)).thenReturn(Optional.empty());
     }
 
@@ -113,7 +113,7 @@ public class SkillServiceImplIntegrationTest {
         Skill item1 = Datagen.generateSkill("item1");
         Skill item2 = Datagen.generateSkill("item2");
         Skill item3 = Datagen.generateSkill("item3");
-        List<Skill> allItems = service.findAll();
+        List<Skill> allItems = service.getAll();
         verifyFindAllEmployeesIsCalledOnce();
         assertThat(allItems).hasSize(3).extracting(Skill::getSkillName).contains(item1.getSkillName(), item2.getSkillName(), item3.getSkillName());
     }
@@ -142,7 +142,7 @@ public class SkillServiceImplIntegrationTest {
     }
 
     private void verifyFindAllEmployeesIsCalledOnce() {
-        Mockito.verify(repository, VerificationModeFactory.times(1)).findAll();
+        Mockito.verify(repository, VerificationModeFactory.times(1)).findAllByDeleted(false);
         Mockito.reset(repository);
     }
 

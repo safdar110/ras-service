@@ -36,6 +36,8 @@ public class BaseModel {
     @Column(name = "id", columnDefinition = "BINARY(16)")
     protected UUID id;
 
+    protected String name;
+
     @CreationTimestamp
     protected Date createdAt;
 
