@@ -6,6 +6,7 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -24,7 +25,7 @@ public class Project extends BaseModel{
     @JoinColumn(name="client_id")
     private Client projectClient;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "project_feature",
             joinColumns = @JoinColumn(name = "feature_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project_id",
@@ -32,15 +33,15 @@ public class Project extends BaseModel{
     private List<Feature> projectFeatures;
 
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany
     @JoinTable(name = "project_resource",
             joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project_id",
                     referencedColumnName = "id"))
     private List<Resource> projectResources;
 
-    private LocalDateTime projectStartDate;
-    private LocalDateTime projectDevelopmentDate;
+    private Date projectStartDate;
+    private Date projectDevelopmentDate;
     private BigDecimal projectCost;
     private String projectTimeline;
     private String projectPaymentMethod;

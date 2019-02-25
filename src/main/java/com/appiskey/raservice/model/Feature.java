@@ -17,10 +17,10 @@ import java.util.List;
 @Table
 public class Feature extends BaseModel {
     private String featureName;
-    private Duration featureEstimateDuration;
+    private float featureEstimateDuration;
 
-//    @ManyToMany(mappedBy = "projectFeatures", cascade = CascadeType.PERSIST)
-//    private List<Project> featureProjects;
+    @ManyToMany
+    private List<Project> featureProjects;
 
 
 //    @ManyToMany(cascade = CascadeType.ALL)

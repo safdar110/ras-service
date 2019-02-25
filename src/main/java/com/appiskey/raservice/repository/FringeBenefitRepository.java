@@ -8,7 +8,5 @@ import java.util.UUID;
 /**
  * Created by suraksha-app on 2/14/19.
  */
-public interface FringeBenefitRepository  extends PagingAndSortingRepository<FringeBenefit,UUID>{
-    Iterable<FringeBenefit> findAllByDeleted(Boolean deleted);
-
+public interface FringeBenefitRepository  extends BaseRepository<FringeBenefit>{
 }
