@@ -18,44 +18,8 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "${app.url}" + "/operatingcost")
 
-public class OperatingCostController {
+public class OperatingCostController extends  BaseController<OperatingCostService, OperatingCost> {
 
-    @Autowired
-    OperatingCostService operatingCostService;
-
-    @GetMapping
-    public Iterable<OperatingCost> getAllOperatingCosts(){
-
-        return operatingCostService.getAllOperatingCosts();
-    }
-
-    @PostMapping
-    public OperatingCost addOperatingCost(@Valid @RequestBody OperatingCost operatingCost){
-        return operatingCostService.createOperatingCost(operatingCost);
-    }
-
-    @GetMapping("/{uuid}")
-    @ResponseBody
-    public Optional<OperatingCost> getOperatingCostByID(@PathVariable("uuid") UUID id) {
-        return operatingCostService.getOperatingCostByID(id);
-
-    }
-
-    @DeleteMapping("{id}")
-    public Boolean deleteOperatingCost(@PathVariable UUID id) {
-        return operatingCostService.deleteOperatingCost(id);
-    }
-
-    @PutMapping
-    @ResponseBody
-    public ResponseEntity<OperatingCost> editOperatingCost(@RequestBody OperatingCost operatingCost) {
-        return operatingCostService.editOperatingCost(operatingCost);
-    }
-
-    @PostMapping("/search")
-    public Iterable<OperatingCost> findOperatingCostByName(@RequestBody Map<String, BigDecimal> body){
-        return  operatingCostService.searchOperatingCost(body.get("keyword").toString());
-    }
 
 
 

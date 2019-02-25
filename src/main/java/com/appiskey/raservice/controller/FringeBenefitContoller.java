@@ -16,44 +16,9 @@ import java.util.UUID;
 @RestController
 @RequestMapping(value = "${app.url}" + "/fringebenefit")
 
-public class FringeBenefitContoller {
+public class FringeBenefitContoller extends BaseController<FringeBenefitService, FringeBenefit>{
 
-    @Autowired
-    FringeBenefitService fringeBenefitService;
 
-    @GetMapping
-    public Iterable<FringeBenefit> getAllFringeBenefits(){
-
-        return fringeBenefitService.getAllFringeBenefits();
-    }
-
-    @PostMapping
-    public FringeBenefit addFringeBenefit(@Valid @RequestBody FringeBenefit fringeBenefit){
-        return fringeBenefitService.createFringeBenefit(fringeBenefit);
-    }
-
-    @GetMapping("/{uuid}")
-    @ResponseBody
-    public Optional<FringeBenefit> getFringeBenefitByID(@PathVariable("uuid") UUID id) {
-        return fringeBenefitService.getFringeBenefitByID(id);
-
-    }
-
-    @DeleteMapping("{id}")
-    public Boolean deleteOperatingCost(@PathVariable UUID id) {
-        return fringeBenefitService.deleteFringeBenefit(id);
-    }
-
-    @PutMapping
-    @ResponseBody
-    public ResponseEntity<FringeBenefit> editFringeBenefit(@RequestBody FringeBenefit fringeBenefit) {
-        return fringeBenefitService.editFringeBenefit(fringeBenefit);
-    }
-
-//    @PostMapping("/search")
-//    public Iterable<FringeBenefit> findOperatingCostByName(@RequestBody Map<String, BigDecimal> body){
-//        return  fringeBenefitService.searchOperatingCost(body.get("keyword").toString());
-//    }
 
 
 }

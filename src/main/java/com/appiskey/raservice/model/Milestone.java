@@ -18,9 +18,9 @@ import java.util.Date;
 public class Milestone extends BaseModel {
 
     private String milestoneName;
-    private LocalDateTime milestoneStartDate;
-    private LocalDateTime milestoneDelieveryDate;
-    private LocalDateTime milestoneDevelopmentDate;
+    private Date milestoneStartDate;
+    private Date milestoneDelieveryDate;
+    private Date milestoneDevelopmentDate;
     private BigDecimal milestoneExpectedPayment;
     private BigDecimal milestonePaymentAmount;
     private BigDecimal milestoneCost;
