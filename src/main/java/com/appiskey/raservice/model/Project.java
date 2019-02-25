@@ -32,13 +32,19 @@ public class Project extends BaseModel{
                     referencedColumnName = "id"))
     private List<Feature> projectFeatures;
 
-
     @ManyToMany
     @JoinTable(name = "project_resource",
             joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "project_id",
                     referencedColumnName = "id"))
     private List<Resource> projectResources;
+
+    @OneToMany
+    @JoinTable(name = "project_milestone",
+            joinColumns = @JoinColumn(name = "milestone_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "project_id",
+                    referencedColumnName = "id"))
+    private List<Milestone> projectMilestones;
 
     private Date projectStartDate;
     private Date projectDevelopmentDate;

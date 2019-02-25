@@ -42,7 +42,7 @@ public class Resource extends BaseModel{
 
 
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "resource_skill",
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "resource_id",
