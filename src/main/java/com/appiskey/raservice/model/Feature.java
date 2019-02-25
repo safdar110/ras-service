@@ -19,7 +19,8 @@ public class Feature extends BaseModel {
     private String featureName;
     private float featureEstimateDuration;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinColumn(name = "project_id")
     private List<Project> featureProjects;
 
 
