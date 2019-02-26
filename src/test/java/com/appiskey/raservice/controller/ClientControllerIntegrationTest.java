@@ -38,13 +38,13 @@ public class ClientControllerIntegrationTest {
     @Test
     public void givenItems_whenGetItems_thenReturnJsonArray() throws Exception{
         Client item1 = new Client();
-        item1.setClientName("item1");
+        item1.setName("item1");
         List<Client> allItems = Arrays.asList(item1);
         given(service.getAll()).willReturn(allItems);
         mockMvc.perform(get(appUrl + "/client")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].clientName", is(item1.getClientName())));
+                .andExpect(jsonPath("$[0].name", is(item1.getName())));
     }
 }

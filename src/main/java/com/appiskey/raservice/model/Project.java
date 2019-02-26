@@ -19,7 +19,7 @@ import java.util.List;
 @Table
 public class Project extends BaseModel{
 
-    private String projectName;
+//    private String projectName;
 
     @ManyToOne
     @JoinColumn(name="client_id")

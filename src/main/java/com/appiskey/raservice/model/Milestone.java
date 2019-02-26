@@ -17,7 +17,7 @@ import java.util.Date;
 @Table
 public class Milestone extends BaseModel {
 
-    private String milestoneName;
+//    private String milestoneName;
     private Date milestoneStartDate;
     private Date milestoneDelieveryDate;
     private Date milestoneDevelopmentDate;

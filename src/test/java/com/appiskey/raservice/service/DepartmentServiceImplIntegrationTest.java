@@ -41,11 +41,11 @@ public class DepartmentServiceImplIntegrationTest {
     @Before
     public void setup(){
         Department python = new Department();
-        python.setDepartmentName("python");
+        python.setName("python");
         ArrayList<Department> newList = new ArrayList<>();
         newList.add(python);
 
-        Iterable<Department>  foundList = repository.findByDepartmentNameContainingIgnoreCase("python");
+        Iterable<Department>  foundList = repository.findByNameContainingIgnoreCase("python");
         Mockito.when(foundList)
                 .thenReturn(newList);
     }
@@ -55,7 +55,7 @@ public class DepartmentServiceImplIntegrationTest {
         String name = "python";
         Iterable<Department>  foundList  = service.searchByDepartmentName(name);
         Department found  = Lists.newArrayList(foundList).get(0);
-        assertThat(found.getDepartmentName())
+        assertThat(found.getName())
                 .isEqualTo(name);
     }
 

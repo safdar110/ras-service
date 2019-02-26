@@ -25,6 +25,6 @@ public class DepartmentServiceImpl extends BaseServiceImpl<Department> implement
 
     @Override
     public List<Department> searchByDepartmentName(String keyword) {
-        return departmentRepository.findByDepartmentNameContainingIgnoreCase(keyword);
+        return departmentRepository.findByNameContainingIgnoreCase(keyword);
     }
 }

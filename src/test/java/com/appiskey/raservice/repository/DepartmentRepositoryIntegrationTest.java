@@ -28,16 +28,16 @@ public class DepartmentRepositoryIntegrationTest {
 
         // given
         Department devops = new Department();
-        devops.setDepartmentName("devops");
+        devops.setName("devops");
         entityManager.persist(devops);
         entityManager.flush();
 
 
         // when
-        Iterable<Department>  foundList = repository.findByDepartmentNameContainingIgnoreCase("op");
+        Iterable<Department>  foundList = repository.findByNameContainingIgnoreCase("op");
         Department found  = Lists.newArrayList(foundList).get(0);
         // then
-        assertThat(found.getDepartmentName()).isEqualTo(devops.getDepartmentName());
+        assertThat(found.getName()).isEqualTo(devops.getName());
 
     }
 
@@ -46,16 +46,16 @@ public class DepartmentRepositoryIntegrationTest {
 
         // given
         Department devops = new Department();
-        devops.setDepartmentName("devops");
+        devops.setName("devops");
         entityManager.persist(devops);
 
         Department html = new Department();
-        devops.setDepartmentName("html");
+        devops.setName("html");
         entityManager.persist(html);
 
 
         Department css = new Department();
-        devops.setDepartmentName("css");
+        devops.setName("css");
         entityManager.persist(css);
 
         entityManager.flush();

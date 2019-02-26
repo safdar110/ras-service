@@ -46,15 +46,15 @@ public class ClientRepositoryIntegrationTest {
 
         // given
         Client item1 = new Client();
-        item1.setClientName("item1");
+        item1.setName("item1");
         entityManager.persist(item1);
 
         Client item2 = new Client();
-        item2.setClientName("item2");
+        item2.setName("item2");
         entityManager.persist(item2);
 
         Client item3 = new Client();
-        item3.setClientName("item3");
+        item3.setName("item3");
         entityManager.persist(item3);
 
         entityManager.flush();
