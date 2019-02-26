@@ -53,7 +53,7 @@ public class DepartmentServiceImplIntegrationTest {
     @Test
     public void whenValidName_thenDepartmentShouldBefound(){
         String name = "python";
-        Iterable<Department>  foundList  = service.searchByDepartmentName(name);
+        Iterable<Department>  foundList  = service.searchByName(name);
         Department found  = Lists.newArrayList(foundList).get(0);
         assertThat(found.getName())
                 .isEqualTo(name);
