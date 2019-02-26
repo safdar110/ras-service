@@ -21,6 +21,6 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
 
     @PostMapping("/search")
     public List<Department> searchByName(@RequestBody Map<String, String> body) {
-        return service.searchByDepartmentName(body.get("keyword"));
+        return service.searchByName(body.get("keyword"));
     }
 }

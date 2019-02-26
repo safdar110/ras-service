@@ -33,6 +33,11 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     }
 
     @Override
+    public List<T> searchByName(String keyword) {
+        return repository.findByNameContainingIgnoreCase(keyword);
+    }
+
+    @Override
     public List<T> getAll() {
         return repository.findAllByDeleted(false);
     }

@@ -20,11 +20,11 @@ import java.util.UUID;
 @Service("departmentService")
 public class DepartmentServiceImpl extends BaseServiceImpl<Department> implements DepartmentService{
 
-    @Autowired
-    DepartmentRepository departmentRepository;
-
-    @Override
-    public List<Department> searchByDepartmentName(String keyword) {
-        return departmentRepository.findByNameContainingIgnoreCase(keyword);
-    }
+//    @Autowired
+//    DepartmentRepository departmentRepository;
+//
+//    @Override
+//    public List<Department> searchByDepartmentName(String keyword) {
+//        return departmentRepository.findByNameContainingIgnoreCase(keyword);
+//    }
 }
