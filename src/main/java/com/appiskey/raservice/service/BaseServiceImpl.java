@@ -57,7 +57,7 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
     public T delete(UUID id) {
         Optional<T> item = repository.findById(id);
         if (item.isPresent()) {
-            repository.delete(item.get());
+            deleteSoft(item.get().getId());
             return item.get();
         }
         return null;
