@@ -31,7 +31,7 @@ public class Milestone extends BaseModel {
 //    private Client client;
 
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "project_id", referencedColumnName = "id")
     private Project project;
 
