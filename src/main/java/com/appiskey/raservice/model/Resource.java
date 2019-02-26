@@ -18,7 +18,7 @@ import java.util.List;
 @Entity
 @Table
 public class Resource extends BaseModel{
-    private String resourceName;
+//    private String resourceName;
     private String resourceCNIC;
     private String resourceDOB;
     private String resourceEmail;

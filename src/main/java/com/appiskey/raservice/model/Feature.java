@@ -16,7 +16,7 @@ import java.util.List;
 @Entity
 @Table
 public class Feature extends BaseModel {
-    private String featureName;
+//    private String featureName;
     private float featureEstimateDuration;
 
     @ManyToMany

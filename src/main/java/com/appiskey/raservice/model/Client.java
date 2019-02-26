@@ -17,7 +17,7 @@ import java.util.Set;
 @Table
 public class Client extends BaseModel{
 
-    private String clientName;
+//    private String clientName;
     private String clientPhoneNumber;
     private String clientEmail;
     private String clientSocial;

@@ -20,7 +20,7 @@ import java.util.List;
 public class FringeBenefit extends BaseModel {
 
     private String benefitMonth;
-    private String expenseName;
+//    private String expenseName;
     private BigDecimal expenseAmount;
     private Boolean isOneTime;
 //

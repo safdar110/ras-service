@@ -39,7 +39,7 @@ public class ClientServiceImplIntegrationTest {
     @Before
     public void setup() {
         Client tom = new Client();
-        tom.setClientName("tom");
+        tom.setName("tom");
         ArrayList<Client> newList = new ArrayList<>();
         newList.add(tom);
 
@@ -51,7 +51,7 @@ public class ClientServiceImplIntegrationTest {
     @Test
     public void whenFindAll_thenListShouldBefound() {
         Client tom = new Client();
-        tom.setClientName("tom");
+        tom.setName("tom");
         Iterable<Client> foundList = service.getAll();
         assertThat(foundList)
                 .isNotEmpty()

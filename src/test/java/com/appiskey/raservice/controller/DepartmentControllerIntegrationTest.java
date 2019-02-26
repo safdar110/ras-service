@@ -38,13 +38,13 @@ public class DepartmentControllerIntegrationTest {
     @Test
     public void givenDepartments_whenGetDepartments_thenReturnJsonArray() throws Exception{
         Department python = new Department();
-        python.setDepartmentName("python");
+        python.setName("python");
         List<Department> allDepartments = Arrays.asList(python);
         given(service.getAll()).willReturn(allDepartments);
         mockMvc.perform(get(appUrl + "/department")
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$",hasSize(1)))
-                .andExpect(jsonPath("$[0].departmentName", is(python.getDepartmentName())));
+                .andExpect(jsonPath("$[0].name", is(python.getName())));
     }
 }

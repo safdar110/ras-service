@@ -14,6 +14,6 @@ import java.util.UUID;
  */
 
 public interface DepartmentRepository extends BaseRepository<Department> {
-    List<Department> findByDepartmentNameContainingIgnoreCase(String keyword);
+//    List<Department> findByDepartmentNameContainingIgnoreCase(String keyword);
 }
 
