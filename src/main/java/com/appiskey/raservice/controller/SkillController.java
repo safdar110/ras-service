@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 @RestController
 @RequestMapping(value = "${app.url}" + "/skill")
-public class SkillController extends BaseController<SkillService, Skill> {
+public class    SkillController extends BaseController<SkillService, Skill> {
 
     @PostMapping("/search")
     public Iterable<Skill> searchByName(@RequestBody Map<String, String> body) {
