@@ -54,5 +54,4 @@ public class BaseController<S extends BaseService<T>, T extends BaseModel> {
     public T update(@RequestBody T item) {
         return service.update(item);
     }
-
 }
