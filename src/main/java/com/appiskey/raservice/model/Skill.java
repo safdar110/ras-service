@@ -18,7 +18,7 @@ public class Skill extends BaseModel {
 
 //    private String skillName;
 
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinColumn(name = "resource_id")
-    private List<Resource> skillResources;
+//    @ManyToMany(fetch = FetchType.EAGER)
+//    @JoinColumn(name = "resource_id")
+//    private List<Resource> skillResources;
 }
