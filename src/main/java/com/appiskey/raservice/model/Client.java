@@ -27,7 +27,7 @@ public class Client extends BaseModel{
     private String clientImageUrl;
     private String clientTimeZone;
     private String clientAvailability;
-    private String clientCompany;
+    private String clientCompanyName;
     private Boolean isActive;
 
 

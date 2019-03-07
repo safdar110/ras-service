@@ -37,8 +37,8 @@ public class Resource extends BaseModel{
     private BigDecimal resourceSalaryPerMonth;
     private BigDecimal resourcePerHourRate;
     private String resourceShift;
-    private BigDecimal resourceBenefits;
-    private int resourceContractType;     //isIntern, isPartTime , isFullTime
+    private String resourceBenefits;
+    private String resourceContractType;     //isIntern, isPartTime , isFullTime
 
 
 
