@@ -26,19 +26,8 @@ pipeline {
         }
         stage('Deliver') {
             steps {
- //               sh './jenkins/scripts/deliver.sh'
+                sh 'echo "done"'
             }
         }
     }
 }
-
-/*
-node{
-    stage('SCM Checkout'){
-        git 'https://github.com/appiskeydev/raservice'
-    }
-    stage('Compile-Package'){
-        sh 'mvn package'
-    }
-}
-*/
