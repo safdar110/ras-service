@@ -43,6 +43,7 @@ pipeline {
             withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'GC_KEY')]) {
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                 sh("gcloud container clusters get-credentials ras-cluster --zone us-central1-a --project rasdevak")
+                sh("cat .docs/deployment.yaml | sed -e "s/@KVERSION/$BUILD_NUMBER/g" -e "s/@KAPP_NAME/raservice/g" | kubectl apply -f-")
               }
           }
         }
