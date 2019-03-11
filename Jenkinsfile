@@ -42,7 +42,7 @@ pipeline {
           steps{
             withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'GC_KEY')]) {
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
-                sh("gcloud container clusters get-credentials prod --zone us-central1-a --project rasdevak")
+                sh("gcloud container clusters get-credentials ras-cluster --zone us-central1-a --project rasdevak")
               }
           }
         }
