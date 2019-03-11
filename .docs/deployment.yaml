@@ -1,7 +1,7 @@
 apiVersion: apps/v1beta1
 kind: Deployment
 metadata:
-  namespace: nsdev
+  namespace: nsras
   name: @KAPP_NAME
   labels:
     app: @KAPP_NAME
@@ -54,7 +54,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  namespace: nsdev
+  namespace: nsras
   name: @KAPP_NAME
   labels:
     app: @KAPP_NAME
