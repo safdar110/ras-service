@@ -18,7 +18,7 @@ pipeline {
         sh 'git checkout prod'
         sh 'git pull origin prod'
         script{ env.GIT_COMMIT = getCommitSha() }
-        sh 'echo $GIT_COMMIT'
+        sh 'echo ${env.GIT_COMMIT}'
       }
     }
     stage('Build Artifact') {
