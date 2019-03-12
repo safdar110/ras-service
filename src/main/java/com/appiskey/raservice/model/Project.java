@@ -58,7 +58,7 @@ public class Project extends BaseModel{
     private Date projectStartDate;
     private Date projectDevelopmentDate;
     private BigDecimal projectCost;
-    private String projectTimeline;
+    private int projectTimeline;
     private String projectPaymentMethod;
 
 
