@@ -43,6 +43,7 @@ pipeline {
       }
     }
      stage('Deploy on Dev Server') {
+          agent any
           when {
                 branch 'master'
                 beforeAgent true
@@ -56,6 +57,7 @@ pipeline {
           }
         }
      stage('Deploy on Prod Server') {
+          agent any
           when {
                 branch 'prod'
                 beforeAgent true
