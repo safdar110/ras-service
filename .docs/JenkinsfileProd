@@ -12,7 +12,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        //git 'https://github.com/appiskeydev/raservice.git'
+        git 'https://github.com/appiskeydev/raservice.git'
         sh 'git fetch'
         sh 'git checkout prod'
         sh 'git pull origin prod'
