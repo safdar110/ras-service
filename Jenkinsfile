@@ -10,7 +10,6 @@ pipeline {
   }
   agent any
   stages {
-
     stage('Build Artifact') {
        steps {
          sh 'rm -rf target'
@@ -42,7 +41,7 @@ pipeline {
           agent any
           when {
                 branch 'master'
-                beforeAgent true
+                //beforeAgent true
                }
           steps{
             withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'GC_KEY')]) {
@@ -56,7 +55,7 @@ pipeline {
           agent any
           when {
                 branch 'prod'
-                beforeAgent true
+                //beforeAgent true
                }
           steps{
             withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
