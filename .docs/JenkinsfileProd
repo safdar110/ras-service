@@ -19,7 +19,7 @@ pipeline {
         sh 'git checkout prod'
         sh 'git pull origin prod'
         @echo off
-        echo GIT_COMMIT %GIT_COMMIT%
+        sh 'echo GIT_COMMIT %GIT_COMMIT%'
       }
     }
     stage('Build Artifact') {
