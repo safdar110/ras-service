@@ -18,7 +18,6 @@ pipeline {
         sh 'git fetch'
         sh 'git checkout prod'
         sh 'git pull origin prod'
-        @echo off
         sh 'echo GIT_COMMIT %GIT_COMMIT%'
       }
     }
