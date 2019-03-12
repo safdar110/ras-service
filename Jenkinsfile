@@ -10,11 +10,7 @@ pipeline {
   }
   agent any
   stages {
-    stage('Cloning Git') {
-      steps {
-        git 'https://github.com/appiskeydev/raservice.git'
-      }
-    }
+
     stage('Build Artifact') {
        steps {
          sh 'rm -rf target'
