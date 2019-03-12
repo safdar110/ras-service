@@ -7,7 +7,6 @@ pipeline {
     ZONE = 'us-central1-a'
     CLUSTER_NAME = 'ras-cluster'
     IMAGE_NAME = 'raservice'
-    GIT_COMMIT = ''
   }
   agent any
   stages {
@@ -17,8 +16,6 @@ pipeline {
         sh 'git fetch'
         sh 'git checkout prod'
         sh 'git pull origin prod'
-        script{ env.GIT_COMMIT = getCommitSha() }
-        sh 'echo ${env.GIT_COMMIT}'
       }
     }
     stage('Build Artifact') {
@@ -58,7 +55,4 @@ pipeline {
           }
         }
   }
-}
-def getCommitSha(){
-    return sh(returnStdout: true, script: 'git rev-parse HEAD')
 }
