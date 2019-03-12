@@ -7,6 +7,7 @@ pipeline {
     ZONE = 'us-central1-a'
     CLUSTER_NAME = 'ras-cluster'
     IMAGE_NAME = 'raservice'
+    IMAGE_VERSION = "p$BUILD_NUMBER"
   }
   agent any
   stages {
