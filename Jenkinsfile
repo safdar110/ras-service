@@ -15,20 +15,20 @@ pipeline {
         git 'https://github.com/appiskeydev/raservice.git'
       }
     }
-    stage('Build') {
+    stage('Build Artifact') {
        steps {
          sh 'rm -rf target'
          sh 'mvn -DskipTests package'
        }
     }
-    stage('Building image') {
+    stage('Building Docker image') {
       steps{
         script {
           dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
-    stage('Deploy Image') {
+    stage('Deploy Docker Image') {
       steps{
          script {
             docker.withRegistry( '', registryCredential ) {
@@ -42,12 +42,26 @@ pipeline {
         sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
-     stage('Deployment') {
+     stage('Deploy on Dev Server') {
+          when {
+                branch 'master'
+               }
           steps{
             withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'GC_KEY')]) {
-
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
+                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$BUILD_NUMBER/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
+              }
+          }
+        }
+     stage('Deploy on Prod Server') {
+          when {
+                branch 'prod'
+               }
+          steps{
+            withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
+                sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+                sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project rasprodak")
                 sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$BUILD_NUMBER/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
               }
           }
