@@ -28,7 +28,7 @@ pipeline {
     stage('Building Docker image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$BUILD_NUMBER"
+          dockerImage = docker.build registry + ":$IMAGE_VERSION"
         }
       }
     }
@@ -43,7 +43,7 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$BUILD_NUMBER"
+        sh "docker rmi $registry:$IMAGE_VERSION"
       }
     }
      stage('Deploy on Prod Server') {
@@ -51,7 +51,7 @@ pipeline {
             withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
-                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$BUILD_NUMBER/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
+                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$IMAGE_VERSION/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
               }
           }
         }
