@@ -18,7 +18,7 @@ pipeline {
         sh 'git fetch'
         sh 'git checkout prod'
         sh 'git pull origin prod'
-        def GIT_COMMIT = sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+        def GIT_COMMIT = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
       }
     }
     stage('Build Artifact') {
