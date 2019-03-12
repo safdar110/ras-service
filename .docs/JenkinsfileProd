@@ -16,6 +16,7 @@ pipeline {
         sh 'git fetch'
         sh 'git checkout prod'
         sh 'git pull origin prod'
+        echo getCommitSha()
       }
     }
     stage('Build Artifact') {
@@ -55,4 +56,7 @@ pipeline {
           }
         }
   }
+}
+def getCommitSha(){
+    return sh(returnStdout: true, script: 'git rev-parse HEAD')
 }
