@@ -10,6 +10,11 @@ pipeline {
   }
   agent any
   stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/appiskeydev/raservice.git'
+      }
+    }
     stage('Build Artifact') {
        steps {
          sh 'rm -rf target'
@@ -38,10 +43,8 @@ pipeline {
       }
     }
      stage('Deploy on Dev Server') {
-          agent any
           when {
                 branch 'master'
-                //beforeAgent true
                }
           steps{
             withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'GC_KEY')]) {
@@ -52,10 +55,8 @@ pipeline {
           }
         }
      stage('Deploy on Prod Server') {
-          agent any
           when {
                 branch 'prod'
-                //beforeAgent true
                }
           steps{
             withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
