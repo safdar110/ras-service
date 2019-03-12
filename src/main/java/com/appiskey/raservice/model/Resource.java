@@ -29,7 +29,6 @@ public class Resource extends BaseModel{
     private String resourceNationality;
     private String resourceEmergencyContactNo;
     private String resourceMaritalStatus;
-    private String resourceDesignation;
     private String resourceResume;
     private Date resourceDateOfJoining;
     private int resourceWorkingDays;
@@ -39,6 +38,12 @@ public class Resource extends BaseModel{
     private String resourceShift;
     private String resourceBenefits;
     private String resourceContractType;     //isIntern, isPartTime , isFullTime
+
+
+
+    @ManyToOne
+    @JoinColumn(name="designation_id")
+    private Designation resourceDesignation;
 
 
 
