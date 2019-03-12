@@ -7,8 +7,6 @@ pipeline {
     ZONE = 'us-central1-a'
     CLUSTER_NAME = 'ras-cluster'
     IMAGE_NAME = 'raservice'
-    GIT_COMMIT = ''
-    //GIT_COMMIT_HASH = sh (script: "git log -n 1 --pretty=format:'%H'", returnStdout: true)
   }
   agent any
   stages {
@@ -18,7 +16,6 @@ pipeline {
         sh 'git fetch'
         sh 'git checkout prod'
         sh 'git pull origin prod'
-        sh 'echo GIT_COMMIT %GIT_COMMIT%'
       }
     }
     stage('Build Artifact') {
@@ -30,7 +27,7 @@ pipeline {
     stage('Building Docker image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":${env.GIT_COMMIT}"
+          dockerImage = docker.build registry + ":$BUILD_NUMBER"
         }
       }
     }
@@ -45,7 +42,7 @@ pipeline {
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:${env.GIT_COMMIT}"
+        sh "docker rmi $registry:$BUILD_NUMBER"
       }
     }
      stage('Deploy on Prod Server') {
@@ -53,7 +50,7 @@ pipeline {
             withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
-                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/${env.GIT_COMMIT}/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
+                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$BUILD_NUMBER/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
               }
           }
         }
