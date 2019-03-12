@@ -23,11 +23,10 @@ public class Milestone extends BaseModel {
 //    private String milestoneName;
     private Date milestoneStartDate;
     private Date milestoneDelieveryDate;
-    private Date milestoneDevelopmentDate;
     private BigDecimal milestoneExpectedPayment;
-    private BigDecimal milestonePaymentAmount;
+    private int milestoneNoOfDays;
     private BigDecimal milestoneCost;
-    private String milestonePaymentMethod;
+
 
 
 //    @ManyToOne
