@@ -48,7 +48,7 @@ pipeline {
           steps{
             withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'DEV_GC_KEY')]) {
                 //sh("gcloud config set container/use_client_certificate True")
-                //sh("gcloud auth activate-service-account --key-file=${DEV_GC_KEY}")
+                //sh("gcloud auth activate-service-account --key-file=${DEV_GC_KEY}") //
                 //sh("rm ~/.kube/config")
                 sh("gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=${DEV_GC_KEY} --project=$PROJECT_NAME")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
