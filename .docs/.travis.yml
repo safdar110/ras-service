@@ -6,3 +6,6 @@ change in travis file
 4th changes
 5th changes
 6
+7
+8//sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+hhss

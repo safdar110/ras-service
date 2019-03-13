@@ -14,44 +14,13 @@ pipeline {
     stage('Cloning Git') {
       steps {
         git 'https://github.com/appiskeydev/raservice.git'
-        sh 'git fetch'
-        sh 'git checkout prod'
-        sh 'git pull origin prod'
-      }
-    }
-    stage('Build Artifact') {
-       steps {
-         sh 'rm -rf target'
-         sh 'mvn -DskipTests package'
-       }
-    }
-    stage('Building Docker image') {
-      steps{
-        script {
-          dockerImage = docker.build registry + ":$IMAGE_VERSION"
-        }
-      }
-    }
-    stage('Deploy Docker Image') {
-      steps{
-         script {
-            docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
-          }
-        }
-      }
-    }
-    stage('Remove Unused docker image') {
-      steps{
-        sh "docker rmi $registry:$IMAGE_VERSION"
       }
     }
      stage('Deploy on Prod Server') {
           steps{
             withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
-                sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+                sh("gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=${GC_KEY} --project=$PROJECT_NAME")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
-                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$IMAGE_VERSION/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
               }
           }
         }
