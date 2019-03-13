@@ -49,7 +49,6 @@ pipeline {
      stage('Deploy on Prod Server') {
           steps{
             withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
-                //sh("rm ~/.kube/config")
                 //sh("gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=${GC_KEY} --project=$PROJECT_NAME")
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
