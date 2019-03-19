@@ -16,7 +16,7 @@ spec:
 #      - name: gitlab-auth
       containers:
       - name: KAPP_NAME
-        image: KREGISTRY
+        image: khawarhere/KAPP_NAME:KVERSION
         ports:
         - containerPort: 8080
         env:
