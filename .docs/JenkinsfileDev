@@ -3,12 +3,11 @@ pipeline {
     registry = "khawarhere/raservice"
     registryCredential = 'dockerhub'
     dockerImage = ''
-    PROJECT_NAME = 'rasdevak'
+    PROJECT_ID= 'rasdevak'
     ZONE = 'us-central1-a'
     CLUSTER_NAME = 'ras-cluster'
     IMAGE_NAME = 'raservice'
     IMAGE_VERSION = "d$BUILD_NUMBER"
-    SERVICE_ACCOUNT = 'jenkins@rasdevak.iam.gserviceaccount.com'
   }
   agent any
   stages {
@@ -48,7 +47,7 @@ pipeline {
           steps{
             withCredentials([file(credentialsId: 'JENKINS_DEV', variable: 'GC_KEY')]) {
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
-                sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
+                sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID")
                 sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$IMAGE_VERSION/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
               }
           }
