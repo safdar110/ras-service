@@ -1,14 +1,12 @@
 pipeline {
   environment {
-    registry = "khawarhere/raservice"
     registryCredential = 'dockerhub'
-    dockerImage = ''
     PROJECT_ID= 'rasdevak'
     ZONE = 'us-central1-a'
     CLUSTER_NAME = 'ras-cluster'
     IMAGE_NAME = 'raservice'
-    //IMAGE_VERSION = "d$BUILD_NUMBER"
-    IMAGE_VERSION = sh("\$(git rev-parse --short HEAD)")
+    REGISTRY = "khawarhere/$IMAGE_NAME"
+    IMAGE_VERSION = "\$(git rev-parse --short HEAD)"
   }
   agent any
   stages {
@@ -26,7 +24,7 @@ pipeline {
     stage('Building Docker image') {
       steps{
         script {
-          dockerImage = docker.build registry + ":$IMAGE_VERSION"
+          sh("docker build -t $REGISTRY:$IMAGE_VERSION .")
         }
       }
     }
@@ -34,14 +32,14 @@ pipeline {
       steps{
          script {
             docker.withRegistry( '', registryCredential ) {
-            dockerImage.push()
+            sh("docker push $REGISTRY:$IMAGE_VERSION")
           }
         }
       }
     }
     stage('Remove Unused docker image') {
       steps{
-        sh "docker rmi $registry:$IMAGE_VERSION"
+        sh "docker rmi $REGISTRY:$IMAGE_VERSION"
       }
     }
      stage('Deploy on Dev Server') {
@@ -49,7 +47,7 @@ pipeline {
             withCredentials([file(credentialsId: 'JENKINS_DEV', variable: 'GC_KEY')]) {
                 sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
                 sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_ID")
-                sh("cat .docs/deployment.yaml | sed -e 's/KVERSION/$IMAGE_VERSION/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
+                sh("cat .docs/deployment.yaml | sed -e 's/KREGISTRY/$REGISTRY/g' -e 's/KAPP_NAME/$IMAGE_NAME/g' | kubectl apply -f-")
               }
           }
         }
