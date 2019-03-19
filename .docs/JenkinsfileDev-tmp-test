@@ -1,0 +1,22 @@
+pipeline {
+  environment {
+    PROJECT_NAME = 'rasdevak'
+    ZONE = 'us-central1-a'
+    CLUSTER_NAME = 'ras-cluster'
+    IMAGE_NAME = 'raservice'
+    IMAGE_VERSION = "d$BUILD_NUMBER"
+    SERVICE_ACCOUNT = 'devops@rasdevak.iam.gserviceaccount.com'
+  }
+  agent any
+  stages {
+    stage('Test GCP Auth') {
+            steps{
+              withCredentials([file(credentialsId: 'DEV_RAS_SA_KEY', variable: 'GC_KEY')]) {
+                  sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
+                  sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
+                }
+            }
+          }
+
+  }
+}

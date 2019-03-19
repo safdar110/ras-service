@@ -9,3 +9,7 @@ change in travis file
 7
 8//sh("gcloud auth activate-service-account --key-file=${GC_KEY}")
 hhss
+
+  gcloud projects add-iam-policy-binding $PROJECT_NAME \
+  --member=serviceAccount:devops@rasdevak.iam.gserviceaccount.com \
+  --role=roles/container.clusters.get
