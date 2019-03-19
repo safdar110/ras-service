@@ -7,7 +7,8 @@ pipeline {
     ZONE = 'us-central1-a'
     CLUSTER_NAME = 'ras-cluster'
     IMAGE_NAME = 'raservice'
-    IMAGE_VERSION = "d$BUILD_NUMBER"
+    //IMAGE_VERSION = "d$BUILD_NUMBER"
+    IMAGE_VERSION = sh("\$(git rev-parse --short HEAD)")
   }
   agent any
   stages {
