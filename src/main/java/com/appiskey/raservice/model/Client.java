@@ -30,9 +30,9 @@ public class Client extends BaseModel{
     private Boolean isActive;
 
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name = "company_id")
-    private Company clientCompanyName;
+    private Company clientCompany;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
