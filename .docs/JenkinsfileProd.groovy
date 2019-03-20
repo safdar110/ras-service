@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registryCredential = 'dockerhub'
-        PROJECT_ID = 'rasdevak'
+        PROJECT_ID = 'rasprodak'
         ZONE = 'us-central1-a'
         CLUSTER_NAME = 'ras-cluster'
         IMAGE_NAME = 'raservice'
@@ -13,6 +13,9 @@ pipeline {
         stage('Cloning Git') {
             steps {
                 git 'https://github.com/appiskeydev/raservice.git'
+                sh 'git fetch'
+                sh 'git checkout prod'
+                sh 'git pull origin prod'
             }
         }
         stage('Build Artifact') {
@@ -55,5 +58,5 @@ pipeline {
 }
 
 def getShortCommitHash() {
-    return sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+    return 'p' + sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 }
