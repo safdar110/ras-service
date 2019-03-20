@@ -55,5 +55,5 @@ pipeline {
 }
 
 def getShortCommitHash() {
-    return sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
+    return 'd' + sh(returnStdout: true, script: "git log -n 1 --pretty=format:'%h'").trim()
 }
