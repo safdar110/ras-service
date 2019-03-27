@@ -1,7 +1,7 @@
 pipeline {
     environment {
         registryCredential = 'dockerhub'
-        PROJECT_ID = 'rasstagingak'
+        PROJECT_ID = 'rastagingak'
         ZONE = 'us-central1-a'
         CLUSTER_NAME = 'ras-cluster'
         IMAGE_NAME = 'raservice'
