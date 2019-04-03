@@ -35,6 +35,12 @@ public class BaseController<S extends BaseService<T>, T extends BaseModel> {
         return service.insert(item);
     }
 
+    @PostMapping("/saveall")
+    @ResponseStatus(value = HttpStatus.CREATED)
+    public List<T> saveAll(@Valid @RequestBody Iterable<T> list) {
+        return service.saveAll(list);
+    }
+
     @GetMapping("/{uuid}")
     @ResponseBody
     @ResponseStatus(value = HttpStatus.OK)

@@ -20,4 +20,7 @@ import java.util.UUID;
 
 @RestController
 @RequestMapping(value = "${app.url}" + "/client")
-public class ClientController extends BaseController<ClientService, Client> {}
+public class ClientController extends BaseController<ClientService, Client> {
+
+
+}

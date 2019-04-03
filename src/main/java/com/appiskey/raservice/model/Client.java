@@ -27,9 +27,12 @@ public class Client extends BaseModel{
     private String clientImageUrl;
     private String clientTimeZone;
     private String clientAvailability;
-    private String clientCompany;
     private Boolean isActive;
 
+
+    @ManyToOne(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+    @JoinColumn(name = "company_id")
+    private Company clientCompany;
 
     @ManyToOne
     @JoinColumn(name = "parent_id")

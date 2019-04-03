@@ -62,6 +62,10 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
         }
         return null;
     }
+    @Override
+    public List<T> saveAll(Iterable<T> list) {
+        return repository.saveAll(list);
+    }
 
     @Override
     public T deleteSoft(UUID id) {

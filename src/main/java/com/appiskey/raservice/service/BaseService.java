@@ -17,6 +17,7 @@ public interface BaseService<T extends BaseModel> {
     public T insert(T item);
     public List<T> findAll();
     public List<T> searchByName(String keyword);
+    public List<T> saveAll(Iterable<T> list);
     public List<T> getAll();
     public T findById(UUID id);
     public T delete(UUID id);
