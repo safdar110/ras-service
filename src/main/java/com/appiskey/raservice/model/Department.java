@@ -18,7 +18,7 @@ import java.util.List;
 public class Department extends BaseModel{
 //    private String departmentName;
   //  private String departmentHod;
-    private String departmentBench;
+    private int departmentBench;
 
 //    @OneToMany
 //    @JoinColumn(name = "resource_id")
