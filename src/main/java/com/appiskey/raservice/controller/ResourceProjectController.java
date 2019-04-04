@@ -1,15 +1,12 @@
 package com.appiskey.raservice.controller;
 
-import com.appiskey.raservice.model.Project;
 import com.appiskey.raservice.model.ResourceProject;
-import com.appiskey.raservice.service.ProjectService;
+import com.appiskey.raservice.service.ResourceProjectService;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
 @RestController
-@RequestMapping(value = "${app.url}" + "/project")
-public class ProjectController extends BaseController<ProjectService,Project>{
-
-
+@RequestMapping(value = "${app.url}" + "/resource-project")
+public class ResourceProjectController extends BaseController<ResourceProjectService, ResourceProject> {
 }

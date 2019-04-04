@@ -55,9 +55,11 @@ public class Resource extends BaseModel{
                     referencedColumnName = "id"))
     private List<Skill> resourceSkills;
 
-    @ManyToOne
-    private Project resourceProject;
+//    @ManyToOne
+//    private Project resourceProject;
 
+    @OneToMany(mappedBy = "project")
+    private List<ResourceProject> resourceProject;
 
     private boolean resourcePartTime;
 
