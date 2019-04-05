@@ -1,6 +1,7 @@
 package com.appiskey.raservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import org.hibernate.annotations.OnDelete;
@@ -20,6 +21,7 @@ import java.util.List;
 @Data
 @Entity
 @Table
+@Builder
 public class Project extends BaseModel{
 
 //    private String projectName;
@@ -43,6 +45,10 @@ public class Project extends BaseModel{
 //    private List<Resource> projectResources;
 
     @OneToMany(mappedBy = "resource")
+//    @JoinTable(name = "resource_project",
+//            joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "project_id",
+//                    referencedColumnName = "id"))
     private List<ResourceProject> projectResources;
 
 //    @OneToMany
