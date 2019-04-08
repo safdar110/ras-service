@@ -9,7 +9,9 @@ import javax.persistence.*;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by khawar on 1/30/19.
@@ -44,12 +46,13 @@ public class Project extends BaseModel{
 //                    referencedColumnName = "id"))
 //    private List<Resource> projectResources;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = {CascadeType.PERSIST, CascadeType.MERGE })
 //    @JoinTable(name = "resource_project",
 //            joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "project_id",
 //                    referencedColumnName = "id"))
-    private List<ResourceProject> projectResources;
+    private Set<ResourceProject> projectResources = new HashSet<>();
+
 
 //    @OneToMany
 //    @JoinTable(name = "project_milestone",

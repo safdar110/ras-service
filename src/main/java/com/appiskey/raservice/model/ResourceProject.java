@@ -1,22 +1,32 @@
 package com.appiskey.raservice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.xml.ws.Response;
 import java.io.Serializable;
+import java.util.UUID;
 
 @Entity
 @Table(name = "resource_project")
 @Data
 @NoArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = {"project", "resource"})
+@EntityListeners(AuditingEntityListener.class)
+@JsonIgnoreProperties(value = {"createdAt", "updatedAt"},
+        allowGetters = true)
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@EqualsAndHashCode
+//@EqualsAndHashCode(callSuper = true, exclude = {"project", "resource"})
 //@IdClass(ResourceProjectId.class)
-public class ResourceProject extends BaseModel implements Serializable{
+public class ResourceProject implements Serializable{
+
 
     @Id
     @ManyToOne

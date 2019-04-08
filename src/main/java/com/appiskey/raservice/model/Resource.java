@@ -7,7 +7,9 @@ import lombok.EqualsAndHashCode;
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by khawar on 1/30/19.
@@ -59,7 +61,7 @@ public class Resource extends BaseModel{
 //    private Project resourceProject;
 
     @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
-    private List<ResourceProject> resourceProject;
+    private Set<ResourceProject> resourceProject = new HashSet<>();
 
     private boolean resourcePartTime;
 
