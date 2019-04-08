@@ -14,10 +14,9 @@ import java.io.Serializable;
 @Table(name = "resource_project")
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@EqualsAndHashCode(callSuper = true, exclude = {"project", "resource"})
-//@IdClass(ResourceProjectId.class)
-public class ResourceProject extends BaseModel{
+//@EqualsAndHashCode(callSuper = true, exclude = {"project", "resource"})
+@IdClass(ResourceProjectId.class)
+public class ResourceProject{
 
 
     @ManyToOne
@@ -31,19 +30,19 @@ public class ResourceProject extends BaseModel{
 
 
 //    @EmbeddedId
-//   ResourceProjectId id;
-//
-//
+//    ResourceProjectId id;
+
+
+
+//    @ManyToOne
+//    @MapsId("resource_id")
+//    @JoinColumn(name = "resource_id")
+//    Resource resource;
 //
 //    @ManyToOne
-//    @MapsId("resourceId")
-//    @JoinColumn(name = "resourceId")
-//    private Resource resource;
-//
-//    @ManyToOne
-//    @MapsId("projectId")
-//    @JoinColumn(name = "projectId")
-//    private Project project;
+//    @MapsId("project_id")
+//    @JoinColumn(name = "project_id")
+//    Project project;
 
     @Column
     private String resourceProjectHour;
