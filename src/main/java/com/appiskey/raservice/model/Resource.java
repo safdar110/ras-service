@@ -58,7 +58,7 @@ public class Resource extends BaseModel{
 //    @ManyToOne
 //    private Project resourceProject;
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
     private List<ResourceProject> resourceProject;
 
     private boolean resourcePartTime;

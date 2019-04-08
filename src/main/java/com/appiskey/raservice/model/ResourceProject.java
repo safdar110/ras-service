@@ -14,18 +14,29 @@ import java.io.Serializable;
 @Table(name = "resource_project")
 @Data
 @NoArgsConstructor
-//@EqualsAndHashCode(callSuper = true, exclude = {"project", "resource"})
-@IdClass(ResourceProjectId.class)
-public class ResourceProject{
+@EqualsAndHashCode(callSuper = true, exclude = {"project", "resource"})
+//@IdClass(ResourceProjectId.class)
+public class ResourceProject extends BaseModel implements Serializable{
 
-
+    @Id
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "resourceId", referencedColumnName = "id")
+    @JoinColumn
     private Resource resource;
 
+    @Id
     @ManyToOne
-    @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
+    @JoinColumn
     private Project project;
+
+//
+//
+//    @ManyToOne
+//    @PrimaryKeyJoinColumn(name = "resourceId", referencedColumnName = "id")
+//    private Resource resource;
+//
+//    @ManyToOne
+//    @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
+//    private Project project;
 
 
 
