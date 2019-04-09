@@ -1,8 +1,7 @@
 package com.appiskey.raservice.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
@@ -19,8 +18,10 @@ import java.util.Set;
 @Data
 @Entity
 @Table
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Resource extends BaseModel{
-//    private String resourceName;
     private String resourceCNIC;
     private String resourceDOB;
     private String resourceEmail;
@@ -57,11 +58,13 @@ public class Resource extends BaseModel{
                     referencedColumnName = "id"))
     private List<Skill> resourceSkills;
 
-//    @ManyToOne
-//    private Project resourceProject;
+    @ManyToOne
+    private Project project;
 
-    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
-    private Set<ResourceProject> resourceProject = new HashSet<>();
+//    @ManyToOne
+//    @JoinColumn(name="resourceId")
+//    @JsonIgnore
+//    private ResourceProject resourceProject;
 
     private boolean resourcePartTime;
 

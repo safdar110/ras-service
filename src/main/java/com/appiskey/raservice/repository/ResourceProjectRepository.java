@@ -5,5 +5,5 @@ import com.appiskey.raservice.model.ResourceProject;
 import com.appiskey.raservice.model.ResourceProjectId;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface ResourceProjectRepository extends JpaRepository<Project, ResourceProjectId> {
+public interface ResourceProjectRepository extends BaseRepository<ResourceProject> {
 }
