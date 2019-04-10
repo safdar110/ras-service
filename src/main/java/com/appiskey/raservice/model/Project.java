@@ -47,7 +47,7 @@ public class Project extends BaseModel{
 
 //    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
 //    @JoinColumn(name = "resource_id")
-    private List<ResourceProject> projectResources;
+    private List<Resource> projectResources;
 
 //    @OneToMany
 //    @JoinTable(name = "project_milestone",
