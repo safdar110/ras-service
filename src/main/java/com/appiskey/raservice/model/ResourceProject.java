@@ -40,13 +40,13 @@ public class ResourceProject extends BaseModel implements Serializable{
 //
 
 
-    @ManyToMany
-//    @PrimaryKeyJoinColumn(name = "resourceId", referencedColumnName = "id")
+    @ManyToOne
+    @PrimaryKeyJoinColumn(name = "resourceId", referencedColumnName = "id")
 //    @JoinTable(name = "project_association",
 //            joinColumns = @JoinColumn(name = "resourceId", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "projectId",
 //                    referencedColumnName = "id"))
-    private List<Resource> resource = new ArrayList<Resource>();
+    private Resource resource ;
 
     @ManyToOne
     @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
@@ -96,3 +96,27 @@ public class ResourceProject extends BaseModel implements Serializable{
 //        return Objects.hash(book.getName(), publisher.getName(), publishedDate);
 //    }
 }
+
+
+
+//                            JSON Request
+
+//{
+//
+//        "resource":
+//
+//        {
+//        "id": "439d600c-339a-48a9-9636-0a0a88b3a339"
+//        },
+//
+//
+//
+//
+//        "project":{
+//
+//        "id": "fc8bfb05-59fb-4a52-9f60-99b02e5ce30b"
+//        },
+//        "resourceProjectHour":"11",
+//        "resourceProjectAllocation":"1"
+//
+//        }
