@@ -35,12 +35,19 @@ public class Project extends BaseModel{
                     referencedColumnName = "id"))
     private List<Feature> projectFeatures;
 
-    @ManyToMany
-    @JoinTable(name = "project_resource",
-            joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "project_id",
-                    referencedColumnName = "id"))
-    private List<Resource> projectResources;
+//    @ManyToMany
+//    @JoinTable(name = "project_resource",
+//            joinColumns = @JoinColumn(name = "resource_id", referencedColumnName = "id"),
+//            inverseJoinColumns = @JoinColumn(name = "project_id",
+//                    referencedColumnName = "id"))
+//    private List<Resource> projectResources;
+
+
+    @OneToMany(cascade = CascadeType.MERGE)
+
+//    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
+//    @JoinColumn(name = "resource_id")
+    private List<ResourceProject> projectResources;
 
 //    @OneToMany
 //    @JoinTable(name = "project_milestone",

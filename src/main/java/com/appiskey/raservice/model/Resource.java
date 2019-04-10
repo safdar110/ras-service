@@ -5,10 +5,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by khawar on 1/30/19.
@@ -58,8 +55,9 @@ public class Resource extends BaseModel{
                     referencedColumnName = "id"))
     private List<Skill> resourceSkills;
 
-    @ManyToOne
-    private Project project;
+
+    @OneToMany
+    private List<Project> projects;
 
 //    @ManyToOne
 //    @JoinColumn(name="resourceId")
