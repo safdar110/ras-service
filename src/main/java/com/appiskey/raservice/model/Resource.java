@@ -56,8 +56,9 @@ public class Resource extends BaseModel{
     private Set<Skill> resourceSkills;
 
 
-    @OneToMany
-    private List<Project> projects;
+    @JsonIgnore
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
+    private List<ResourceProject> resourceProjectsList;
 
 //    @ManyToOne
 //    @JoinColumn(name="resourceId")

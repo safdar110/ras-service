@@ -1,6 +1,7 @@
 package com.appiskey.raservice.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -41,6 +42,7 @@ public class ResourceProject extends BaseModel implements Serializable{
 //
 
 
+//    @JsonIgnore
     @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn(name = "resourceId", referencedColumnName = "id")
 //    @JoinTable(name = "project_association",
@@ -49,7 +51,9 @@ public class ResourceProject extends BaseModel implements Serializable{
 //                    referencedColumnName = "id"))
     private Resource resource ;
 
-    @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.MERGE)
+
+    @JsonIgnore
+    @ManyToOne(fetch= FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
     private Project project;
 
