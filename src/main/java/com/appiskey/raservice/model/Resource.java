@@ -53,7 +53,7 @@ public class Resource extends BaseModel{
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "resource_id",
                     referencedColumnName = "id"))
-    private List<Skill> resourceSkills;
+    private Set<Skill> resourceSkills;
 
 
     @OneToMany
