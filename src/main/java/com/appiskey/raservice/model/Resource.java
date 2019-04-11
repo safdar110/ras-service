@@ -1,6 +1,8 @@
 package com.appiskey.raservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 
 import javax.persistence.*;
@@ -56,8 +58,9 @@ public class Resource extends BaseModel{
     private Set<Skill> resourceSkills;
 
 
-    @JsonIgnore
+
     @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
+    @JsonIgnore
     private List<ResourceProject> resourceProjectsList;
 
 //    @ManyToOne

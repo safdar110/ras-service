@@ -1,8 +1,7 @@
 package com.appiskey.raservice.model;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -52,7 +51,10 @@ public class ResourceProject extends BaseModel implements Serializable{
     private Resource resource ;
 
 
-    @JsonIgnore
+
+//    @JsonIgnore
+         @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+         @JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(fetch= FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
     @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
     private Project project;
