@@ -42,6 +42,8 @@ public class ResourceProject extends BaseModel implements Serializable{
 
 
 //    @JsonIgnore
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//@JsonIdentityReference(alwaysAsId = true)
     @ManyToOne(fetch= FetchType.EAGER, cascade = CascadeType.MERGE)
     @PrimaryKeyJoinColumn(name = "resourceId", referencedColumnName = "id")
 //    @JoinTable(name = "project_association",
@@ -53,10 +55,13 @@ public class ResourceProject extends BaseModel implements Serializable{
 
 
 //    @JsonIgnore
-         @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
-         @JsonIdentityReference(alwaysAsId = true)
-    @ManyToOne(fetch= FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.REFRESH})
+//    @JsonProperty(value = "project")
+
+    @ManyToOne(fetch= FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityReference(alwaysAsId = true)
+//    @JsonIgnoreProperties("project")
     private Project project;
 
 

@@ -1,8 +1,6 @@
 package com.appiskey.raservice.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.fasterxml.jackson.annotation.*;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -45,13 +43,15 @@ public class Project extends BaseModel{
 //    private List<Resource> projectResources;
 
 
-    @OneToMany(mappedBy = "project" ,fetch =  FetchType.EAGER, cascade = CascadeType.MERGE)
-    @JsonIgnoreProperties("project")
+    @OneToMany(mappedBy = "project" ,fetch =  FetchType.EAGER, cascade ={CascadeType.ALL} )
+//    @JsonIgnoreProperties("project")
+//    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+//    @JsonIdentityReference(alwaysAsId = true)
 //    @OneToMany(cascade = {CascadeType.REFRESH, CascadeType.MERGE})
 //    @JoinColumn(name = "resource_id")
     private List<ResourceProject> resourceProjects;
 
-//    @OneToMany
+//    @OneToManyinsert
 //    @JoinTable(name = "project_milestone",
 //            joinColumns = @JoinColumn(name = "milestone_id", referencedColumnName = "id"),
 //            inverseJoinColumns = @JoinColumn(name = "project_id",
