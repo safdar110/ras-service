@@ -20,4 +20,10 @@ public class ResourceProjectServiceImpl extends BaseServiceImpl<ResourceProject>
         return resourceProjects;
 
     }
+
+    @Override
+    public int countDistinctByProjectId(UUID p_id){
+
+        return resourceProjectRepository.countDistinctByProjectId(p_id);
+    }
 }

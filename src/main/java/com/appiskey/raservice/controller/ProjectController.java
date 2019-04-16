@@ -19,11 +19,18 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     @Autowired
     ResourceProjectService resourceProjectService;
 
+    @Autowired
+    ResourceProjectRepository resourceProjectRepository;
+
 
     @PutMapping("/project")
     @ResponseStatus(value = HttpStatus.CREATED)
     public Project insertProject(@RequestBody Project item) {
       // item.getResourceProjects();
+        if(resourceProjectService.countDistinctByProjectId(item.getId()) >= 1 ){
+            System.out.println(resourceProjectService.countDistinctByProjectId(item.getId()));
+        resourceProjectService.deleteSoft(item.getId());
+        }
         resourceProjectService.saveAll(item.getResourceProjects());
         return service.update(item);
     }

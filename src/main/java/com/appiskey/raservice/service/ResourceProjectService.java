@@ -9,5 +9,7 @@ import java.util.UUID;
 public interface ResourceProjectService  extends BaseService<ResourceProject> {
 
     public List<ResourceProject> findByProjectId(UUID p_id);
+
+    public int countDistinctByProjectId(UUID id);
 }
 
