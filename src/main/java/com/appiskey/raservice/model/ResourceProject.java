@@ -59,7 +59,7 @@ public class ResourceProject extends BaseModel implements Serializable{
 
     @ManyToOne(fetch= FetchType.EAGER)
     @PrimaryKeyJoinColumn(name = "projectId", referencedColumnName = "id")
-    @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+    @JsonIdentityInfo(generator = ObjectIdGenerators.IntSequenceGenerator.class, property = "@id" )
     @JsonIdentityReference(alwaysAsId = true)
 //    @JsonIgnoreProperties("project")
     private Project project;

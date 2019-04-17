@@ -5,6 +5,7 @@ import com.appiskey.raservice.model.ResourceProject;
 import com.appiskey.raservice.repository.ResourceProjectRepository;
 import com.appiskey.raservice.service.ProjectService;
 import com.appiskey.raservice.service.ResourceProjectService;
+import org.hibernate.NonUniqueResultException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -27,11 +28,29 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     @ResponseStatus(value = HttpStatus.CREATED)
     public Project insertProject(@RequestBody Project item) {
       // item.getResourceProjects();
-        if(resourceProjectService.countDistinctByProjectId(item.getId()) >= 1 ){
-            System.out.println(resourceProjectService.countDistinctByProjectId(item.getId()));
-        resourceProjectService.deleteSoft(item.getId());
-        }
+
+//        if(resourceProjectService.existsByProjectId(item.getId())) {
+//            resourceProjectService.delete(item.getId());
+//        }
+       if(resourceProjectService.existsByProjectId(item.getId()))
+       resourceProjectService.deleteByProjectId(item.getId());
+        //System.out.println("/");
+
+
         resourceProjectService.saveAll(item.getResourceProjects());
-        return service.update(item);
-    }
+                return service.update(item);
+
+        }
+
+
+
+
+
+
+
+
+
+
+
+
 }

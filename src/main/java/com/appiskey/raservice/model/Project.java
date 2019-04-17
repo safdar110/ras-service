@@ -20,7 +20,7 @@ import java.util.stream.Stream;
 @Data
 @Entity
 @Table
-@Builder
+//@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Project extends BaseModel{
