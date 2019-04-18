@@ -1,0 +1,28 @@
+pipeline {
+  environment {
+    registry = "khawarhere/raservice"
+    registryCredential = 'dockerhub'
+    dockerImage = ''
+    PROJECT_NAME = 'rasprodak'
+    ZONE = 'us-central1-a'
+    CLUSTER_NAME = 'ras-cluster'
+    IMAGE_NAME = 'raservice'
+    IMAGE_VERSION = "p$BUILD_NUMBER"
+  }
+  agent any
+  stages {
+    stage('Cloning Git') {
+      steps {
+        git 'https://github.com/appiskeydev/raservice.git'
+      }
+    }
+     stage('Deploy on Prod Server') {
+          steps{
+            withCredentials([file(credentialsId: 'PROD_RAS_SA_KEY', variable: 'GC_KEY')]) {
+                sh("gcloud auth activate-service-account $SERVICE_ACCOUNT --key-file=${GC_KEY} --project=$PROJECT_NAME")
+                sh("gcloud container clusters get-credentials $CLUSTER_NAME --zone $ZONE --project $PROJECT_NAME")
+              }
+          }
+        }
+  }
+}
