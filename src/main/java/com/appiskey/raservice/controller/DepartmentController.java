@@ -23,4 +23,8 @@ public class DepartmentController extends BaseController<DepartmentService, Depa
     public List<Department> searchByName(@RequestBody Map<String, String> body) {
         return service.searchByName(body.get("keyword"));
     }
+    @GetMapping("/bench")
+    public List<Department> findMinBenchMark(){
+        return service.findMinBench();
+    }
 }

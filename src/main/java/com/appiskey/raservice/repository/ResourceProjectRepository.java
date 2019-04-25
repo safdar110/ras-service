@@ -15,7 +15,7 @@ public interface ResourceProjectRepository extends BaseRepository<ResourceProjec
    // @Query("select p from ResourceProject p where projectId = :id")
     List<ResourceProject> findByProjectId(UUID id);
 
-    Integer findCountDistinctByProjectId(UUID id);
+
 
     boolean existsByProjectId(UUID id);
 

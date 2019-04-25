@@ -23,11 +23,6 @@ public class ResourceProjectServiceImpl extends BaseServiceImpl<ResourceProject>
 
     }
 
-    @Override
-    public Integer findCountDistinctByProjectId(UUID p_id) {
-
-        return resourceProjectRepository.findCountDistinctByProjectId(p_id);
-    }
 
     @Override
     public boolean existsByProjectId(UUID id) {
@@ -49,4 +44,6 @@ public class ResourceProjectServiceImpl extends BaseServiceImpl<ResourceProject>
     public void deleteByProjectId(UUID id){
         resourceProjectRepository.deleteByProjectId(id);
     }
+
+
 }

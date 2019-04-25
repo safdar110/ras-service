@@ -2,6 +2,7 @@ package com.appiskey.raservice.repository;
 
 import com.appiskey.raservice.model.Department;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
@@ -15,5 +16,8 @@ import java.util.UUID;
 
 public interface DepartmentRepository extends BaseRepository<Department> {
 //    List<Department> findByDepartmentNameContainingIgnoreCase(String keyword);
+
+    @Query("SELECT  name, MIN(departmentBench) FROM Department group by departmentBench , name ")
+    public List<Department> findMinBench();
 }
 

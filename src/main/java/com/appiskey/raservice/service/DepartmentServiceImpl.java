@@ -19,7 +19,13 @@ import java.util.UUID;
  */
 @Service("departmentService")
 public class DepartmentServiceImpl extends BaseServiceImpl<Department> implements DepartmentService{
+    @Autowired
+    DepartmentRepository departmentRepository;
 
+    @Override
+    public List<Department> findMinBench(){
+        return departmentRepository.findMinBench();
+    }
 //    @Autowired
 //    DepartmentRepository departmentRepository;
 //

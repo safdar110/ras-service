@@ -14,7 +14,6 @@ public interface ResourceProjectService  extends BaseService<ResourceProject> {
 
     public List<ResourceProject> findByProjectId(UUID p_id);
 
-    public Integer findCountDistinctByProjectId(UUID id);
 
     public boolean existsByProjectId(UUID id);
 
@@ -22,5 +21,6 @@ public interface ResourceProjectService  extends BaseService<ResourceProject> {
     public void deleteAll();
 
     public void deleteByProjectId(UUID id);
+
 }
 

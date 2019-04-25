@@ -62,7 +62,7 @@ public class Project extends BaseModel{
 //    @OnDelete(action = OnDeleteAction.CASCADE)OneToMany
 
 //    @JsonIgnore
-    @OneToMany(fetch = FetchType.LAZY ,cascade = {CascadeType.ALL})
+    @OneToMany( fetch = FetchType.LAZY ,cascade = {CascadeType.ALL})
     private List<Milestone> projectMilestones;
 
     private Date projectStartDate;

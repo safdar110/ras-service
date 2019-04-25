@@ -13,4 +13,5 @@ import java.util.UUID;
  */
 public interface DepartmentService extends BaseService<Department>{
 //    public List<Department> searchByDepartmentName(String keyword);
+public List<Department> findMinBench();
 }

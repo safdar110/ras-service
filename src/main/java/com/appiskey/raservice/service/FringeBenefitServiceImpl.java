@@ -18,6 +18,14 @@ import java.util.UUID;
 @Service("FringeBenefitService")
 public class FringeBenefitServiceImpl extends BaseServiceImpl<FringeBenefit> implements FringeBenefitService{
 
+    @Autowired
+    FringeBenefitRepository fringeBenefitRepository;
 
+
+@Override
+public double findTotalExpense(){
+    return fringeBenefitRepository.findTotalExpense();
+
+}
 
 }

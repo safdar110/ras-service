@@ -19,6 +19,10 @@ import java.util.UUID;
 public class FringeBenefitContoller extends BaseController<FringeBenefitService, FringeBenefit>{
 
 
+    @GetMapping("/total-expense")
+    public double findTotalExpense(){
+        return service.findTotalExpense();
 
+    }
 
 }

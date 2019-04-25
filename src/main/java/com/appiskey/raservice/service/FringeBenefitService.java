@@ -11,4 +11,7 @@ import java.util.UUID;
  */
 public interface FringeBenefitService extends BaseService<FringeBenefit> {
 
+    public double findTotalExpense();
+
+
 }

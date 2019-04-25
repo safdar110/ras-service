@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
+import java.util.List;
+import java.util.UUID;
 
 
 @RestController
@@ -22,9 +25,12 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     @Autowired
     ResourceProjectService resourceProjectService;
 
-    @Autowired
-    ResourceProjectRepository resourceProjectRepository;
 
+
+    @GetMapping("/count")
+    public Integer totalProjects(){
+        return service.findCountDistinct();
+    }
 
     @PutMapping("/project")
     @ResponseStatus(value = HttpStatus.CREATED)
@@ -55,6 +61,16 @@ public class ProjectController extends BaseController<ProjectService,Project>{
         return new ProjectDahboard();
   }
 
+  @GetMapping("/critical-project")
+  public Object[] CriticalProjects(){
+        return service.getAllNames();
+  }
+
+  @GetMapping("/total-revenue")
+    public double findTotalRevenue(){
+        return service.findTotalRevenue();
+
+    }
 
     @GetMapping("/widget1")
     public DueTask getProjectWidget1(){
@@ -83,6 +99,10 @@ public class ProjectController extends BaseController<ProjectService,Project>{
         return projectDahboard.getProjectIssue();
     }
 
+    @GetMapping("/total-budget")
+    public Object findTotalBudget(){
+        return  service.findTotalBudget();
+    }
 
 //
 //    @GetMapping("/widget6")
