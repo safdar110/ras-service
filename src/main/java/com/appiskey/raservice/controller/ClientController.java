@@ -23,4 +23,9 @@ import java.util.UUID;
 public class ClientController extends BaseController<ClientService, Client> {
 
 
+    @GetMapping("/count")
+    public Integer totalProjects(){
+        return service.findCountDistinct();
+    }
+
 }

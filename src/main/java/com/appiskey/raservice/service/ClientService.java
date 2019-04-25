@@ -13,4 +13,7 @@ import java.util.UUID;
  */
 public interface ClientService extends BaseService<Client>{
 //    public Iterable<Client> searchByName(String keyword);
+
+    public Integer findCountDistinct();
+
 }
