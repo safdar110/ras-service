@@ -1,6 +1,7 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.FringeBenefit;
+import com.appiskey.raservice.projection.TotalExpense;
 import com.appiskey.raservice.repository.FringeBenefitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -23,7 +24,7 @@ public class FringeBenefitServiceImpl extends BaseServiceImpl<FringeBenefit> imp
 
 
 @Override
-public double findTotalExpense(){
+public TotalExpense findTotalExpense(){
     return fringeBenefitRepository.findTotalExpense();
 
 }

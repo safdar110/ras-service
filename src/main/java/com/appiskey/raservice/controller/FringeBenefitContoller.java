@@ -1,6 +1,7 @@
 package com.appiskey.raservice.controller;
 
 import com.appiskey.raservice.model.FringeBenefit;
+import com.appiskey.raservice.projection.TotalExpense;
 import com.appiskey.raservice.service.FringeBenefitService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -20,7 +21,7 @@ public class FringeBenefitContoller extends BaseController<FringeBenefitService,
 
 
     @GetMapping("/total-expense")
-    public double findTotalExpense(){
+    public TotalExpense findTotalExpense(){
         return service.findTotalExpense();
 
     }

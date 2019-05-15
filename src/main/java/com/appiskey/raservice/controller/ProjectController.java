@@ -1,7 +1,9 @@
 package com.appiskey.raservice.controller;
 
+import com.appiskey.raservice.model.Filter;
 import com.appiskey.raservice.model.Project;
-import com.appiskey.raservice.repository.ResourceProjectRepository;
+import com.appiskey.raservice.projection.*;
+import com.appiskey.raservice.projection.BudgetDetail;
 import com.appiskey.raservice.response.widgets.*;
 import com.appiskey.raservice.service.ProjectService;
 import com.appiskey.raservice.service.ResourceProjectService;
@@ -9,9 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 
 @RestController
@@ -28,7 +29,7 @@ public class ProjectController extends BaseController<ProjectService,Project>{
 
 
     @GetMapping("/count")
-    public Integer totalProjects(){
+    public ProjectCount totalProjects(){
         return service.findCountDistinct();
     }
 
@@ -62,12 +63,12 @@ public class ProjectController extends BaseController<ProjectService,Project>{
   }
 
   @GetMapping("/critical-project")
-  public Object[] CriticalProjects(){
+  public List<ProjectObject> CriticalProjects(){
         return service.getAllNames();
   }
 
   @GetMapping("/total-revenue")
-    public double findTotalRevenue(){
+    public ProjectTotalRevenue findTotalRevenue(){
         return service.findTotalRevenue();
 
     }
@@ -100,15 +101,36 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     }
 
     @GetMapping("/total-budget")
-    public Object findTotalBudget(){
+    public BudgetCount findTotalBudget(){
         return  service.findTotalBudget();
     }
 
+    @GetMapping("/detail")
+    public ProjectDetail findProjectDetail(){
+        return service.findProjectDetail();
+    }
+
+//    @GetMapping("/percent-complete")
+//    public ProjectComplete findProjectPercentCompleted(){
+//        return service.findProjectPercentCompleted();
+//    }
 //
 //    @GetMapping("/widget6")
 //    public TaskDistriibution getProjectWidget6(){
 //        return projectDahboard.getTaskDistriibution();
 //    }
+
+    @PostMapping("/filter")
+    public FilterTotalRevenue findFilteredTotalRevenue(@RequestBody Filter filter){
+        return service.findFilteredTotalRevenue(filter.getTo(), filter.getFrom());
+    }
+
+    @GetMapping("/budget-detail")
+    public List<BudgetDetail> findBudgetDetail(){
+        return service.findBudgetDetail();
+    }
+
+
 
 
 }

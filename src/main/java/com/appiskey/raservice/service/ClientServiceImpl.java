@@ -1,6 +1,8 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.Client;
+import com.appiskey.raservice.projection.ClientCount;
+import com.appiskey.raservice.projection.ClientsAddedThisMonth;
 import com.appiskey.raservice.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,9 +17,15 @@ public class ClientServiceImpl extends BaseServiceImpl<Client> implements Client
     ClientRepository clientRepository;
 
     @Override
-    public Integer findCountDistinct() {
+    public ClientCount findCountDistinct() {
 
         return clientRepository.findCountDistinct();
+    }
+
+    @Override
+    public ClientsAddedThisMonth findClientsAddedThisMonth() {
+
+        return clientRepository.findClientsAddedThisMonth();
     }
 
 

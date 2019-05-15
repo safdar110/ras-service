@@ -73,7 +73,7 @@ public class Resource extends BaseModel{
 
     @ManyToOne
     @JoinColumn(name="department_id")
-    @JsonIgnore
+//    @JsonIgnore
     private Department resourceDepartment;
 
 

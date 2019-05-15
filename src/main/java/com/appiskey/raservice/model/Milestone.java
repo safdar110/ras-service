@@ -21,11 +21,16 @@ import java.util.Date;
 public class Milestone extends BaseModel {
 
 //    private String milestoneName;
+    @Temporal(TemporalType.DATE)
     private Date milestoneStartDate;
+    @Temporal(TemporalType.DATE)
     private Date milestoneDelieveryDate;
+
     private BigDecimal milestoneExpectedPayment;
     private int milestoneNoOfDays;
     private BigDecimal milestoneCost;
+    private boolean flag;
+
 
 
 

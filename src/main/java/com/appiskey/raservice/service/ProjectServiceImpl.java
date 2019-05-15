@@ -1,13 +1,14 @@
 package com.appiskey.raservice.service;
 
+import com.appiskey.raservice.model.Filter;
 import com.appiskey.raservice.model.Project;
+import com.appiskey.raservice.projection.*;
 import com.appiskey.raservice.repository.ProjectRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 @Service("Projectservice")
 public class ProjectServiceImpl extends BaseServiceImpl<Project> implements ProjectService{
@@ -16,22 +17,43 @@ public class ProjectServiceImpl extends BaseServiceImpl<Project> implements Proj
     ProjectRepository projectRepository;
 
     @Override
-    public Integer findCountDistinct() {
+    public ProjectCount findCountDistinct() {
 
         return projectRepository.findCountDistinct();
     }
 
     @Override
-    public Object[] getAllNames(){
+    public List<ProjectObject> getAllNames(){
         return projectRepository.getAllNames();
     }
    @Override
-    public double findTotalRevenue(){
+    public ProjectTotalRevenue findTotalRevenue(){
         return projectRepository.findTotalRevenue();
     }
 
        @Override
-        public Object findTotalBudget(){
+        public BudgetCount findTotalBudget(){
         return  projectRepository.findTotalBudget();
     }
+
+    @Override
+    public ProjectDetail findProjectDetail(){
+        return projectRepository.findProjectDetail();
+    }
+
+    @Override
+    public ProjectComplete findProjectPercentCompleted(){
+        return projectRepository.findProjectPercentCompleted();
+    }
+
+    @Override
+    public FilterTotalRevenue findFilteredTotalRevenue(String to, String from){
+        return projectRepository.findFilteredTotalRevenue(to, from);
+    }
+
+    @Override
+    public List<BudgetDetail> findBudgetDetail(){
+        return projectRepository.findBudgetDetail();
+    }
+
 }

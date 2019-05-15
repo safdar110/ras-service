@@ -1,6 +1,9 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.Milestone;
+import com.appiskey.raservice.projection.MilestoneRevenueOverdueThisMonth;
+import com.appiskey.raservice.projection.MilestoneTotalDelivery;
+import com.appiskey.raservice.projection.MilestoneTotalRevenueThisMonth;
 import com.appiskey.raservice.repository.MilestoneRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,10 +15,22 @@ public class MilestoneServiceImpl extends BaseServiceImpl<Milestone> implements 
     MilestoneRepository milestoneRepository;
 
     @Override
-    public Integer findCountTotalDelivery() {
+    public MilestoneTotalDelivery findCountTotalDelivery() {
 
         return milestoneRepository.findCountTotalDelivery();
     }
 
+    @Override
+    public MilestoneTotalRevenueThisMonth finTotalRevenueThisMoth() {
+
+        return milestoneRepository.finTotalRevenueThisMoth();
+    }
+
+
+    @Override
+    public MilestoneRevenueOverdueThisMonth findRevenueOverdueThisMonth() {
+
+        return milestoneRepository.findRevenueOverdueThisMonth();
+    }
 }
 

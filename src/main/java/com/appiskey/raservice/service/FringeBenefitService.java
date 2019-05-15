@@ -1,6 +1,7 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.FringeBenefit;
+import com.appiskey.raservice.projection.TotalExpense;
 import org.springframework.http.ResponseEntity;
 
 import java.util.Optional;
@@ -11,7 +12,7 @@ import java.util.UUID;
  */
 public interface FringeBenefitService extends BaseService<FringeBenefit> {
 
-    public double findTotalExpense();
+    public TotalExpense findTotalExpense();
 
 
 }

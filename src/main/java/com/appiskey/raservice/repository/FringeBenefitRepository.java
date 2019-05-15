@@ -1,6 +1,7 @@
 package com.appiskey.raservice.repository;
 
 import com.appiskey.raservice.model.FringeBenefit;
+import com.appiskey.raservice.projection.TotalExpense;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 
@@ -12,6 +13,6 @@ import java.util.UUID;
 public interface FringeBenefitRepository  extends BaseRepository<FringeBenefit> {
 
 
-    @Query("SELECT Sum(expenseAmount) FROM  FringeBenefit")
-    public double findTotalExpense();
+    @Query("SELECT COALESCE(SUM(expenseAmount),0) as totalExpense FROM  FringeBenefit")
+    public TotalExpense findTotalExpense();
 }

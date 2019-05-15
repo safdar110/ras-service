@@ -1,20 +1,30 @@
 package com.appiskey.raservice.service;
 
+import com.appiskey.raservice.model.Filter;
 import com.appiskey.raservice.model.Project;
+import com.appiskey.raservice.projection.*;
 
-import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public interface ProjectService extends BaseService<Project> {
 
-    public Integer findCountDistinct();
+    public ProjectCount findCountDistinct();
 
-    public Object[] getAllNames();
+    public List<ProjectObject> getAllNames();
 
-    public double findTotalRevenue();
+    public ProjectTotalRevenue findTotalRevenue();
 
-    public Object findTotalBudget();
+    public BudgetCount findTotalBudget();
+
+    public ProjectDetail findProjectDetail();
+
+    public ProjectComplete findProjectPercentCompleted();
+
+    public FilterTotalRevenue findFilteredTotalRevenue(String to, String from);
+
+    public List<BudgetDetail> findBudgetDetail();
+
 
 
 
