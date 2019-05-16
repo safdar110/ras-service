@@ -50,4 +50,9 @@ public class ResourceServiceImpl extends BaseServiceImpl<Resource> implements Re
     public ResourcesAddedThisMonth findResourcesAddedThisMonth(){
         return resourceRepository.findResourcesAddedThisMonth();
     }
+
+    @Override
+    public TotalSpent findtotalSpentThisMonth(){
+        return resourceRepository.findtotalSpentThisMonth();
+    }
 }

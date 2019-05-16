@@ -32,5 +32,8 @@ public interface ResourceRepository extends BaseRepository<Resource>{
     @Query(nativeQuery = true, value = "SELECT count(*) as count from resource where EXTRACT(MONTH FROM created_at) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM created_at) =EXTRACT(YEAR FROM CURRENT_DATE)")
     public ResourcesAddedThisMonth findResourcesAddedThisMonth();
 
+    @Query(nativeQuery = true,value="SELECT SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as totalSpentThisMonth from resource r JOIN resource_project rp ON r.id = rp.resource_id where EXTRACT(MONTH FROM rp.created_at) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM rp.created_at) =EXTRACT(YEAR FROM CURRENT_DATE)")
+    public TotalSpent findtotalSpentThisMonth();
+
 
 }

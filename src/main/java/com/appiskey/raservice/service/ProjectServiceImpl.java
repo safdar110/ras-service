@@ -37,12 +37,12 @@ public class ProjectServiceImpl extends BaseServiceImpl<Project> implements Proj
     }
 
     @Override
-    public ProjectDetail findProjectDetail(){
+    public List<ProjectDetail> findProjectDetail(){
         return projectRepository.findProjectDetail();
     }
 
     @Override
-    public ProjectComplete findProjectPercentCompleted(){
+    public List<ProjectComplete>  findProjectPercentCompleted(){
         return projectRepository.findProjectPercentCompleted();
     }
 
@@ -54,6 +54,11 @@ public class ProjectServiceImpl extends BaseServiceImpl<Project> implements Proj
     @Override
     public List<BudgetDetail> findBudgetDetail(){
         return projectRepository.findBudgetDetail();
+    }
+
+    @Override
+    public TotalRemaining findTotalRemaining(){
+        return projectRepository.findTotalRemaining();
     }
 
 }

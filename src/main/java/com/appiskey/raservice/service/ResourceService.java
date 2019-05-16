@@ -19,6 +19,8 @@ public interface ResourceService extends BaseService<Resource> {
     public List<ResourceDetails> findResourceDetails();
     public List<ResourceList>  findResourceList();
     public ResourcesAddedThisMonth findResourcesAddedThisMonth();
+    public TotalSpent findtotalSpentThisMonth();
+
 
 
 

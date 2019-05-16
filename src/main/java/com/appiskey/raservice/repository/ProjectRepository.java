@@ -24,16 +24,20 @@ public interface ProjectRepository extends BaseRepository<Project>{
     public BudgetCount findTotalBudget();
 
     @Query(nativeQuery = true, value="SELECT  DISTINCT(p.name) as projectName, p.project_cost as projectCost, p.project_timeline as projectTimeline, m.name as CurrentMilestone, m.milestone_delievery_date as currentMilestoneDeliveryDate from project p JOIN project_project_milestones pm on p.id=pm.project_id JOIN milestone m ON m.id = pm.project_milestones_id WHERE CURRENT_DATE BETWEEN m.milestone_start_date AND m.milestone_delievery_date")
-    public ProjectDetail findProjectDetail();
+    public List<ProjectDetail> findProjectDetail();
 
     @Query(nativeQuery = true, value="SELECT 100*(SELECT DISTINCT COUNT(id) from milestone WHERE milestone_delievery_date < CURRENT_DATE)/COUNT(*) as ProjectPercentage, p.name as ProjectName from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id group by p.name")
-    public ProjectComplete findProjectPercentCompleted();
+    public List<ProjectComplete> findProjectPercentCompleted();
 
     @Query( nativeQuery = true, value="SELECT (SELECT COALESCE(SUM(milestone_expected_payment),0) FROM milestone m JOIN  project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where (m.milestone_start_date >= :to AND m.milestone_delievery_date <= :from) AND (m.flag = 1 )) as totalRevenue,  (SELECT COALESCE(Sum(expense_amount),0) FROM fringe_benefit) as totalExpense, (SELECT totalRevenue)-(SELECT totalExpense) as totalBudget")
     public FilterTotalRevenue findFilteredTotalRevenue(@Param("to") String to, @Param("from")  String from);
 
     @Query(nativeQuery = true, value="SELECT p.name as projectName , p.project_cost as totalBudget,SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as totalSpent from resource r JOIN resource_project rp ON r.id = rp.resource_id JOIN project p ON p.id = rp.project_id group by p.name, p.project_cost")
     public List<BudgetDetail> findBudgetDetail();
+
+    @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0)) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where m.flag =0) as totalRemaining")
+    public TotalRemaining findTotalRemaining();
+
 
 
 

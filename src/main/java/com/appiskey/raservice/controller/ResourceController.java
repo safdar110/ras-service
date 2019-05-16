@@ -49,4 +49,8 @@ public class ResourceController extends BaseController<ResourceService, Resource
         return service.findResourcesAddedThisMonth();
     }
 
+    @GetMapping("/total-spent-month")
+    public TotalSpent findtotalSpentThisMonth(){
+        return service.findtotalSpentThisMonth();
+    }
 }

@@ -4,6 +4,7 @@ import com.appiskey.raservice.model.Filter;
 import com.appiskey.raservice.model.Project;
 import com.appiskey.raservice.projection.*;
 import com.appiskey.raservice.projection.BudgetDetail;
+import com.appiskey.raservice.projection.TotalRemaining;
 import com.appiskey.raservice.response.widgets.*;
 import com.appiskey.raservice.service.ProjectService;
 import com.appiskey.raservice.service.ResourceProjectService;
@@ -106,7 +107,7 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     }
 
     @GetMapping("/detail")
-    public ProjectDetail findProjectDetail(){
+    public List<ProjectDetail> findProjectDetail(){
         return service.findProjectDetail();
     }
 
@@ -129,6 +130,17 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     public List<BudgetDetail> findBudgetDetail(){
         return service.findBudgetDetail();
     }
+
+    @GetMapping("/project-percent-complete")
+    public List<ProjectComplete>  findProjectPercentCompleted(){
+        return service.findProjectPercentCompleted();
+    }
+
+    @GetMapping("/total-remaining")
+    public TotalRemaining findTotalRemaining(){
+        return service.findTotalRemaining();
+    }
+
 
 
 

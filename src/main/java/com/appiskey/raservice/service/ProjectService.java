@@ -17,13 +17,15 @@ public interface ProjectService extends BaseService<Project> {
 
     public BudgetCount findTotalBudget();
 
-    public ProjectDetail findProjectDetail();
+    public List<ProjectDetail> findProjectDetail();
 
-    public ProjectComplete findProjectPercentCompleted();
+    public List<ProjectComplete>  findProjectPercentCompleted();
 
     public FilterTotalRevenue findFilteredTotalRevenue(String to, String from);
 
     public List<BudgetDetail> findBudgetDetail();
+
+    public TotalRemaining findTotalRemaining();
 
 
 
