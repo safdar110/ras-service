@@ -24,6 +24,15 @@ public class BaseServiceImpl<T extends BaseModel> implements BaseService<T> {
 
     @Override
     public T insert(T item) {
+        try {
+            return repository.saveAndFlush(item);
+        }
+        catch (Exception e){
+            System.out.println(e.getMessage());
+            String p =e.getMessage();
+
+        }
+
         return repository.saveAndFlush(item);
     }
 

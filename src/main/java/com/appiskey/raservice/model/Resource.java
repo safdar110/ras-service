@@ -1,13 +1,13 @@
 package com.appiskey.raservice.model;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.*;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by khawar on 1/30/19.
@@ -17,8 +17,10 @@ import java.util.List;
 @Data
 @Entity
 @Table
+@Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class Resource extends BaseModel{
-//    private String resourceName;
     private String resourceCNIC;
     private String resourceDOB;
     private String resourceEmail;
@@ -53,18 +55,25 @@ public class Resource extends BaseModel{
             joinColumns = @JoinColumn(name = "skill_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "resource_id",
                     referencedColumnName = "id"))
-    private List<Skill> resourceSkills;
+    private Set<Skill> resourceSkills;
 
-    @ManyToOne
-    private Project resourceProject;
 
+
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL)
+    @JsonIgnore
+    private List<ResourceProject> resourceProjectsList;
+
+//    @ManyToOne
+//    @JoinColumn(name="resourceId")
+//    @JsonIgnore
+//    private ResourceProject resourceProject;
 
     private boolean resourcePartTime;
 
 
     @ManyToOne
     @JoinColumn(name="department_id")
-    @JsonIgnore
+//    @JsonIgnore
     private Department resourceDepartment;
 
 

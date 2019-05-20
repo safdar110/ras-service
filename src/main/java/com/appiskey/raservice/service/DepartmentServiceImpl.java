@@ -1,12 +1,10 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.Department;
-import com.appiskey.raservice.model.Skill;
+import com.appiskey.raservice.projection.*;
 import com.appiskey.raservice.repository.DepartmentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
@@ -19,7 +17,41 @@ import java.util.UUID;
  */
 @Service("departmentService")
 public class DepartmentServiceImpl extends BaseServiceImpl<Department> implements DepartmentService{
+    @Autowired
+    DepartmentRepository departmentRepository;
 
+    @Override
+    public List<DepartmentMinBench> findMinBench(){
+        return departmentRepository.findMinBench();
+    }
+
+    @Override
+    public DepartmentTotalCount findTotalDepartments() {
+        return departmentRepository.findTotalDepartments();
+    }
+
+    @Override
+    public DepartmentTotalCost findTotalDepartmentCost() {
+        return departmentRepository.findTotalDepartmentCost();
+    }
+
+
+    @Override
+    public DepartmentAverageCost findAverageDepartmentCost() {
+        return departmentRepository.findAverageDepartmentCost();
+    }
+
+
+    @Override
+    public DepartmentAverageRevenue findAverageDepartmentRevenue() {
+        return departmentRepository.findAverageDepartmentRevenue();
+
+
+    }
+    @Override
+    public List<DepartmentDetail> findDepartmentsDetail(){
+        return departmentRepository.findDepartmentsDetail();
+    }
 //    @Autowired
 //    DepartmentRepository departmentRepository;
 //

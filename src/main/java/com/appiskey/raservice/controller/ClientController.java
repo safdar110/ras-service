@@ -2,6 +2,8 @@ package com.appiskey.raservice.controller;
 
 import com.appiskey.raservice.model.Client;
 import com.appiskey.raservice.model.Department;
+import com.appiskey.raservice.projection.ClientCount;
+import com.appiskey.raservice.projection.ClientsAddedThisMonth;
 import com.appiskey.raservice.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -22,5 +24,16 @@ import java.util.UUID;
 @RequestMapping(value = "${app.url}" + "/client")
 public class ClientController extends BaseController<ClientService, Client> {
 
+
+    @GetMapping("/count")
+    public ClientCount totalClients(){
+        return service.findCountDistinct();
+    }
+
+    @GetMapping("/clients-this-month")
+    public ClientsAddedThisMonth findClientsAddedThisMonth() {
+
+        return service.findClientsAddedThisMonth();
+    }
 
 }

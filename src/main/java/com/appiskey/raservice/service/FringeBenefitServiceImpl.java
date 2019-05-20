@@ -1,6 +1,7 @@
 package com.appiskey.raservice.service;
 
 import com.appiskey.raservice.model.FringeBenefit;
+import com.appiskey.raservice.projection.TotalExpense;
 import com.appiskey.raservice.repository.FringeBenefitRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,14 @@ import java.util.UUID;
 @Service("FringeBenefitService")
 public class FringeBenefitServiceImpl extends BaseServiceImpl<FringeBenefit> implements FringeBenefitService{
 
+    @Autowired
+    FringeBenefitRepository fringeBenefitRepository;
 
+
+@Override
+public TotalExpense findTotalExpense(){
+    return fringeBenefitRepository.findTotalExpense();
+
+}
 
 }
