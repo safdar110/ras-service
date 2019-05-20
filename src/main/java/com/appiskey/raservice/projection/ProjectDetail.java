@@ -8,6 +8,7 @@ public interface ProjectDetail {
     Double getProjectTimeline();
     String getCurrentMilestone();
     Date getCurrentMilestoneDeliveryDate();
+    Double getPercentCompleted();
 
 
 }

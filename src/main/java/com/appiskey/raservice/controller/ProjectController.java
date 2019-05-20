@@ -132,7 +132,7 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     }
 
     @GetMapping("/project-percent-complete")
-    public List<ProjectComplete>  findProjectPercentCompleted(){
+    public ProjectComplete findProjectPercentCompleted(){
         return service.findProjectPercentCompleted();
     }
 
@@ -142,7 +142,15 @@ public class ProjectController extends BaseController<ProjectService,Project>{
     }
 
 
-
+    @GetMapping("/project-health")
+    public List<ProjectHealth> findProjectHealth(){
+        return service.findProjectHealth();
+    }
+//
+//    @GetMapping("/total-revenue-per-project")
+//    public TotalRevenuePerProject findTotalRevenuePerProject(@RequestBody FilterByProjectName filterByProjectName){
+//        return service.findTotalRevenuePerProject(filterByProjectName.getProjectName());
+//    }
 
 
 }

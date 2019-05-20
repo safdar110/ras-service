@@ -30,7 +30,8 @@ public interface DepartmentRepository extends BaseRepository<Department> {
     @Query("SELECT COALESCE(SUM(resourceSalaryPerMonth)/COUNT(*),0) as averageCost from Resource")
     public DepartmentAverageCost findAverageDepartmentCost();
 
-    @Query("SELECT COALESCE(SUM(milestoneCost)/COUNT(*),0.00) as averageRevenue from Milestone")
+//    @Query("SELECT COALESCE(SUM(milestoneCost)/COUNT(*),0.00) as averageRevenue from Milestone")
+    @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0))/COUNT(m.id) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where m.flag =1) as averageRevenue")
     public DepartmentAverageRevenue findAverageDepartmentRevenue();
 
     @Query(nativeQuery = true, value= " SELECT d.name as name, COUNT(r.name) as totalResources, SUM(rp.resource_project_allocation) as resourcesOccupied , 100-SUM(rp.resource_project_allocation) as resourcesBench , IF(SUM(rp.resource_project_allocation)  > 100, SUM(rp.resource_project_allocation)-100, 0)  as departmentThreshold, COUNT(rp.project_id) as totalProjects from department d JOIN resource r ON d.id = r.department_id JOIN resource_project rp ON r.id = rp.resource_id GROUP by d.name")

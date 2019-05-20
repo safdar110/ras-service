@@ -3,6 +3,7 @@ package com.appiskey.raservice.service;
 import com.appiskey.raservice.model.Filter;
 import com.appiskey.raservice.model.Project;
 import com.appiskey.raservice.projection.*;
+import org.springframework.data.repository.query.Param;
 
 import java.util.Date;
 import java.util.List;
@@ -19,13 +20,17 @@ public interface ProjectService extends BaseService<Project> {
 
     public List<ProjectDetail> findProjectDetail();
 
-    public List<ProjectComplete>  findProjectPercentCompleted();
+    public ProjectComplete findProjectPercentCompleted();
 
     public FilterTotalRevenue findFilteredTotalRevenue(String to, String from);
 
     public List<BudgetDetail> findBudgetDetail();
 
     public TotalRemaining findTotalRemaining();
+
+    public List<ProjectHealth> findProjectHealth();
+
+//    public TotalRevenuePerProject findTotalRevenuePerProject(String projectName);
 
 
 

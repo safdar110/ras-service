@@ -29,6 +29,8 @@ public class Milestone extends BaseModel {
     private BigDecimal milestoneExpectedPayment;
     private int milestoneNoOfDays;
     private BigDecimal milestoneCost;
+    private BigDecimal milestoneTotalPercent;
+    private BigDecimal milestonePercentComplete;
     private boolean flag;
 
 
