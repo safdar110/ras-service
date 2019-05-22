@@ -147,10 +147,10 @@ public class ProjectController extends BaseController<ProjectService,Project>{
         return service.findProjectHealth();
     }
 //
-//    @GetMapping("/total-revenue-per-project")
-//    public TotalRevenuePerProject findTotalRevenuePerProject(@RequestBody FilterByProjectName filterByProjectName){
-//        return service.findTotalRevenuePerProject(filterByProjectName.getProjectName());
-//    }
+    @PostMapping("/total-revenue-per-project")
+    public TotalRevenuePerProject findTotalRevenuePerProject(@RequestBody FilterByProjectName filterByProjectName){
+        return service.findTotalRevenuePerProjectByName(filterByProjectName.getProjectName());
+    }
 
 
 }

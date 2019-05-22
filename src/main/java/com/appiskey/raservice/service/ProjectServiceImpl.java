@@ -66,10 +66,10 @@ public class ProjectServiceImpl extends BaseServiceImpl<Project> implements Proj
         return projectRepository.findProjectHealth();
     }
 
-//    @Override
-//    public TotalRevenuePerProject findTotalRevenuePerProject(String projectName){
-//        return projectRepository.findTotalRevenuePerProject(projectName);
-//    }
+    @Override
+    public TotalRevenuePerProject findTotalRevenuePerProjectByName(String projectName){
+        return projectRepository.findTotalRevenuePerProjectByName(projectName);
+    }
 
 
 }

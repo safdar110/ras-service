@@ -41,8 +41,8 @@ public interface ProjectRepository extends BaseRepository<Project>{
     @Query(nativeQuery = true, value= "SELECT p.name as ProjectName, SUM(m.milestone_total_percent/100 * p.project_cost) as PlannedValue, SUM(m.milestone_percent_complete/100 * p.project_cost) as EarnedValue,SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as actualCost, SUM(m.milestone_percent_complete/100 * p.project_cost)/SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as CPI,SUM(m.milestone_percent_complete/100 * p.project_cost)/SUM(m.milestone_total_percent/100 * p.project_cost) as SPI from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id =pm.project_id JOIN resource_project rp ON p.id = rp.project_id JOIN resource r ON r.id = rp.resource_id GROUP BY p.name, p.project_cost")
     public List<ProjectHealth> findProjectHealth();
 
-//    @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0)) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where p.name = :projectName AND m.flag =1) as totalRevenuePerProject")
-//    public TotalRevenuePerProject findTotalRevenuePerProject(@Param("projectName")String projectName);
+    @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0)) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where p.name =:projectName AND m.flag =1) as totalRevenuePerProject")
+    public TotalRevenuePerProject findTotalRevenuePerProjectByName(@Param("projectName") String projectName);
 
 //    @Query("")
 //    public

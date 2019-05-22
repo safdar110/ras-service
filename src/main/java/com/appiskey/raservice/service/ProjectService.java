@@ -30,7 +30,7 @@ public interface ProjectService extends BaseService<Project> {
 
     public List<ProjectHealth> findProjectHealth();
 
-//    public TotalRevenuePerProject findTotalRevenuePerProject(String projectName);
+    public TotalRevenuePerProject findTotalRevenuePerProjectByName(String projectName);
 
 
 
