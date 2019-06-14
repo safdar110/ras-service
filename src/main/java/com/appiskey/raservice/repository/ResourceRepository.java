@@ -20,7 +20,7 @@ public interface ResourceRepository extends BaseRepository<Resource>{
     @Query("SELECT COALESCE(SUM(resourceSalaryPerMonth),0) as totalCost FROM Resource")
     public ResourceTotalCost findResourceTotalCost();
 
-    @Query("SELECT COALESCE(SUM(resourceSalaryPerMonth),0)/COUNT(*) as resourceAverageCost FROM Resource")
+    @Query(nativeQuery = true, value= "SELECT COALESCE(SUM(resource_salary_per_month)/COUNT(*),0) as resourceAverageCost FROM resource")
     public ResourceAverageCost findResourceAverageCost();
 
     @Query(nativeQuery = true, value="SELECT r.name as resourceName, COUNT(p.name) as totalProjects,SUM(rp.resource_project_allocation) as resourceOccupied, 100-(SUM(rp.resource_project_allocation)) as resourceFree, SUM((rp.resource_project_allocation/100) * p.project_cost) as RevenuePerResource from project p JOIN resource_project rp ON p.id= rp.project_id JOIN resource r ON r.id = rp.resource_id group by r.name")
@@ -32,7 +32,7 @@ public interface ResourceRepository extends BaseRepository<Resource>{
     @Query(nativeQuery = true, value = "SELECT count(*) as count from resource where EXTRACT(MONTH FROM created_at) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM created_at) =EXTRACT(YEAR FROM CURRENT_DATE)")
     public ResourcesAddedThisMonth findResourcesAddedThisMonth();
 
-    @Query(nativeQuery = true,value="SELECT SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as totalSpentThisMonth from resource r JOIN resource_project rp ON r.id = rp.resource_id where EXTRACT(MONTH FROM rp.created_at) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM rp.created_at) =EXTRACT(YEAR FROM CURRENT_DATE)")
+    @Query(nativeQuery = true,value="SELECT COALESCE(SUM(r.resource_salary_per_month* rp.resource_project_allocation/100),0) as totalSpentThisMonth from resource r JOIN resource_project rp ON r.id = rp.resource_id where EXTRACT(MONTH FROM rp.created_at) = EXTRACT(MONTH FROM CURRENT_DATE) AND EXTRACT(YEAR FROM rp.created_at) =EXTRACT(YEAR FROM CURRENT_DATE)")
     public TotalSpent findtotalSpentThisMonth();
 
 

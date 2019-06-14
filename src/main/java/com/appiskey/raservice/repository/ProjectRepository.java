@@ -26,7 +26,7 @@ public interface ProjectRepository extends BaseRepository<Project>{
     @Query(nativeQuery = true, value="SELECT p.name as projectName,ANY_VALUE(p.project_cost) as projectCost, ANY_VALUE(p.project_timeline) as projectTimeline,ANY_VALUE(m.name) as CurrentMilestone, ANY_VALUE(m.milestone_delievery_date) as currentMilestoneDeliveryDate, SUM(m.milestone_percent_complete) as percentCompleted from project p JOIN project_project_milestones pm on p.id=pm.project_id JOIN milestone m ON m.id = pm.project_milestones_id WHERE CURRENT_DATE BETWEEN m.milestone_start_date AND m.milestone_delievery_date group by p.name")
     public List<ProjectDetail> findProjectDetail();
 
-    @Query(nativeQuery = true, value="SELECT SUM(m.milestone_percent_complete) as percentCompleted from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN  project p ON p.id = pm.project_id WHERE CURRENT_DATE BETWEEN m.milestone_start_date AND m.milestone_delievery_date")
+    @Query(nativeQuery = true, value="SELECT (COALESCE(SUM(m.milestone_percent_complete),0)) as percentCompleted from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN  project p ON p.id = pm.project_id WHERE CURRENT_DATE BETWEEN m.milestone_start_date AND m.milestone_delievery_date")
     public ProjectComplete findProjectPercentCompleted();
 
     @Query( nativeQuery = true, value="SELECT (SELECT COALESCE(SUM(milestone_expected_payment),0) FROM milestone m JOIN  project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where (m.milestone_start_date >= :to AND m.milestone_delievery_date <= :from) AND (m.flag = 1 )) as totalRevenue,  (SELECT COALESCE(Sum(expense_amount),0) FROM fringe_benefit) as totalExpense, (SELECT totalRevenue)-(SELECT totalExpense) as totalBudget")
@@ -38,12 +38,16 @@ public interface ProjectRepository extends BaseRepository<Project>{
     @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0)) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where m.flag =0) as totalRemaining")
     public TotalRemaining findTotalRemaining();
 
-    @Query(nativeQuery = true, value= "SELECT p.name as ProjectName, SUM(m.milestone_total_percent/100 * p.project_cost) as PlannedValue, SUM(m.milestone_percent_complete/100 * p.project_cost) as EarnedValue,SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as actualCost, SUM(m.milestone_percent_complete/100 * p.project_cost)/SUM(r.resource_salary_per_month* rp.resource_project_allocation/100) as CPI,SUM(m.milestone_percent_complete/100 * p.project_cost)/SUM(m.milestone_total_percent/100 * p.project_cost) as SPI from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id =pm.project_id JOIN resource_project rp ON p.id = rp.project_id JOIN resource r ON r.id = rp.resource_id GROUP BY p.name, p.project_cost")
+    @Query(nativeQuery = true, value= "SELECT p.name as ProjectName, (COALESCE(SUM(m.milestone_total_percent/100 * p.project_cost),0)) as PlannedValue, (COALESCE(SUM(m.milestone_percent_complete/100 * p.project_cost),0)) as EarnedValue,(COALESCE(SUM(r.resource_salary_per_month* rp.resource_project_allocation/100),0)) as actualCost, (COALESCE(SUM(m.milestone_percent_complete/100 * p.project_cost),0))/(COALESCE(SUM(r.resource_salary_per_month* rp.resource_project_allocation/100),0)) as CPI,(COALESCE(SUM(m.milestone_percent_complete/100 * p.project_cost),0))/(COALESCE(SUM(m.milestone_total_percent/100 * p.project_cost),0)) as SPI from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id =pm.project_id JOIN resource_project rp ON p.id = rp.project_id JOIN resource r ON r.id = rp.resource_id GROUP BY p.name, p.project_cost")
     public List<ProjectHealth> findProjectHealth();
 
-//    @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0)) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where p.name = :projectName AND m.flag =1) as totalRevenuePerProject")
-//    public TotalRevenuePerProject findTotalRevenuePerProject(@Param("projectName")String projectName);
+    @Query(nativeQuery = true, value = "SELECT (SELECT (COALESCE(SUM(milestone_expected_payment),0)) FROM milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id = pm.project_id where p.name =:projectName AND m.flag =1) as totalRevenuePerProject")
+    public TotalRevenuePerProject findTotalRevenuePerProjectByName(@Param("projectName") String projectName);
 
+
+    //Project health with coalesce
+
+//    SELECT p.name as ProjectName,(COALESCE(SUM(m.milestone_total_percent/100 * p.project_cost),0)) as PlannedValue, (COALESCE( SUM(m.milestone_percent_complete/100 * p.project_cost),0)) as EarnedValue, (COALESCE(SUM(r.resource_salary_per_month* rp.resource_project_allocation/100),0)) as actualCost, (COALESCE( SUM(m.milestone_percent_complete/100 * p.project_cost),0))/ (COALESCE(SUM(r.resource_salary_per_month* rp.resource_project_allocation/100),0)) as CPI, (COALESCE( SUM(m.milestone_percent_complete/100 * p.project_cost) ,0))/(COALESCE(SUM(m.milestone_total_percent/100 * p.project_cost),0)) as SPI from milestone m JOIN project_project_milestones pm ON m.id = pm.project_milestones_id JOIN project p ON p.id =pm.project_id JOIN resource_project rp ON p.id = rp.project_id JOIN resource r ON r.id = rp.resource_id GROUP BY p.name, p.project_cost
 //    @Query("")
 //    public
 //    resource on ow much projects involved
