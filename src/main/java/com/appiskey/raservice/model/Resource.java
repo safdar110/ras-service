@@ -21,6 +21,9 @@ import java.util.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Resource extends BaseModel{
+
+
+    private Long resourceId;
     private String resourceCNIC;
     private String resourceDOB;
     private String resourceEmail;
