@@ -1,11 +1,9 @@
 package com.appiskey.raservice.response.widgets;
 
 import lombok.Data;
-import sun.applet.Main;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 @Data
 public class BudgetDistribution {
